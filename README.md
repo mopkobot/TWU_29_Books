@@ -23,3 +23,12 @@ to the repository as it can break the build in the CI server.
 
 Setting Environment Variable
 -----------------------------
+
+
+Jasmine Server
+-------------------------------
+If you don't install jasmine, use "gem install jasmine"
+
+rake jasmine: start jasmine server
+
+visit the link given by server to run all jasmine test
