@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite errors="0" failures="0" hostname="localhost" name="com.thoughtworks.twu.controller.HomeControllerTest" tests="2" time="0.195" timestamp="2012-10-22T09:35:03">
-  <properties />
-  <testcase classname="com.thoughtworks.twu.controller.HomeControllerTest" name="shouldAddUsernameAndUserObjectToPageModelWhereUserExists" time="0.127" />
-  <testcase classname="com.thoughtworks.twu.controller.HomeControllerTest" name="shouldOnlyAddUsernameToPageModelWhereUserNotFound" time="0.002" />
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
