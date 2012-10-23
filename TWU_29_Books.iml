@@ -342,28 +342,6 @@
     <orderEntry type="module-library" scope="TEST">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/.gradle/caches/artifacts-14/filestore/org.seleniumhq.selenium/selenium-java/2.23.0/jar/c63ade463f37b169e0e621557073d202592fa7ea/selenium-java-2.23.0.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="jar://$USER_HOME$/.gradle/caches/artifacts-14/filestore/org.seleniumhq.selenium/selenium-java/2.23.0/source/bd5eb9c1ba89509eba136571c7b796c582a74d1/selenium-java-2.23.0-sources.jar!/" />
-        </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="TEST">
-      <library>
-        <CLASSES>
-          <root url="jar://$USER_HOME$/.gradle/caches/artifacts-14/filestore/org.seleniumhq.selenium/selenium-firefox-driver/2.23.0/jar/f90f60d81378d99d0425b185e3b6b3b6b7066018/selenium-firefox-driver-2.23.0.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="jar://$USER_HOME$/.gradle/caches/artifacts-14/filestore/org.seleniumhq.selenium/selenium-firefox-driver/2.23.0/source/e6254b0add24e7bc3e19d83b02012f9498753770/selenium-firefox-driver-2.23.0-sources.jar!/" />
-        </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="TEST">
-      <library>
-        <CLASSES>
           <root url="jar://$USER_HOME$/.gradle/caches/artifacts-14/filestore/org.hamcrest/hamcrest-core/1.1/jar/860340562250678d1a344907ac75754e259cdb14/hamcrest-core-1.1.jar!/" />
         </CLASSES>
         <JAVADOC />
@@ -431,17 +409,6 @@
         <JAVADOC />
         <SOURCES>
           <root url="jar://$USER_HOME$/.gradle/caches/artifacts-14/filestore/com.google.guava/guava/12.0/source/f8b98e61865bed3c39b978ee3bf5c7fb990c4032/guava-12.0-sources.jar!/" />
-        </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="TEST">
-      <library>
-        <CLASSES>
-          <root url="jar://$USER_HOME$/.gradle/caches/artifacts-14/filestore/org.seleniumhq.selenium/selenium-api/2.23.0/jar/7331830f8578eae37c57b50b456a2c93266275f5/selenium-api-2.23.0.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="jar://$USER_HOME$/.gradle/caches/artifacts-14/filestore/org.seleniumhq.selenium/selenium-api/2.23.0/source/4e1ef27e003fc603527b55efb7269cc2dd5ad3f2/selenium-api-2.23.0-sources.jar!/" />
         </SOURCES>
       </library>
     </orderEntry>
@@ -525,44 +492,11 @@
     <orderEntry type="module-library" scope="TEST">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/.gradle/caches/artifacts-14/filestore/org.seleniumhq.selenium/selenium-remote-driver/2.23.0/jar/d790cbe8823f44fa56a6e40a84eb644d6e58b8a4/selenium-remote-driver-2.23.0.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="jar://$USER_HOME$/.gradle/caches/artifacts-14/filestore/org.seleniumhq.selenium/selenium-remote-driver/2.23.0/source/14717f8f69b5ef75443f42b179e06811524dcfda/selenium-remote-driver-2.23.0-sources.jar!/" />
-        </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="TEST">
-      <library>
-        <CLASSES>
           <root url="jar://$USER_HOME$/.gradle/caches/artifacts-14/filestore/commons-io/commons-io/2.0.1/jar/7ffdb02f95af1c1a208544e076cea5b8e66e731a/commons-io-2.0.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
           <root url="jar://$USER_HOME$/.gradle/caches/artifacts-14/filestore/commons-io/commons-io/2.0.1/source/8ace0a355c375f0d20d04fa0db7b986c6637a689/commons-io-2.0.1-sources.jar!/" />
-        </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="TEST">
-      <library>
-        <CLASSES>
-          <root url="jar://$USER_HOME$/.gradle/caches/artifacts-14/filestore/org.seleniumhq.selenium/selenium-android-driver/2.23.0/jar/fe9b920b965bc263fe4e5a1c45e3738bc66776b4/selenium-android-driver-2.23.0.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="jar://$USER_HOME$/.gradle/caches/artifacts-14/filestore/org.seleniumhq.selenium/selenium-android-driver/2.23.0/source/4650789f7c01f648a846f3101c381ba44ce7d30/selenium-android-driver-2.23.0-sources.jar!/" />
-        </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="TEST">
-      <library>
-        <CLASSES>
-          <root url="jar://$USER_HOME$/.gradle/caches/artifacts-14/filestore/org.seleniumhq.selenium/selenium-chrome-driver/2.23.0/jar/73b3661c0fff8e1d1690c0d89c708ad2525f33d9/selenium-chrome-driver-2.23.0.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="jar://$USER_HOME$/.gradle/caches/artifacts-14/filestore/org.seleniumhq.selenium/selenium-chrome-driver/2.23.0/source/ba8ae46e95830ded48861beb691df383287733c3/selenium-chrome-driver-2.23.0-sources.jar!/" />
         </SOURCES>
       </library>
     </orderEntry>
@@ -686,39 +620,6 @@
     <orderEntry type="module-library" scope="TEST">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/.gradle/caches/artifacts-14/filestore/org.seleniumhq.selenium/selenium-htmlunit-driver/2.23.0/jar/5b33c55fd9fa66a14acb264cf780c2be80a9a856/selenium-htmlunit-driver-2.23.0.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="jar://$USER_HOME$/.gradle/caches/artifacts-14/filestore/org.seleniumhq.selenium/selenium-htmlunit-driver/2.23.0/source/2dae2242286165d7ae493aa57845b90e9b214553/selenium-htmlunit-driver-2.23.0-sources.jar!/" />
-        </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="TEST">
-      <library>
-        <CLASSES>
-          <root url="jar://$USER_HOME$/.gradle/caches/artifacts-14/filestore/org.seleniumhq.selenium/selenium-ie-driver/2.23.0/jar/3b6c53224732636b8abdd67ad5248394b491a80b/selenium-ie-driver-2.23.0.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="jar://$USER_HOME$/.gradle/caches/artifacts-14/filestore/org.seleniumhq.selenium/selenium-ie-driver/2.23.0/source/ab5a23bc54a103acb3577ac46dd96c658b136791/selenium-ie-driver-2.23.0-sources.jar!/" />
-        </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="TEST">
-      <library>
-        <CLASSES>
-          <root url="jar://$USER_HOME$/.gradle/caches/artifacts-14/filestore/org.seleniumhq.selenium/selenium-iphone-driver/2.23.0/jar/598031491ffd385599337480fa0a459023e8863a/selenium-iphone-driver-2.23.0.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="jar://$USER_HOME$/.gradle/caches/artifacts-14/filestore/org.seleniumhq.selenium/selenium-iphone-driver/2.23.0/source/4453a7450d7d9b658852adbfb771e8e0c062337b/selenium-iphone-driver-2.23.0-sources.jar!/" />
-        </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="TEST">
-      <library>
-        <CLASSES>
           <root url="jar://$USER_HOME$/.gradle/caches/artifacts-14/filestore/org.jboss.netty/netty/3.2.7.Final/bundle/1a1c5dde827576f3730bf6f3d7b389e770b90aaa/netty-3.2.7.Final.jar!/" />
         </CLASSES>
         <JAVADOC />
@@ -738,29 +639,7 @@
         </SOURCES>
       </library>
     </orderEntry>
-    <orderEntry type="module-library" scope="TEST">
-      <library>
-        <CLASSES>
-          <root url="jar://$USER_HOME$/.gradle/caches/artifacts-14/filestore/org.seleniumhq.selenium/selenium-safari-driver/2.23.0/jar/9bde5572f2fb8fb54252d9b2aff59d133ff43adf/selenium-safari-driver-2.23.0.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="jar://$USER_HOME$/.gradle/caches/artifacts-14/filestore/org.seleniumhq.selenium/selenium-safari-driver/2.23.0/source/7eb7e6ee627039e7acb1bf7cb9d2bc503f1d9af0/selenium-safari-driver-2.23.0-sources.jar!/" />
-        </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="TEST">
-      <library>
-        <CLASSES>
-          <root url="jar://$USER_HOME$/.gradle/caches/artifacts-14/filestore/org.seleniumhq.selenium/selenium-support/2.23.0/jar/f34552a38056edf6fb59ab44566b6e2ca43bef4b/selenium-support-2.23.0.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="jar://$USER_HOME$/.gradle/caches/artifacts-14/filestore/org.seleniumhq.selenium/selenium-support/2.23.0/source/b5c545970c414c3d0aa86c94e06c3db3e86cef69/selenium-support-2.23.0-sources.jar!/" />
-        </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
+    <orderEntry type="module-library">
       <library>
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../selenium-2.25.0/selenium-java-2.25.0.jar!/" />
@@ -769,7 +648,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library" exported="">
+    <orderEntry type="module-library">
       <library>
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../selenium-server-standalone-2.25.0.jar!/" />
