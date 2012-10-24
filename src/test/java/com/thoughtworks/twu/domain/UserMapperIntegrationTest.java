@@ -16,14 +16,21 @@ public class UserMapperIntegrationTest extends IntegrationTest {
 
     @Test
     public  void shouldChooseUserByUserName() {
-        String bill = "Bill";
-        addUserToRepository(bill);
-        User user = userMapper.getUser(bill);
-        assertThat(user.getName(), equalTo("Bill"));
+        String tom = "Tom";
+        addUserToRepository(tom);
+        User user = userMapper.getUser(tom);
+        assertThat(user.getName(), equalTo("Tom"));
     }
 
     private void addUserToRepository(String name) {
         userMapper.insertUser(new User(111, name));
     }
-    
+
+    @Test
+    public void shouldDeleteUserByName(){
+        String bill = "bill";
+        userMapper.deleteUserByName(bill);
+        User user = userMapper.getUser(bill);
+        assertThat(user,equalTo(null));
+    }
 }

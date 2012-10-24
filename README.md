@@ -8,8 +8,9 @@ For Mac:
 1. Clone the project repository using git.
 2. Install HomeBrew
 3. Run "brew install gradle"
-4. Run "gradle build" to run all tests and build a WAR.
-5. Run "gradle jettyRun" to deploy using jetty.
+4. Run "gradle loadData"
+5. Run "gradle build" to run all tests and build a WAR.
+6. Run "gradle jettyRun" to deploy using jetty.
 
 For linux:
 1. Clone the project repository using git.

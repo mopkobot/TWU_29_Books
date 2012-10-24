@@ -1,5 +1,9 @@
+create database if not exists readerfeeder;
+drop table user;
+drop table task;
+
 create table user (
-    id int not null,
+    id int not null auto_increment,
     name varchar(80) null,
     constraint pk_user primary key (id)
 );
