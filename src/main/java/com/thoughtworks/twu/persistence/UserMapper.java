@@ -10,7 +10,7 @@ public interface UserMapper {
     @Select("SELECT id,name FROM user where name = #{name}")
     User getUser(String name);
 
-    @Insert("INSERT INTO user (id, name) VALUES(#{id}, #{name})")
+    @Insert("INSERT INTO user (name) VALUES(#{name})")
     void insertUser(User user);
 
     @Delete("DELETE FROM user where name = #{name}")

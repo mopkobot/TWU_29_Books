@@ -29,18 +29,8 @@
         <property name="typeAliasesPackage" value="com.thoughtworks.twu.domain" />
     </bean>
 
-
-
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.thoughtworks.twu.persistence"/>
     </bean>
-
-    <bean id="authenticationFilter" class="org.jasig.cas.client.authentication.AuthenticationFilter">
-
-            <property name="casServerLoginUrl" value="https://castest.thoughtworks.com:443"/>
-            <property name="renew" value="false"/>
-            <property name="gateway" value="false"/>
-            <property name="service" value="https://localhost:8080/twu"/>
-        </bean>
 
 </beans>

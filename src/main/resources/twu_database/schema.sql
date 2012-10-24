@@ -1,6 +1,7 @@
 create database if not exists readerfeeder;
-drop table user;
-drop table task;
+use readerfeeder;
+drop table if exists user;
+drop table if exists task;
 
 create table user (
     id int not null auto_increment,
