@@ -26,11 +26,27 @@
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="typeAliasesPackage" value="com.thoughtworks.twu.domain" />
+        <property name="typeAliasesPackage" value="com.thoughtworks.twu.domain"/>
     </bean>
 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.thoughtworks.twu.persistence"/>
+    </bean>
+
+    <bean id="authenticationFilter" class="org.jasig.cas.client.authentication.AuthenticationFilter">
+        <property name="casServerLoginUrl" value="https://cas.thoughtworks.com:443/cas/login"/>
+        <property name="renew" value="false"/>
+        <property name="gateway" value="false"/>
+        <property name="service" value="http://127.0.0.1:8080/twu/home"/>
+    </bean>
+
+    <bean id="ticketValidationFilter" class="org.jasig.cas.client.validation.Cas10TicketValidationFilter">
+        <property name="service" value="http://127.0.0.1:8080/twu/home"/>
+        <property name="ticketValidator">
+            <bean class="org.jasig.cas.client.validation.Cas10TicketValidator">
+                <constructor-arg index="0" value="https://cas.thoughtworks.com:443/cas/login"/>
+            </bean>
+        </property>
     </bean>
 
 </beans>
