@@ -25,7 +25,6 @@ import java.text.NumberFormat;
  * http://code.google.com/apis/books/docs/getting_started.html
  */
 public class BooksSample {
-
     private static final NumberFormat CURRENCY_FORMATTER = NumberFormat.getCurrencyInstance();
     private static final NumberFormat PERCENT_FORMATTER = NumberFormat.getPercentInstance();
 
