@@ -38,7 +38,7 @@ public class BooksSample {
                 .setJsonHttpRequestInitializer(credential)
                 .build();
         // Set query string and filter only Google eBooks.
-        System.out.println("Query: [" + query + "]");
+        System.out.println("Query : [" + query + "]");
         Books.Volumes.List volumesList = books.volumes().list(query);
         volumesList.setFilter("ebooks");
 
