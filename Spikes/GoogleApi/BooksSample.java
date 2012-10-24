@@ -45,7 +45,7 @@ public class BooksSample {
         // Execute the query.
         Volumes volumes = volumesList.execute();
         if (volumes.getTotalItems() == 0 || volumes.getItems() == null) {
-            System.out.println("No matches found.");
+            System.out.println(" No matches found.");
             return;
         }
 
