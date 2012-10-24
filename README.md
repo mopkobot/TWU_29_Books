@@ -4,11 +4,18 @@ twu_29_Books
 Development Environment Setup
 -----------------------------
 
+For Mac:
 1. Clone the project repository using git.
 2. Install HomeBrew
 3. Run "brew install gradle"
 4. Run "gradle build" to run all tests and build a WAR.
 5. Run "gradle jettyRun" to deploy using jetty.
+
+For linux:
+1. Clone the project repository using git.
+2. Run "yum install gradle"
+3. Run "gradle build" to run all tests and build a WAR.
+4. Run "gradle jettyRun" to deploy using jetty.
 
 IntelliJ IDEA Setup
 -------------------

@@ -38,7 +38,7 @@
     </bean>
 
     <bean id="authenticationFilter" class="org.jasig.cas.client.authentication.AuthenticationFilter">
-            <!--<property name="authenticationFilter" ref="authenticationFilter"/>-->
+
             <property name="casServerLoginUrl" value="https://castest.thoughtworks.com:443"/>
             <property name="renew" value="false"/>
             <property name="gateway" value="false"/>
