@@ -15,8 +15,9 @@ For Mac:
 For linux:
 1. Clone the project repository using git.
 2. Run "yum install gradle"
-3. Run "gradle build" to run all tests and build a WAR.
-4. Run "gradle jettyRun" to deploy using jetty.
+3. Run "gradle loadData"
+4. Run "gradle build" to run all tests and build a WAR.
+5. Run "gradle jettyRun" to deploy using jetty.
 
 IntelliJ IDEA Setup
 -------------------
