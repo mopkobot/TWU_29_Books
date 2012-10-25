@@ -57,7 +57,7 @@ task functionalTest(type: Test, dependsOn: "test") {
 
 task loadData << {
     runScript("src/main/resources/twu_database/schema.sql",
-            "jdbc:mysql://localhost:3306", "root", "pass1234")
+            "jdbc:mysql://localhost:3306", "root", "")
     runScript("src/main/resources/twu_database/import.sql", "jdbc:mysql://localhost:3306/readerfeeder", "root", "")
 }
 
