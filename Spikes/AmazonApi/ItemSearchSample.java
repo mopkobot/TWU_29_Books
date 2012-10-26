@@ -94,8 +94,8 @@ public class ItemSearchSample {
         params.put("Service", "AWSECommerceService");
         params.put("Version", "2009-03-31");
         params.put("Operation", "ItemSearch");
-        params.put("SearchIndex", "Music");
-        params.put("Keywords", "girls generation");
+        params.put("SearchIndex", "Books");
+        params.put("Title", "Harry Potter");
         params.put("ResponseGroup", "Small");
         params.put("AssociateTag", "readfeed01-20");
 
