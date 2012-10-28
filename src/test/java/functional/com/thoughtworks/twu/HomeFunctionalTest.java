@@ -22,11 +22,12 @@ public class HomeFunctionalTest {
 
     @Test
     public void shouldShowTryMeLink() {
-        webDriver.get("http://localhost:8080/twu");
+        webDriver.get("http://localhost:8080/twu/home");
         WebElement link = webDriver.findElement(By.tagName("a"));
 
         assertThat(link.getText(), is("Try me"));
-        assertThat(link.getAttribute("href"), is("http://localhost:8080/twu/?username=bill"));
+        assertThat(link.getAttribute("href"),
+                is("http://localhost:8080/twu/home?username=bill"));
 
         webDriver.get(link.getAttribute("href"));
         WebElement h1 = webDriver.findElement(By.tagName("h1"));
