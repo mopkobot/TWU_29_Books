@@ -5,17 +5,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
-
-/**
- * Created with IntelliJ IDEA.
- * User: lavanya
- * Date: 10/25/12
- * Time: 9:44 PM
- * To change this template use File | Settings | File Templates.
- */
 public class HtmlUnitDemo {
 
     WebDriver driver;
@@ -26,7 +17,7 @@ public class HtmlUnitDemo {
         driver.findElement(By.id("username")).sendKeys("lavanyam");
         driver.findElement(By.id("password")).sendKeys("lavanya");
         driver.findElement(By.className("btn-submit")).click();
-        Assert.assertEquals(driver.getTitle(), "CAS – Central Authentication Service");
+        Assert.assertEquals(driver.getTitle(), "CAS \u2013 Central Authentication Service");
 
     }
 
