@@ -1,7 +1,7 @@
-package com.thoughtworks.twu.domain;
+package com.thoughtworks.twu.persistence;
 
 
-import com.thoughtworks.twu.persistence.UserMapper;
+import com.thoughtworks.twu.domain.User;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
