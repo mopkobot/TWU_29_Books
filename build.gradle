@@ -46,11 +46,11 @@ test {
     exclude '**/smoke/com/thoughtworks/**/*.*'
 }
 
-task functionalTest(type: Test, dependsOn: "test") {
+task functionalTest(type: Test) {
     include '**/functional/com/thoughtworks/**/*.*'
 }
 
-task smokeTest(type: Test, dependsOn: "test") {
+task smokeTest(type: Test) {
     include '**/smoke/com/thoughtworks/**/*.*'
 }
 
