@@ -3,12 +3,14 @@
 // See SampleSpecRunner.html for the next step.
 
 // A JSLINT directive.
-describe( "Sample test",
-          function() {
-              describe('JavaScript addition operator', function () {
-                  it('adds two numbers together', function () {
-                      expect(1 + 2).toEqual(3);
-                  });
-              });
-          }
-);
+
+/*global beforeEach : false, describe : false, 
+ expect : false, it : false, 
+ $ : false, jquery : false,
+ globalnamedasdfrzqce : false
+ */
+describe("Some feature", function () {
+    it("test", function () {
+        expect(true).toBe(true);
+    });
+});
