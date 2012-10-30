@@ -9,8 +9,6 @@
  $ : false, jquery : false,
  globalnamedasdfrzqce : false
  */
-describe("Some feature", function () {
-    it("test", function () {
-        expect(true).toBe(true);
-    });
-});
+describe( "Some feature", 
+          function() {
+          } );
