@@ -3,7 +3,7 @@
 <head>
 <#if book??>
     <title>ReaderFeeder - ${book.title}</title>
-    <#else>
+<#else>
     <title>ReaderFeeder</title>
 </#if>
 </head>
@@ -12,8 +12,12 @@
 <#if book??>
 <img src=${book.image} width=100 height=50/>
 <h1>${book.title}</a>
+    <br>${book.author}
+    <br>${book.description}
+    <br>${book.ISBN10}
+    <br>${book.ISBN13}
 <#else>
-    <p><a href="?booktitle=Harry Potter">View Harry Potter</a></p>
+    <p><a href="?booktitle=The Casual Vacancy">View The Casual Vacancy</a></p>
 </#if>
 </h1>
 

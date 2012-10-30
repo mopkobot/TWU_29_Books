@@ -12,13 +12,6 @@ public class Book implements Serializable {
     private String ISBN10;
     private String ISBN13;
 
-    public String getImage() {
-        return image;
-    }
-    public String getTitle() {
-        return title;
-    }
-
     public Book(String author, String title, String image, String description, String ISBN10, String ISBN13) {
         if (author == null) {
             throw new IllegalArgumentException("No author");
@@ -39,6 +32,34 @@ public class Book implements Serializable {
 
     private Book() {
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getISBN10() {
+        return ISBN10;
+    }
+
+    public String getISBN13() {
+        return ISBN13;
+    }
+
+    public String getImage() {
+        return image;
+    }
+    public String getTitle() {
+        return title;
+    }
+
 
     public boolean isImageAvailable() {
         return this.image != null;
