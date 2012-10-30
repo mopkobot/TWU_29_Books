@@ -2,7 +2,7 @@ create database if not exists readerfeeder;
 use readerfeeder;
 drop table if exists user;
 drop table if exists task;
-drop table if exists book;
+drop table if exists books;
 
 create table user (
     id Integer not null auto_increment,
@@ -14,12 +14,12 @@ create table task (
     id Integer not null,
     name varchar(80) null,
     description varchar(300) null,
-    poIntegers Integer null,
+    points Integer null,
     code varchar(10) null,
     constraint pk_task primary key (id)
 );
 
-create table book (
+create table books (
     id Integer not null auto_increment,
     title varchar(150) not null,
     author varchar(150) not null,

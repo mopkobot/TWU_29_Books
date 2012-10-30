@@ -1,31 +1,22 @@
 package com.thoughtworks.twu.domain;
 
-import java.io.Serializable;
-
 //Understands a row in table book of readerfeeder
-public class Book implements Serializable {
+public class Book {
+    public static final String DEFAULT_IMAGE_SRC = "http://smartmobilestudio.com/wp-content/uploads/2012/06/leather-book-preview.png";
+    public static final String DEFAULT_DESCRIPTION = "No description available.";
     private int id;
     private String author;
     private String title;
-    private String image = "http://smartmobilestudio.com/wp-content/uploads/2012/06/leather-book-preview.png";
-    private String description = "No description available.";
+    private String image = DEFAULT_IMAGE_SRC;
+    private String description = DEFAULT_DESCRIPTION;
     private String ISBN10;
     private String ISBN13;
 
     public Book(String author, String title, String image, String description, String ISBN10, String ISBN13) {
-        if (author == null) {
-            throw new IllegalArgumentException("No author");
-        }
-        if (title == null) {
-            throw new IllegalArgumentException("No Title");
-        }
         this.author = author;
         this.title = title;
-        if(image != null) this.image = image;
-        if(description != null) this.description = description;
-        if(ISBN10 == null && ISBN13 == null){
-            throw new IllegalArgumentException("No ISBN");
-        }
+        if (image != null) this.image = image;
+        if (description != null) this.description = description;
         this.ISBN10 = ISBN10;
         this.ISBN13 = ISBN13;
     }
@@ -56,13 +47,9 @@ public class Book implements Serializable {
     public String getImage() {
         return image;
     }
+
     public String getTitle() {
         return title;
-    }
-
-
-    public boolean isImageAvailable() {
-        return this.image != null;
     }
 
     @Override
