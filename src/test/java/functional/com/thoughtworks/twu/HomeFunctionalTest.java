@@ -21,7 +21,7 @@ public class HomeFunctionalTest {
     }
 
     @Test
-    public void shouldShowTryMeLink() {
+    public void shouldShowMeHeaderOfThePage() {
         webDriver.get("http://localhost:8080/twu/home");
         WebElement header = webDriver.findElement(By.tagName("h1"));
 
