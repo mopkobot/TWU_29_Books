@@ -23,16 +23,10 @@ public class HomeFunctionalTest {
     @Test
     public void shouldShowTryMeLink() {
         webDriver.get("http://localhost:8080/twu/home");
-        WebElement link = webDriver.findElement(By.tagName("a"));
+        WebElement header = webDriver.findElement(By.tagName("h1"));
 
-        assertThat(link.getText(), is("Try me"));
-        assertThat(link.getAttribute("href"),
-                is("http://localhost:8080/twu/home?username=bill"));
+        assertThat(header.getText(), is("SSO Internal/VPN access, please use Active Directory credentials."));
 
-        webDriver.get(link.getAttribute("href"));
-        WebElement h1 = webDriver.findElement(By.tagName("h1"));
-
-        assertThat(h1.getText(), is("Hallo bill"));
     }
 
     @After
