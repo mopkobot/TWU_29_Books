@@ -2,9 +2,19 @@ apply plugin: 'java'
 apply plugin: 'jetty'
 apply plugin: 'war'
 apply plugin: 'idea'
+apply plugin: 'jasmineGradle'
 
 repositories {
     mavenCentral()
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "com.github.dzhaughnroth:jasmine-gradle-plugin:0.4"
+    }
 }
 
 configurations {
@@ -33,7 +43,7 @@ dependencies {
             'org.seleniumhq.selenium:selenium-java:2.25.0',
             'org.seleniumhq.selenium:selenium-firefox-driver:2.25.0'
 
-    sql     'mysql:mysql-connector-java:5.1.21'
+    sql 'mysql:mysql-connector-java:5.1.21'
 
 }
 
@@ -61,13 +71,13 @@ task loadData << {
 }
 
 def runScript(scriptName, url, user, password) {
-    ant.sql(classpath: configurations.sql.asPath, src:scriptName,
-            driver:'com.mysql.jdbc.Driver',
-            print:true,
-            url:url,
-            userid:user,
-            password:password,
-            onerror:'continue'
+    ant.sql(classpath: configurations.sql.asPath, src: scriptName,
+            driver: 'com.mysql.jdbc.Driver',
+            print: true,
+            url: url,
+            userid: user,
+            password: password,
+            onerror: 'continue'
     )
 }
 
