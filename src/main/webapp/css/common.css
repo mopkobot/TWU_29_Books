@@ -1,0 +1,41 @@
+.book-cover {
+    float: left;
+    padding: 20px;
+    margin-left: 58px;
+
+}
+
+.book-info {
+    width: 69%;
+    float: right;
+}
+
+.description {
+    float: left;
+    width: 84%;
+    position: relative;
+    left: 80px;
+    color: black;
+    display: block;
+    font-family: verdana, arial, helvetica, sans-serif;
+    font-size: 15px;
+}
+
+.title {
+    font-size: 60px !important;
+}
+
+.author {
+    font-size: 30px !important;
+}
+.isbn {
+    font-size: 15px;
+    position: relative;
+    top: 60px;
+}
+
+.book {
+    width:100%;
+    height: 100%;
+    overflow-x: scroll;
+}

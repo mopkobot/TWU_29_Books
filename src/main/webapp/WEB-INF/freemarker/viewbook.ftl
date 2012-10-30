@@ -1,25 +1,46 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 <#if book??>
     <title>ReaderFeeder - ${book.title}</title>
 <#else>
     <title>ReaderFeeder</title>
 </#if>
+    <link rel="stylesheet" type="text/css" href="css/common.css"/>
 </head>
+
 
 <body>
 <#if book??>
-<img src=${book.image} width=100 height=50/>
-<h1>${book.title}</a>
-    <br>${book.author}
-    <br>${book.description}
-    <br>${book.ISBN10}
-    <br>${book.ISBN13}
+
+<div class="book-head">
+    <div class="book-cover">
+        <img src="${book.image}"/>
+    </div>
+    <div class="book-info">
+        <h1 class="title">${book.title}</h1>
+        <h2 class="author">${book.author}</h2>
+        <div class="isbn">
+            <#if book.ISBN10??>
+                ISBN-10:${book.ISBN10}
+            </#if>
+            <br>
+            <#if book.ISBN13??>
+                ISBN-13:${book.ISBN13}
+            </#if>
+        </div>
+    </div>
+</div>
+
+<div class="description">
+    <hr>
+    ${book.description}
+</div>
+
 <#else>
     <p><a href="?booktitle=The Casual Vacancy">View The Casual Vacancy</a></p>
 </#if>
-</h1>
 
 </body>
 </html>
