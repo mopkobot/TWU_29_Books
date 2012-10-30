@@ -52,6 +52,10 @@ public class Book {
         return title;
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> #145 Ni & Summer change test for book domain object
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
