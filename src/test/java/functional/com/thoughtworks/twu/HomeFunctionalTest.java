@@ -18,6 +18,7 @@ public class HomeFunctionalTest {
     @Before
     public void setUp() {
         webDriver = new FirefoxDriver();
+        webDriver.get("http://cas.thoughtworks.com/cas/logout");
     }
 
     @Test
