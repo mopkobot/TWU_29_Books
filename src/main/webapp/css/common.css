@@ -11,6 +11,7 @@
 }
 
 .description {
+    border-top: 2px red;
     float: left;
     width: 84%;
     position: relative;

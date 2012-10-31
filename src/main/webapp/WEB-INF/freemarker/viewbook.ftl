@@ -1,4 +1,8 @@
-<@layout.block title="ReaderFeeder 1">
+<#if book??>
+    <#assign title="ReaderFeeder - "+ book.title>
+</#if>
+
+<@layout.block title=title  >
 
     <#if book??>
         <div class="book-head">
