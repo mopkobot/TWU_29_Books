@@ -57,11 +57,14 @@ test {
 
 task functionalTest(type: Test) {
     include '**/functional/com/thoughtworks/**/*.*'
+    exclude '**/smoke/com/thoughtworks/**/*.*'
+    exclude '**/com/thoughtworks/**/*.*'
 }
 
 task smokeTest(type: Test) {
     include '**/smoke/com/thoughtworks/**/*.*'
     exclude '**/functional/com/thoughtworks/**/*.*'
+    exclude '**/com/thoughtworks/**/*.*'
 }
 
 task loadData << {
