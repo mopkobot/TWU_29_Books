@@ -1,10 +1,12 @@
 package com.thoughtworks.twu.controller;
 
+import com.thoughtworks.twu.domain.User;
 import org.junit.Test;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import static org.junit.Assert.assertEquals;
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
 
 public class LoginControllerTest {
     @Test
@@ -15,6 +17,9 @@ public class LoginControllerTest {
         request.setRemoteUser("test");
         ModelAndView actualModelAndView = loginController.welcome(request);
 
-        assertEquals(actualModelAndView.getModelMap().get("username"), "test");
+        User user = (User)actualModelAndView.getModel().get("user");
+
+        assertThat(user.getName(), is("test"));
     }
+
 }

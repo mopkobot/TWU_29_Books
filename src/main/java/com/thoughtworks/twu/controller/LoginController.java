@@ -13,12 +13,9 @@ public class LoginController {
 
     @RequestMapping(value = "/welcome", method = RequestMethod.GET)
     public ModelAndView welcome(HttpServletRequest request) {
-        ModelAndView modelAndView = new ModelAndView("welcome");
-
+        ModelAndView modelAndView = new ModelAndView();
         String username = request.getRemoteUser();
-        System.out.println("-------------* "+ username);
-        User user = new User(username);
-        modelAndView.addObject("user", user);
+        modelAndView.addObject("user", new User(username));
         return modelAndView;
     }
 }
