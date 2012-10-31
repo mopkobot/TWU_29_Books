@@ -1,5 +1,6 @@
-package com.thoughtworks.twu.controller;
+package main.com.thoughtworks.twu.controller;
 
+import com.thoughtworks.twu.controller.SearchController;
 import com.thoughtworks.twu.domain.Book;
 import com.thoughtworks.twu.service.SearchService;
 import org.junit.Test;

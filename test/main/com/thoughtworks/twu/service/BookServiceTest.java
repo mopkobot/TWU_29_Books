@@ -1,7 +1,8 @@
-package com.thoughtworks.twu.service;
+package main.com.thoughtworks.twu.service;
 
 import com.thoughtworks.twu.domain.Book;
 import com.thoughtworks.twu.persistence.BookMapper;
+import com.thoughtworks.twu.service.BookService;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.equalTo;

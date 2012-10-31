@@ -1,6 +1,7 @@
-package com.thoughtworks.twu.persistence;
+package main.com.thoughtworks.twu.persistence;
 
 import com.thoughtworks.twu.domain.Book;
+import com.thoughtworks.twu.persistence.BookMapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,5 +1,6 @@
-package com.thoughtworks.twu.controller;
+package main.com.thoughtworks.twu.controller;
 
+import com.thoughtworks.twu.controller.HomeController;
 import com.thoughtworks.twu.domain.User;
 import com.thoughtworks.twu.service.UserService;
 import org.junit.Test;

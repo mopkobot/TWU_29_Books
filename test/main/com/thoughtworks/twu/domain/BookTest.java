@@ -1,5 +1,6 @@
-package com.thoughtworks.twu.domain;
+package main.com.thoughtworks.twu.domain;
 
+import com.thoughtworks.twu.domain.Book;
 import org.junit.Before;
 import org.junit.Test;
 

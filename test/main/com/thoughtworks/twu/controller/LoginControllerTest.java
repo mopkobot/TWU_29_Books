@@ -1,5 +1,6 @@
-package com.thoughtworks.twu.controller;
+package main.com.thoughtworks.twu.controller;
 
+import com.thoughtworks.twu.controller.LoginController;
 import com.thoughtworks.twu.domain.User;
 import org.junit.Test;
 import org.springframework.mock.web.MockHttpServletRequest;

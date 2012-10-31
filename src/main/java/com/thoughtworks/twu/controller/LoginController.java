@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class LoginController {
 
-    @RequestMapping(value = "/welcome", method = RequestMethod.GET)
+    @RequestMapping(value = "/create-user-profile", method = RequestMethod.GET)
     public ModelAndView welcome(HttpServletRequest request) {
-        ModelAndView modelAndView = new ModelAndView();
+        ModelAndView modelAndView = new ModelAndView("create-user-profile");
         String username = request.getRemoteUser();
         modelAndView.addObject("user", new User(username));
         return modelAndView;
