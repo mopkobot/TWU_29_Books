@@ -5,7 +5,7 @@ import com.thoughtworks.twu.persistence.BookMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-//Understands the interface of ORM
+//Job: Understands the interface of ORM
 @Service
 public class BookService {
     private BookMapper bookMapper;

@@ -24,8 +24,10 @@ public class BookViewController {
         ModelAndView modelAndView = new ModelAndView("viewbook");
         if (!title.isEmpty()) {
             Book book = bookService.getBookByTitle(title);
-            modelAndView.addObject("book", book);
+            if (book != null){
+                return modelAndView.addObject("book", book);
+            }
         }
-        return modelAndView;
+        return modelAndView.addObject("bookNotFound", "Could not find book");
     }
 }

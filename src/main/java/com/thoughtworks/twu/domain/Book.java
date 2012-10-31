@@ -1,6 +1,6 @@
 package com.thoughtworks.twu.domain;
 
-//Understands a row in table book of readerfeeder
+//Job: Understands literary work written by a certain person
 public class Book {
     public static final String DEFAULT_IMAGE_SRC = "http://smartmobilestudio.com/wp-content/uploads/2012/06/leather-book-preview.png";
     public static final String DEFAULT_DESCRIPTION = "No description available.";
@@ -53,18 +53,18 @@ public class Book {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    public boolean equals(Object anotherObject) {
+        if (this == anotherObject) return true;
+        if (anotherObject == null || getClass() != anotherObject.getClass()) return false;
 
-        Book book = (Book) o;
+        Book thatBook = (Book) anotherObject;
 
-        if (author != null ? !author.equals(book.author) : book.author != null) return false;
-        if (image != null ? !image.equals(book.image) : book.image != null) return false;
-        if (title != null ? !title.equals(book.title) : book.title != null) return false;
-        if (description != null ? !description.equals(book.description) : book.description != null) return false;
-        if (ISBN10 != null ? !ISBN10.equals(book.ISBN10) : book.ISBN10 != null) return false;
-        if (ISBN13 != null ? !ISBN13.equals(book.ISBN13) : book.ISBN13 != null) return false;
+        if (this.author != null ? !author.equals(thatBook.author) : thatBook.author != null) return false;
+        if (this.image != null ? !image.equals(thatBook.image) : thatBook.image != null) return false;
+        if (this.title != null ? !title.equals(thatBook.title) : thatBook.title != null) return false;
+        if (this.description != null ? !description.equals(thatBook.description) : thatBook.description != null) return false;
+        if (this.ISBN10 != null ? !ISBN10.equals(thatBook.ISBN10) : thatBook.ISBN10 != null) return false;
+        if (this.ISBN13 != null ? !ISBN13.equals(thatBook.ISBN13) : thatBook.ISBN13 != null) return false;
         return true;
     }
 
