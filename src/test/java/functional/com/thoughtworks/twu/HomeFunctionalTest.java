@@ -18,15 +18,14 @@ public class HomeFunctionalTest {
     @Before
     public void setUp() {
         webDriver = new FirefoxDriver();
-        webDriver.get("http://cas.thoughtworks.com/cas/logout");
     }
 
     @Test
     public void shouldShowMeHeaderOfThePage() {
         webDriver.get("http://localhost:8080/twu/home");
-        WebElement header = webDriver.findElement(By.tagName("h1"));
+        WebElement link = webDriver.findElement(By.tagName("a"));
 
-        assertThat(header.getText(), is("SSO Internal/VPN access, please use Active Directory credentials."));
+        assertThat(link.getAttribute("href"), is("Try me"));
 
     }
 
