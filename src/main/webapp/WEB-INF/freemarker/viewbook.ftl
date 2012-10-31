@@ -7,13 +7,14 @@
 <#else>
     <title>ReaderFeeder</title>
 </#if>
+    <link rel="stylesheet" type="text/css" href="static/css/bootstrap.css"/>
     <link rel="stylesheet" type="text/css" href="css/common.css"/>
 </head>
 
 
 <body>
 <#if book??>
-
+<div class="container">
 <div class="book-head">
     <div class="book-cover">
         <img src="${book.image}"/>
@@ -36,6 +37,7 @@
 <div class="description">
     <hr>
     ${book.description}
+</div>
 </div>
 
 <#else>
