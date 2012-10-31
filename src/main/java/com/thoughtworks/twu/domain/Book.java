@@ -15,8 +15,8 @@ public class Book {
     public Book(String author, String title, String image, String description, String ISBN10, String ISBN13) {
         this.author = author;
         this.title = title;
-        if (image != null) this.image = image;
-        if (description != null) this.description = description;
+        if (image != null && !image.trim().isEmpty()) this.image = image;
+        if (description != null && !description.trim().isEmpty()) this.description = description;
         this.ISBN10 = ISBN10;
         this.ISBN13 = ISBN13;
     }

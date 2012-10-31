@@ -22,11 +22,9 @@ public class BookViewController {
     @RequestMapping(value = "/viewbook", method = RequestMethod.GET)
     public ModelAndView viewBook(@RequestParam(value = "booktitle", defaultValue = "") String title) {
         ModelAndView modelAndView = new ModelAndView("viewbook");
-        if (!title.isEmpty()) {
-            Book book = bookService.getBookByTitle(title);
-            if (book != null){
-                return modelAndView.addObject("book", book);
-            }
+        Book book = bookService.getBookByTitle(title);
+        if (book != null){
+            return modelAndView.addObject("book", book);
         }
         return modelAndView.addObject("bookNotFound", "Could not find book");
     }

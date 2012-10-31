@@ -4,7 +4,7 @@ import com.thoughtworks.twu.domain.Book;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
-//Understands interaction with book table in DB
+//Job: Understands interaction with book table in DB
 public interface BookMapper {
     @Insert("INSERT INTO books (title, author, image, description, ISBN10, ISBN13) VALUES(#{title}, #{author}, #{image}," +
             " #{description}, #{ISBN10}, #{ISBN13})")

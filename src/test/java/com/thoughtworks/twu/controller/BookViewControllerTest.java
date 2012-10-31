@@ -34,7 +34,7 @@ public class BookViewControllerTest {
         String expectedMessage = "Could not find book";
         ModelAndView modelAndView = bookPageModelAndView(invalidTitle, false);
 
-        String messageFromModelAndView =  (String) modelAndView.getModel().get("bookNotFound");
+        String messageFromModelAndView = (String) modelAndView.getModel().get("bookNotFound");
         assertThat(messageFromModelAndView, is(expectedMessage));
     }
 
@@ -44,13 +44,13 @@ public class BookViewControllerTest {
         String expectedMessage = "Could not find book";
         ModelAndView modelAndView = bookPageModelAndView(emptyTitle, false);
 
-        String messageFromModelAndView =  (String) modelAndView.getModel().get("bookNotFound");
+        String messageFromModelAndView = (String) modelAndView.getModel().get("bookNotFound");
         assertThat(messageFromModelAndView, is(expectedMessage));
     }
 
     private ModelAndView bookPageModelAndView(String title, boolean isValidTitle) throws IOException {
         BookService bookService = mock(BookService.class);
-        Book book = (isValidTitle) ? getBook(): null;
+        Book book = (isValidTitle) ? getBook() : null;
 
         when(bookService.getBookByTitle(title)).thenReturn(book);
 
@@ -62,9 +62,9 @@ public class BookViewControllerTest {
         String title = "A Present Book";
         String author = "author";
         String image = "http://ecx.images-amazon.com/images/I/51MU5VilKpL._BO2,204,203,200_PIsitb-sticker-arrow-click,TopRight,35,-76_AA300_SH20_OU01_.jpg";
-        String description = "this is a book about life, I love it very much!!";
+        String description = "This is a book about life, I love it very much!!";
         String ISBN10 = "0156027321";
         String ISBN13 = "978-0156027328";
-       return new Book(author, title, image, description, ISBN10, ISBN13);
+        return new Book(author, title, image, description, ISBN10, ISBN13);
     }
 }

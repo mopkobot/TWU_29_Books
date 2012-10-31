@@ -44,7 +44,6 @@ dependencies {
             'org.seleniumhq.selenium:selenium-firefox-driver:2.25.0'
 
     sql 'mysql:mysql-connector-java:5.1.21'
-
 }
 
 jettyRun {
@@ -62,6 +61,7 @@ task functionalTest(type: Test) {
 
 task smokeTest(type: Test) {
     include '**/smoke/com/thoughtworks/**/*.*'
+    exclude '**/functional/com/thoughtworks/**/*.*'
 }
 
 task loadData << {
@@ -87,9 +87,19 @@ functionalTest.doFirst {
     jettyRun.execute()
 }
 
+smokeTest.doFirst {
+    jettyRun.httpPort = 8080
+    jettyRun.daemon = true
+    jettyRun.execute()
+}
+
 [jettyRunWar, jettyStop]*.stopPort = 8081
 [jettyRunWar, jettyStop]*.stopKey = 'stopKey'
 
 functionalTest.doLast {
+    jettyStop.execute()
+}
+
+smokeTest.doLast {
     jettyStop.execute()
 }
