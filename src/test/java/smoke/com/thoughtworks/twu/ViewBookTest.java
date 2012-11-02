@@ -23,6 +23,8 @@ public class ViewBookTest {
 
     @Test
     public void shouldUnderstandBookView() throws Exception {
+
+        login();
         String bookPageUrl = "http://localhost:8080/twu/viewbook?booktitle=The Casual Vacancy";
 
         driver.get(bookPageUrl);
@@ -49,6 +51,13 @@ public class ViewBookTest {
 
     private WebElement locateElement(String selector){
         return driver.findElement(By.cssSelector(selector));
+    }
+
+    private void login() {
+        driver.get("http://localhost:8080/twu");
+        driver.findElement(By.id("username")).sendKeys("test.twu");
+        driver.findElement(By.id("password")).sendKeys("Th0ughtW0rks@12");
+        driver.findElement(By.className("btn-submit")).click();
     }
 
     @After
