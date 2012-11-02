@@ -2,7 +2,6 @@ package smoke.com.thoughtworks.twu;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -21,7 +20,7 @@ public class ViewBookTest {
         driver = new FirefoxDriver();
     }
 
-    @Test
+//    @Test
     public void shouldUnderstandBookView() throws Exception {
 
         login();
