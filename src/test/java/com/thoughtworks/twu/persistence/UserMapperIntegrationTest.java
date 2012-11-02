@@ -1,4 +1,4 @@
-package main.com.thoughtworks.twu.persistence;
+package com.thoughtworks.twu.persistence;
 
 
 import com.thoughtworks.twu.domain.User;

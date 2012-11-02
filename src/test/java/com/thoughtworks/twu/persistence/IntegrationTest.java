@@ -1,4 +1,4 @@
-package main.com.thoughtworks.twu.persistence;
+package com.thoughtworks.twu.persistence;
 
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;

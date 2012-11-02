@@ -1,4 +1,4 @@
-package main.com.thoughtworks.twu.controller;
+package com.thoughtworks.twu.controller;
 
 import com.thoughtworks.twu.controller.SearchController;
 import com.thoughtworks.twu.domain.Book;

@@ -1,4 +1,4 @@
-package main.com.thoughtworks.twu.domain;
+package com.thoughtworks.twu.domain;
 
 import com.thoughtworks.twu.domain.Book;
 import org.junit.Before;

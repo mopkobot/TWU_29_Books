@@ -1,4 +1,4 @@
-package main.com.thoughtworks.twu.service;
+package com.thoughtworks.twu.service;
 
 import com.thoughtworks.twu.domain.Book;
 import com.thoughtworks.twu.persistence.BookMapper;

@@ -1,4 +1,4 @@
-package main.com.thoughtworks.twu.controller;
+package com.thoughtworks.twu.controller;
 
 import com.thoughtworks.twu.controller.LoginController;
 import com.thoughtworks.twu.domain.User;
