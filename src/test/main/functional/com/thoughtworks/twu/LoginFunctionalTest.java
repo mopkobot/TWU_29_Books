@@ -6,7 +6,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 import static org.hamcrest.core.IsNull.notNullValue;
 import static org.junit.Assert.assertEquals;
@@ -17,7 +17,7 @@ public class LoginFunctionalTest {
 
     @Before
     public void setUp() {
-        webDriver = new HtmlUnitDriver();
+        webDriver = new FirefoxDriver();
     }
 
     @Test

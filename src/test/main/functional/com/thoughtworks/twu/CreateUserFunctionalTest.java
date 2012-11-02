@@ -5,7 +5,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 import static junit.framework.Assert.assertEquals;
 
@@ -14,13 +15,21 @@ public class CreateUserFunctionalTest {
 
     @Before
     public void setUp() {
-        webDriver = new HtmlUnitDriver();
+        webDriver = new FirefoxDriver();
         performSuccessfulLogin();
     }
 
     @Test
     public void shouldRedirectToCreateUserPage() {
         assertEquals(webDriver.getTitle(), "ReaderFeeder Create Profile");
+    }
+
+    @Test
+    public void shouldBeAbleToCreateProfile() {
+        WebElement username = webDriver.findElement(By.className("username"));
+        username.sendKeys("foo");
+        webDriver.findElement(By.className("save")).click();
+        assertEquals(webDriver.getTitle(), "ReaderFeeder Welcome");
     }
 
     @After
