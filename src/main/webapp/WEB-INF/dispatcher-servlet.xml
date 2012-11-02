@@ -12,8 +12,15 @@
     <context:component-scan base-package="com.thoughtworks.twu.controller"/>
     <mvc:annotation-driven/>
 
+    <mvc:default-servlet-handler/>
+
     <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
         <property name="templateLoaderPath" value="/WEB-INF/freemarker/"/>
+        <property name="freemarkerSettings">
+            <props>
+                <prop key="auto_import">layout.ftl as layout</prop>
+            </props>
+        </property>
     </bean>
 
     <bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">

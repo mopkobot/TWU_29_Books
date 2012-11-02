@@ -1,8 +1,25 @@
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+nav,
+section {
+    display: block;
+}
+
+img.book-img {
+    width: 300px;
+    height: 300px;
+}
+
 .book-cover {
     float: left;
     padding: 20px;
     margin-left: 58px;
-
 }
 
 .book-info {
@@ -12,33 +29,36 @@
 
 .description {
     float: left;
-    width: 84%;
     position: relative;
     left: 80px;
     color: black;
-    display: block;
     font-family: verdana, arial, helvetica, sans-serif;
-    font-size: 15px;
+    font-size: 13px;
+    overflow: auto;
+    height: 400px;
+    width: 100%;
+    line-height: 160%;
 }
 
 .title {
-    font-size: 40px !important;
+    font-size: 30px !important;
     padding-top: 54px;
 }
 
 .author {
-    font-size: 30px !important;
+    font-size: 20px !important;
 }
 
 .isbn {
     font-size: 15px;
     position: relative;
-    top: 60px;
+    top: 20px;
 }
 
 .container {
-    width: 1062px;
+    width: 1024px;
     margin-left: auto;
     margin-right: auto;
     *zoom: 1;
 }
+
