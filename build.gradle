@@ -54,14 +54,26 @@ jettyRun {
 test {
     exclude '**/functional/com/thoughtworks/**/*.*'
     exclude '**/smoke/com/thoughtworks/**/*.*'
+
+    beforeTest { descriptor ->
+        logger.lifecycle("Running test: " + descriptor)
+    }
 }
 
 task functionalTest(type: Test) {
     include '**/functional/com/thoughtworks/**/*.*'
+
+    beforeTest { descriptor ->
+        logger.lifecycle("Running test: " + descriptor)
+    }
 }
 
 task smokeTest(type: Test) {
     include '**/smoke/com/thoughtworks/**/*.*'
+
+    beforeTest { descriptor ->
+        logger.lifecycle("Running test: " + descriptor)
+    }
 }
 
 task loadData << {
