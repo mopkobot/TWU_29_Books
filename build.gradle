@@ -15,6 +15,9 @@ project.ext {
 
 repositories {
     mavenCentral()
+    maven {
+        url "http://mavenrepo.google-api-java-client.googlecode.com/hg"
+    }
 }
 
 buildscript {
@@ -45,7 +48,10 @@ dependencies {
             'commons-lang:commons-lang:2.6',
             'org.jasig.cas.client:cas-client-core:3.2.1',
             'mysql:mysql-connector-java:5.1.21',
-            'com.dbdeploy:dbdeploy-ant:3.0M3'
+            'com.dbdeploy:dbdeploy-ant:3.0M3',
+            'com.google.api-client:google-api-client:1.11.0-beta',
+            'com.google.apis:google-api-services-books:v1-rev11-1.8.0-beta',
+            'com.google.http-client:google-http-client-jackson2:1.11.0-beta'
 
     testCompile 'junit:junit:4.10',
             'org.springframework:spring-test:3.1.1.RELEASE',

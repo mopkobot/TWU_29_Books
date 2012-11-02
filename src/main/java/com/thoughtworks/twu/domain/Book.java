@@ -85,4 +85,17 @@ public class Book {
         result = 31 * result + (ISBN13 != null ? ISBN13.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", author='" + author + '\'' +
+                ", title='" + title + '\'' +
+                ", image='" + image + '\'' +
+                ", description='" + description + '\'' +
+                ", ISBN10='" + ISBN10 + '\'' +
+                ", ISBN13='" + ISBN13 + '\'' +
+                '}';
+    }
 }

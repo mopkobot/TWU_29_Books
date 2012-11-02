@@ -96,6 +96,10 @@ public class BooksSample {
                 }
                 System.out.println();
             }
+            if (volumeInfo.getImageLinks()!=null)
+            {
+                System.out.println("Thumbnail: " +volumeInfo.getImageLinks().getThumbnail());
+            }
             // Access status.
             String accessViewStatus = volume.getAccessInfo().getAccessViewStatus();
             String message = "Additional information about this book is available from Google eBooks at:";
