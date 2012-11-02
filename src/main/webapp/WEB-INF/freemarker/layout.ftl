@@ -5,9 +5,7 @@
             <title>
                 ${title}
             </title>
-
-            <link rel="stylesheet" type="text/css" href="static/css/bootstrap.css"/>
-            <link rel="stylesheet" type="text/css" href="css/common.css"/>
+            <link rel="stylesheet" type="text/css" href="static/css/common.css"/>
         </head>
 
         <body>

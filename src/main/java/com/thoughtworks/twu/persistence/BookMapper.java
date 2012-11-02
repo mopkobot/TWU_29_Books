@@ -10,7 +10,7 @@ public interface BookMapper {
             " #{description}, #{ISBN10}, #{ISBN13})")
     void insertBook(Book book);
 
-    @Select("SELECT * FROM books WHERE title = #{title}")
+    @Select("SELECT * FROM books WHERE title LIKE #{title}")
     Book getBookByTitle(String title);
 
 

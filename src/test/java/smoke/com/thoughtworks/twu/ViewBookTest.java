@@ -39,7 +39,7 @@ public class ViewBookTest {
 
     private void assertOnBookCover() {
         WebElement imageElement= locateElement("img.book-img");
-        assertThat(imageElement.getAttribute("src").endsWith("jpg"), is(true));
+        assertThat(imageElement.getAttribute("src").isEmpty(), is(true));
     }
 
     private void assertOnBookDescription() {

@@ -2,21 +2,21 @@ package com.thoughtworks.twu.domain;
 
 //Job: Understands literary work written by a certain person
 public class Book {
-    public static final String DEFAULT_IMAGE_SRC = "http://smartmobilestudio.com/wp-content/uploads/2012/06/leather-book-preview.png";
+    public static final String DEFAULT_IMAGE_SRC = "/twu/static/images/default_image.gif";
     public static final String DEFAULT_DESCRIPTION = "No description available.";
     private int id;
     private String author;
     private String title;
-    private String image = DEFAULT_IMAGE_SRC;
-    private String description = DEFAULT_DESCRIPTION;
+    private String image;
+    private String description;
     private String ISBN10;
     private String ISBN13;
 
     public Book(String author, String title, String image, String description, String ISBN10, String ISBN13) {
         this.author = author;
         this.title = title;
-        if (image != null && !image.trim().isEmpty()) this.image = image;
-        if (description != null && !description.trim().isEmpty()) this.description = description;
+        this.image = image;
+        this.description = description;
         this.ISBN10 = ISBN10;
         this.ISBN13 = ISBN13;
     }
@@ -33,6 +33,9 @@ public class Book {
     }
 
     public String getDescription() {
+        if (description == null || description.trim().isEmpty()) {
+            return DEFAULT_DESCRIPTION;
+        }
         return description;
     }
 
@@ -45,6 +48,9 @@ public class Book {
     }
 
     public String getImage() {
+        if (image == null || image.trim().isEmpty()) {
+            return DEFAULT_IMAGE_SRC;
+        }
         return image;
     }
 

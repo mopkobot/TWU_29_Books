@@ -11,7 +11,7 @@
             </div>
             <div class="book-info">
                 <h1 class="title">${book.title}</h1>
-                <h2 class="author">${book.author}</h2>
+                <h2 class="author">by ${book.author}</h2>
                 <div class="isbn">
                     <#if book.ISBN10??>
                         ISBN-10:${book.ISBN10}
@@ -24,10 +24,9 @@
             </div>
         </div>
 
-        <div class="description">
-            <hr>
-        ${book.description}
-        </div>
+        <section class="description" >
+            <blockquote> ${book.description}  </blockquote>
+        </section>
     <#else>
         <p><h1 class="title">${bookNotFound}</h1></p>
     </#if>
