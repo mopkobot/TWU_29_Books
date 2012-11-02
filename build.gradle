@@ -99,18 +99,9 @@ functionalTest.doFirst {
     jettyRun.execute()
 }
 
-smokeTest.doFirst {
-    functionalTest.doFirst
-}
-
 [jettyRunWar, jettyStop]*.stopPort = 8081
 [jettyRunWar, jettyStop]*.stopKey = 'stopKey'
 
 functionalTest.doLast {
     jettyStop.execute()
 }
-
-smokeTest.doLast {
-    functionalTest.doLast
-}
-
