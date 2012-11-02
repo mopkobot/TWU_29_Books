@@ -1,4 +1,4 @@
-package main.functional.com.thoughtworks.twu;
+package functional.com.thoughtworks.twu;
 
 import org.junit.After;
 import org.junit.Before;
@@ -20,7 +20,7 @@ public class LoginFunctionalTest {
         webDriver = new FirefoxDriver();
     }
 
-    @Test
+    @Test//(groups = {"functionalTest","smoke"})
     public void shouldShowMeCASLoginPage() {
         webDriver.get("http://localhost:8080/twu");
         WebElement header = webDriver.findElement(By.id("cas"));
@@ -37,7 +37,7 @@ public class LoginFunctionalTest {
         webDriver.findElement(By.id("password")).sendKeys("Th0ughtW0rks@12");
         webDriver.findElement(By.className("btn-submit")).click();
 
-        assertEquals(webDriver.getTitle(), "ReaderFeeder Create Profile");
+        assertEquals(webDriver.getTitle(), "ReaderFeeder");
     }
 
     @Test
@@ -51,16 +51,68 @@ public class LoginFunctionalTest {
         assertEquals(webDriver.getTitle(), "CAS \u2013 Central Authentication " + "Service");
     }
 
-//    @Test
-//    public void shouldShowUserNameAfterLoginSuccessfully() {
-//        webDriver.get("http://localhost:8080/twu");
-//
-//        webDriver.findElement(By.id("username")).sendKeys("test.twu");
-//        webDriver.findElement(By.id("password")).sendKeys("Th0ughtW0rks@12");
-//        webDriver.findElement(By.className("btn-submit")).click();
-//
-//        assertEquals(webDriver.findElement(By.className("username")).getText(), "test.twu");
-//    }
+    @Test
+    public void shouldDenyIllegalUserAccess2() {
+        webDriver.get("http://localhost:8080/twu");
+
+        webDriver.findElement(By.id("username")).sendKeys("test.twu");
+        webDriver.findElement(By.id("password")).sendKeys("");
+        webDriver.findElement(By.className("btn-submit")).click();
+
+        assertEquals(webDriver.getTitle(), "CAS \u2013 Central Authentication " + "Service");
+    }
+
+    @Test
+    public void shouldDenyIllegalUserAccess3() {
+        webDriver.get("http://localhost:8080/twu");
+
+        webDriver.findElement(By.id("username")).sendKeys("");
+        webDriver.findElement(By.id("password")).sendKeys("Th0ughtW0rks@12");
+        webDriver.findElement(By.className("btn-submit")).click();
+
+        assertEquals(webDriver.getTitle(), "CAS \u2013 Central Authentication " + "Service");
+    }
+
+    @Test
+    public void shouldDenyIllegalUserAccess4() {
+        webDriver.get("http://localhost:8080/twu");
+        webDriver.findElement(By.id("username")).sendKeys("000000123dg.twu");
+        webDriver.findElement(By.id("password")).sendKeys("Th0ughtW0rks@12");
+        webDriver.findElement(By.className("btn-submit")).click();
+
+        assertEquals(webDriver.getTitle(), "CAS \u2013 Central Authentication " + "Service");
+    }
+
+    @Test
+    public void shouldShowUserNameAfterLoginSuccessfully() {
+        webDriver.get("http://localhost:8080/twu");
+
+        webDriver.findElement(By.id("username")).sendKeys("test.twu");
+        webDriver.findElement(By.id("password")).sendKeys("Th0ughtW0rks@12");
+        webDriver.findElement(By.className("btn-submit")).click();
+
+        assertEquals(webDriver.findElement(By.className("username")).getText(), "test.twu");
+    }
+
+    @Test
+    public void shouldShowUserNameIfAlreadyLoggedIntoCAS(){ //Single sign on
+        webDriver.get("https://castest.thoughtworks.com/cas/login");
+        webDriver.findElement(By.id("username")).sendKeys("test.twu");
+        webDriver.findElement(By.id("password")).sendKeys("Th0ughtW0rks@12");
+        webDriver.findElement(By.className("btn-submit")).click();
+        webDriver.get("http://localhost:8080/twu");
+        assertEquals( "test.twu",webDriver.findElement(By.className("username")).getText());
+    }
+
+    @Test
+    public void shouldStayOnSamePageOnRefresh(){
+        webDriver.get("http://localhost:8080/twu");
+        webDriver.findElement(By.id("username")).sendKeys("test.twu");
+        webDriver.findElement(By.id("password")).sendKeys("Th0ughtW0rks@12");
+        webDriver.findElement(By.className("btn-submit")).click();
+        webDriver.navigate().refresh();
+        assertEquals(webDriver.findElement(By.className("username")).getText(), "test.twu");
+    }
 
     @After
     public void tearDown() {
