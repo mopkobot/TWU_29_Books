@@ -152,5 +152,7 @@ def startJetty() {
 }
 
 def stopJetty() {
+    jettyStop.stopKey="Ctrl+c"
+    jettyStop.stopPort=8080
     jettyStop.execute()
 }
