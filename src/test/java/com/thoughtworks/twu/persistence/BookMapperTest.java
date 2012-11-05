@@ -5,8 +5,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
+import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.hamcrest.core.IsEqual.equalTo;
@@ -17,6 +19,7 @@ import static org.junit.Assert.assertThat;
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
 @TransactionConfiguration(defaultRollback=true)
+@TestExecutionListeners({TransactionalTestExecutionListener.class})
 public class BookMapperTest extends IntegrationTest{
     @Autowired
     private BookMapper bookMapper;
