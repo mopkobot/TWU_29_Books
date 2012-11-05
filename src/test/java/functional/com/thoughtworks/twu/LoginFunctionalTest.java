@@ -105,6 +105,7 @@ public class LoginFunctionalTest {
     }
 
     @Test
+    //TODO: fixed test
     public void shouldStayOnSamePageOnRefresh(){
         webDriver.get("http://localhost:8080/twu");
         webDriver.findElement(By.id("username")).sendKeys("test.twu");
