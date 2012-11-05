@@ -74,6 +74,14 @@ task functionalTest(type: Test) {
     beforeTest { descriptor ->
         logger.lifecycle("Running test: " + descriptor)
     }
+
+    doFirst {
+        startJetty()
+    }
+
+    doLast {
+        stopJetty()
+    }
 }
 
 task smokeTest(type: Test) {
@@ -81,6 +89,14 @@ task smokeTest(type: Test) {
 
     beforeTest { descriptor ->
         logger.lifecycle("Running test: " + descriptor)
+    }
+
+    doFirst {
+        startJetty()
+    }
+
+    doLast {
+        stopJetty()
     }
 }
 
@@ -121,17 +137,12 @@ task updateDatabase  << {
     )
 }
 
-
-
-functionalTest.doFirst {
+def startJetty() {
     jettyRun.httpPort = 8080
     jettyRun.daemon = true
     jettyRun.execute()
 }
 
-[jettyRunWar, jettyStop]*.stopPort = 8081
-[jettyRunWar, jettyStop]*.stopKey = 'stopKey'
-
-functionalTest.doLast {
+def stopJetty() {
     jettyStop.execute()
 }
