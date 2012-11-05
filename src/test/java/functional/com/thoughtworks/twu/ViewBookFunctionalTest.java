@@ -1,4 +1,5 @@
 package functional.com.thoughtworks.twu;
+import junit.framework.Assert;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -7,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-import static org.hamcrest.core.IsNull.notNullValue;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
@@ -21,11 +22,36 @@ public class ViewBookFunctionalTest{
     public void shouldValidateAllElementsPresent(){
         login();
         webDriver.get("127.0.0.1:8080/twu/viewbook?booktitle=The Casual Vacancy");
-        assertEquals(webDriver.findElement(By.className("book-cover")).isDisplayed(), true);
-        assertEquals(webDriver.findElement(By.className("title")).isDisplayed(), true);
-        assertEquals(webDriver.findElement(By.className("author")).isDisplayed(), true);
+        assertOnBookTitle();
+        assertOnBookCover();
+        assertOnBookDescription();
+        assertOnIsbn();
+        assertOnAuthor();
+    }
+    private void assertOnIsbn() {
+
         assertEquals(webDriver.findElement(By.className("isbn")).isDisplayed(), true);
-        assertEquals(webDriver.findElement(By.className("description")).isDisplayed(), true);
+    }
+
+    private void assertOnAuthor() {
+        assertEquals(webDriver.findElement(By.className("author")).isDisplayed(), true);
+    }
+    private void assertOnBookTitle() {
+        WebElement titleElement = locateElement("h1.title");
+        Assert.assertEquals("The Casual Vacancy", titleElement.getText());
+    }
+
+    private void assertOnBookCover() {
+        WebElement imageElement= locateElement("img.book-img");
+        assertThat(imageElement.getAttribute("src").isEmpty(), is(false));
+    }
+
+    private void assertOnBookDescription() {
+        WebElement descriptionElement = locateElement("section.description");
+        assertThat(descriptionElement.getText().isEmpty(), is(false));
+    }
+    private WebElement locateElement(String selector){
+        return webDriver.findElement(By.cssSelector(selector));
     }
 
     private void login() {
