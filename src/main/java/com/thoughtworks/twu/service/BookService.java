@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 //Job: Understands the interface of ORM
 @Service
 public class BookService {
+
+    @Autowired
     private BookMapper bookMapper;
 
     @Autowired

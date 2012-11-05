@@ -15,7 +15,7 @@ public class LoginController {
     public ModelAndView welcome(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView("welcome");
         String username = request.getRemoteUser();
-        modelAndView.addObject("user", new User(username));
+        modelAndView.addObject("user", new User("casname",username));
         return modelAndView;
     }
 }
