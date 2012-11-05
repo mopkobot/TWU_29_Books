@@ -2,6 +2,7 @@ package smoke.com.thoughtworks.twu;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -20,11 +21,11 @@ public class ViewBookTest {
         driver = new FirefoxDriver();
     }
 
-//    @Test
+    @Test
     public void shouldUnderstandBookView() throws Exception {
 
         login();
-        String bookPageUrl = "http://localhost:8080/twu/viewbook?booktitle=The Casual Vacancy";
+        String bookPageUrl = "http://127.0.0.1:8080/twu/viewbook?booktitle=The Casual Vacancy";
 
         driver.get(bookPageUrl);
 
@@ -40,11 +41,11 @@ public class ViewBookTest {
 
     private void assertOnBookCover() {
         WebElement imageElement= locateElement("img.book-img");
-        assertThat(imageElement.getAttribute("src").isEmpty(), is(true));
+        assertThat(imageElement.getAttribute("src").isEmpty(), is(false));
     }
 
     private void assertOnBookDescription() {
-        WebElement descriptionElement = locateElement("div.description");
+        WebElement descriptionElement = locateElement("section.description");
         assertThat(descriptionElement.getText().isEmpty(), is(false));
     }
 
