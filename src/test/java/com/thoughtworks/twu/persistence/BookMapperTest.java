@@ -17,7 +17,7 @@ import static org.junit.Assert.assertThat;
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
 @TransactionConfiguration(defaultRollback=true)
-public class BookMapperTest{
+public class BookMapperTest extends IntegrationTest{
     @Autowired
     private BookMapper bookMapper;
     private Book book;
