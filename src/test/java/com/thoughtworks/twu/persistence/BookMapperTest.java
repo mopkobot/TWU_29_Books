@@ -25,6 +25,7 @@ public class BookMapperTest extends IntegrationTest{
     private Book book;
 
     @Before
+    @Transactional
     public void setUp() {
         book = new Book("author", "title", "image_src", "description", "0156027321", "978-0156027328");
     }
