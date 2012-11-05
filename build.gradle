@@ -64,6 +64,12 @@ dependencies {
     sql 'mysql:mysql-connector-java:5.1.21'
 }
 
+war {
+    into ('static/javascript') {
+        from 'src/main/javascript'
+    }
+}
+
 jettyRun {
     contextPath = 'twu'
 }

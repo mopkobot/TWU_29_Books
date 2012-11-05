@@ -1,2 +1,2 @@
-jasmineGradle.add( "../SampleSpecRunner.html" );
+jasmineGradle.add( "../SpecRunner.html" );
 

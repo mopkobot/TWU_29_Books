@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 
-<!-- This is a sample Jasmine SpecRunner used by the jasmine gradle
-plugin. Create a suite of tests by saving this as a new file,
+<!-- Create a suite of tests by saving this as a new file,
 referencing your code and spec javascripts where indicated, and open
 with a web browser. 
 
 To use with the plugin, you must add a line like "jasmineGradle.add(
-"../SampleSpecRunner.html" );" to specRunners.js; this will make it
+"../SpecRunner.html" );" to specRunners.js; this will make it
 included in lib/MuliRunner.html. -->
 
 <html>
 <head>
     <title>Jasmine Spec Runner</title>
-    <script type="text/javascript" language="javascript" src="../../main/webapp/static/js/jquery-1.8.2.min.js"></script>
+
     <!-- Jasmine boilerplate -->
     <link rel="stylesheet" type="text/css" href="lib/jasmine.css">
     <link rel="stylesheet" type="text/css" href="lib/jasmine-gradle.css">
@@ -20,18 +19,19 @@ included in lib/MuliRunner.html. -->
     <script type="text/javascript" language="javascript" src="lib/jasmine-html.js"></script>
 
     <!-- We use jquery in noConflict mode. JSLINT is global... -->
-
+    <script type="text/javascript" language="javascript" src="lib/jquery-1.6.1.min.js"></script>
     <script type="text/javascript" language="javascript" src="lib/webjslint.js"></script>
     <script type="text/javascript" language="javascript" src="lib/jasmine-reporters.js"></script>
 
     <!-- include your source files and libraries here... -->
     <!--script type="text/javascript" language="javascript" src="../../java/javascript/Some.js" class="lintable"></script-->
+    <script type="text/javascript" language="javascript" src="../../main/javascript/lib/jquery-1.8.2.min.js"></script>
 
     <!-- Then include your spec files here; that's all! If you want the
    results of JSLINT to be included, include "lintable" in the class
    attribute. -->
 
-    <script type="text/javascript" language="javascript" src="CreateUserSpec.js"></script>
+    <script type="text/javascript" language="javascript" src="SampleSpec.js"></script>
 
 </head>
 <body>
