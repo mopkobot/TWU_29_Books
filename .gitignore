@@ -1,7 +1,7 @@
 out/
 build/
 .gradle/
-TWU_29_Books.iml
-TWU_29_Books.ipr
-TWU_29_Books.iws
+*.iml
+*.ipr
+*.iws
 .DS_Store
