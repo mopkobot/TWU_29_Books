@@ -17,7 +17,6 @@ import static org.junit.Assert.assertThat;
 
 //Ensure that BookMapper could interact with DB as expected
 @RunWith(SpringJUnit4ClassRunner.class)
-@Transactional
 @TransactionConfiguration(defaultRollback=true)
 @TestExecutionListeners({TransactionalTestExecutionListener.class})
 public class BookMapperTest extends IntegrationTest{
@@ -31,6 +30,7 @@ public class BookMapperTest extends IntegrationTest{
     }
 
     @Test
+    @Transactional
     public void shouldGetBookByTitle() {
         bookMapper.insertBook(book);
         Book result = bookMapper.getBookByTitle("title");
