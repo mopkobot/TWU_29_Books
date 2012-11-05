@@ -45,6 +45,7 @@
         <property name="ticketValidator">
             <bean class="org.jasig.cas.client.validation.Cas10TicketValidator">
                 <constructor-arg index="0" value="https://castest.thoughtworks.com:443/cas"/>
+
             </bean>
         </property>
     </bean>

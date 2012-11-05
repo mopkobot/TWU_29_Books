@@ -1,9 +1,3 @@
-insert into user (name) values ('bill');
-insert into user (name) values ('jake');
-
-insert into Task (id, name, description, points, code) values (1, 'Open Space', 'Attend the Open space at b1', 2, 'c23z5');
-insert into Task (id, name, description, points, code) values (2, 'Stand Up', 'Attend the stand up at 9:30 ground floor', 5, 'h93y7');
-insert into Task (id, name, description, points, code) values (3, 'Pecha Kucha', 'Attend the Pecha Kucha', 20, 'if45w1');
 
 insert into books(title, author, description, image, ISBN10) values ('Harry Potter', 'J.K. Rowling', 'fantasy novel', 'http://ecx.images-amazon.com/images/I/51HVlrefdkL._SL500_AA300_.jpg','1234567890');
 insert into books(title, author, description, image, ISBN13) values ('Harry Potter 1', 'J.K. Rowling', 'fantasy novel', 'http://ecx.images-amazon.com/images/I/51HVlrefdkL._SL500_AA300_.jpg','123-1234567890');
@@ -14,5 +8,6 @@ insert into books(title, author, description, image, ISBN10, ISBN13) values ('Th
  'http://ecx.images-amazon.com/images/I/51L2TXKdyjL._BO2,204,203,200_PIsitb-sticker-arrow-click,TopRight,35,-76_AA300_SH20_OU01_.jpg',
  '0316228532', '978-0316228534');
 
+insert into books(title, author, description, image, ISBN10, ISBN13) values ('Harry Potter and the Philosophers Stone ', 'J.K. Rowling', 'fantasy novel', 'http://ecx.images-amazon.com/images/I/412W7VNY0FL._SL160_PIsitb-sticker-arrow-dp,TopRight,12,-18_SH30_OU01_AA160_.jpg','1234567890','123-1234567890');
 
-
+insert into books(title, author, description, image, ISBN10, ISBN13) values ('Harry Potter and the Goblet of Fire', 'J.K. Rowling', 'fantasy novel', 'http://ecx.images-amazon.com/images/I/410BJ4GA8NL._BO2,204,203,200_PIsitb-sticker-arrow-click,TopRight,35,-76_AA300_SH20_OU01_.jpg','1234567890','123-1234567890');

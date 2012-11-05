@@ -4,6 +4,13 @@ apply plugin: 'war'
 apply plugin: 'idea'
 apply plugin: 'jasmineGradle'
 
+project.ext {
+    dbDriver = 'com.mysql.jdbc.Driver'
+    dbUrl = 'jdbc:mysql:///'
+    dbUsername = 'root'
+    dbPassword = ''
+}
+
 repositories {
     mavenCentral()
 }
@@ -11,6 +18,7 @@ repositories {
 buildscript {
     repositories {
         mavenCentral()
+
     }
     dependencies {
         classpath "com.github.dzhaughnroth:jasmine-gradle-plugin:0.4"
@@ -34,7 +42,8 @@ dependencies {
             'ch.qos.logback:logback-classic:1.0.0',
             'commons-lang:commons-lang:2.6',
             'org.jasig.cas.client:cas-client-core:3.2.1',
-            'mysql:mysql-connector-java:5.1.21'
+            'mysql:mysql-connector-java:5.1.21',
+            'com.dbdeploy:dbdeploy-ant:3.0M3'
 
     testCompile 'junit:junit:4.10',
             'org.springframework:spring-test:3.1.1.RELEASE',
@@ -44,7 +53,6 @@ dependencies {
             'org.seleniumhq.selenium:selenium-firefox-driver:2.25.0'
 
     sql 'mysql:mysql-connector-java:5.1.21'
-
 }
 
 jettyRun {
@@ -76,22 +84,44 @@ task smokeTest(type: Test) {
     }
 }
 
-task loadData << {
-    runScript("src/main/resources/twu_database/schema.sql",
-            "jdbc:mysql://localhost:3306", "root", "")
-    runScript("src/main/resources/twu_database/import.sql", "jdbc:mysql://localhost:3306/readerfeeder", "root", "")
+task createDatabase << {
+    ant.sql(driver: dbDriver,
+            url: dbUrl,
+            userid: dbUsername,
+            password: dbPassword,
+            encoding: 'UTF-8',
+            classpath: configurations.compile.asPath) {
+        fileset(file: './src/main/resources/deploy/sql/create_database_readerfeeder.sql')
+    }
 }
 
-def runScript(scriptName, url, user, password) {
-    ant.sql(classpath: configurations.sql.asPath, src: scriptName,
-            driver: 'com.mysql.jdbc.Driver',
-            print: true,
-            url: url,
-            userid: user,
-            password: password,
-            onerror: 'continue'
+task createChangelogTable << {
+    ant.sql(driver: dbDriver,
+            url: dbUrl,
+            userid: dbUsername,
+            password: dbPassword,
+            encoding: 'UTF-8',
+            classpath: configurations.compile.asPath) {
+        fileset(file: './src/main/resources/deploy/sql/create_changelog_table.sql')
+    }
+}
+
+ant.taskdef(name: 'dbdeploy',
+        classname: 'com.dbdeploy.AntTarget',
+        classpath: configurations.compile.asPath
+)
+
+task updateDatabase  << {
+    ant.dbdeploy(driver: dbDriver,
+            url: dbUrl+'readerfeeder',
+            userid: dbUsername,
+            password: dbPassword,
+            dir: './src/main/resources/deploy/sql',
+            dbms: 'mysql'
     )
 }
+
+
 
 functionalTest.doFirst {
     jettyRun.httpPort = 8080
