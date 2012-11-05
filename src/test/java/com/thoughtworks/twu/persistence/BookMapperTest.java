@@ -4,12 +4,13 @@ import com.thoughtworks.twu.domain.Book;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.test.context.transaction.TransactionConfiguration;
 
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertThat;
 
 //Ensure that BookMapper could interact with DB as expected
+@TransactionConfiguration(defaultRollback=true)
 public class BookMapperTest extends IntegrationTest {
     @Autowired
     private BookMapper bookMapper;
@@ -21,7 +22,6 @@ public class BookMapperTest extends IntegrationTest {
     }
 
     @Test
-    @Transactional
     public void shouldGetBookByTitle() {
         bookMapper.insertBook(book);
         Book result = bookMapper.getBookByTitle("title");
