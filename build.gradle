@@ -7,8 +7,7 @@ apply plugin: 'jasmineGradle'
 project.ext {
     dbDriver = 'com.mysql.jdbc.Driver'
     dbHostName =  hasProperty('dbHost') ? dbHost : 'localhost'
-    dbUrl = 'jdbc:mysql://' + dbHostName +
-            ':3306/readerfeeder?characterEncoding=utf-8'
+    dbUrl = 'jdbc:mysql://' + dbHostName
     dbUsername = 'root'
     dbPassword = hasProperty('dbPassword') ? dbPassword : ''
 }
