@@ -2,21 +2,22 @@
 <html>
 <head>
     <title>ReaderFeeder Create Profile</title>
+    <link rel="stylesheet" type="text/css" href="static/css/common.css"/>
     <script src="static/js/jquery-1.8.2.min.js"></script>
 </head>
 
 <body>
-
-<form method="get" action="/twu/redirect">
-    UserName:<input type="text" id="username"/>
-    <input type="submit" value="Submit"/>
+<div class="profile">
+<div id="logo">
+<div>Reader Feeder</div>
+<div>Create profile</div>
+</div>
+<div class="user-form">
+<form method="POST" action="/twu/save">
+    <pre style="font-size: 24px">UserName:  <input type="text" name="username"/></pre>
+    <input type="submit" name="submit" value="Submit" class="submit-btn"/>
 </form>
-<#--<script>-->
-
-    <#--var saveButton = $('#save');-->
-    <#--saveButton.onclick = function() {-->
-        <#--console.log($('#username').text());-->
-    <#--};-->
-<#--</script>-->
+</div>
+</div>
 </body>
 </html>

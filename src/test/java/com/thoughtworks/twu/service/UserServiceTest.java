@@ -41,6 +41,16 @@ public class UserServiceTest {
         assertThat(expectedUser.getCasname(), is(casname));
     }
 
+    @Test
+    public void shouldCreateUser() {
+        UserMapper userMapper = createUserMapper();
+        UserService service = new UserService(userMapper);
+
+        String ret = service.createUser(user);
+
+        assertThat(ret, is("success"));
+    }
+
     private UserMapper createUserMapper() {
         UserMapper userMapper = mock(UserMapper.class);
         when(userMapper.getUserByCasname(casname)).thenReturn(user);

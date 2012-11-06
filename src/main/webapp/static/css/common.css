@@ -62,3 +62,33 @@ img.book-img {
     *zoom: 1;
 }
 
+.profile {
+    position: absolute;
+    top: 59px;
+    left: 147px;
+    width: 90%;
+    height: 90%;
+}
+
+.user-form {
+    position: relative;
+    top: 128px;
+    left: 362px;
+}
+
+.submit-btn {
+    position: relative;
+    left: 250px;
+}
+
+.welcome {
+    float: right;
+    font-size: 21px;
+    position: relative;
+    right: 84px;
+}
+
+#logo {
+    font-family: arial;
+    font-size: 22px;
+}

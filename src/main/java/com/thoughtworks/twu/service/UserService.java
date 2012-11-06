@@ -23,4 +23,9 @@ public class UserService {
     public User getUserByCasname(String casname) {
         return userMapper.getUserByCasname(casname);
     }
+
+    public String createUser(User user) {
+        userMapper.insertUser(user);
+        return "success";
+    }
 }

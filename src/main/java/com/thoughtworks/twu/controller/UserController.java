@@ -26,11 +26,27 @@ public class UserController {
         String remoteUser = httpServletRequest.getRemoteUser();
         ModelAndView modelAndView = new ModelAndView("welcome");
         User user = userService.getUserByCasname(remoteUser);
+
         if(userService.isUserExisted(remoteUser)) {
             modelAndView.addObject("user",user);
             return modelAndView;
         }
         else
             return new ModelAndView("create-user-profile");
+    }
+
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    public ModelAndView saveUser(HttpServletRequest request) {
+        String casname = request.getRemoteUser();
+        String username = (String) request.getParameter("username");
+
+        User user = new User(casname, username);
+        if(!userService.isUserExisted(user.getCasname())){
+            userService.createUser(user);
+        }
+
+        ModelAndView modelAndView = new ModelAndView("welcome");
+        modelAndView.addObject("user", user);
+        return modelAndView ;
     }
 }

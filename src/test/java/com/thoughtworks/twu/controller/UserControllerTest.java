@@ -40,6 +40,19 @@ public class UserControllerTest {
         assertThat(redirect.getViewName(), is("create-user-profile"));
     }
 
+    @Test
+    public void shouldSaveUnregisteredUser() {
+        userService = createUserServiceForUnRegisteredUser();
+        userController = new UserController(userService);
+
+        MockHttpServletRequest request = new MockHttpServletRequest();
+        request.setParameter("username", "foo");
+        ModelAndView ret = userController.saveUser(request);
+
+        User expectUser = (User)ret.getModelMap().get("user");
+        assertThat(expectUser.getName(), is("foo"));
+    }
+
     private UserService createUserServiceForRegisteredUser() {
         UserService service = mock(UserService.class);
         when(service.isUserExisted("foo")).thenReturn(true);
