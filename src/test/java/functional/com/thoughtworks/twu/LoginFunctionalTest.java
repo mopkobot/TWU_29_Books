@@ -1,4 +1,4 @@
-/*package functional.com.thoughtworks.twu;
+package functional.com.thoughtworks.twu;
 
 import org.junit.After;
 import org.junit.Before;
@@ -120,4 +120,3 @@ public class LoginFunctionalTest {
         webDriver.close();
     }
 }
-                                                    */

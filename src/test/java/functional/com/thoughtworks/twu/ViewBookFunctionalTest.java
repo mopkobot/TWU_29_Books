@@ -1,4 +1,4 @@
-/*package functional.com.thoughtworks.twu;
+package functional.com.thoughtworks.twu;
 import junit.framework.Assert;
 import org.junit.After;
 import org.junit.Before;
@@ -78,4 +78,4 @@ public class ViewBookFunctionalTest{
         String title2 =webDriver.findElement(By.className("title")).getText();
         assertEquals(title1,title2);
     }
-} */
+}
