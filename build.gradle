@@ -75,6 +75,7 @@ jettyRun {
 }
 
 test {
+    exclude '**/com/thoughtworks/twu/persistence/**/*.*'
     exclude '**/functional/com/thoughtworks/**/*.*'
     exclude '**/smoke/com/thoughtworks/**/*.*'
 
