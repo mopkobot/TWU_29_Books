@@ -2,6 +2,7 @@ package functional.com.thoughtworks.twu;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -18,7 +19,7 @@ public class CreateUserFunctionalTest {
         performSuccessfulLogin();
     }
 
-    @Test
+    @Ignore
     public void shouldRedirectToCreateUserPage() {
         assertEquals("ReaderFeeder Create Profile", webDriver.getTitle());
     }

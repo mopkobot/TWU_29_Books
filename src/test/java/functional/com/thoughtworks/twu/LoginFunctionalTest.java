@@ -2,6 +2,7 @@ package functional.com.thoughtworks.twu;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -20,7 +21,7 @@ public class LoginFunctionalTest {
         webDriver = new FirefoxDriver();
     }
 
-    @Test//(groups = {"functionalTest","smoke"})
+    @Ignore//(groups = {"functionalTest","smoke"})
     public void shouldShowMeCASLoginPage() {
         webDriver.get("http://localhost:8080/twu");
         WebElement header = webDriver.findElement(By.id("cas"));
@@ -29,7 +30,7 @@ public class LoginFunctionalTest {
         assertEquals(webDriver.getTitle(), "CAS \u2013 Central Authentication " + "Service");
     }
 
-    @Test
+    @Ignore
     public void shouldValidateUserAndPassword() {
         webDriver.get("http://localhost:8080/twu");
 
@@ -40,7 +41,7 @@ public class LoginFunctionalTest {
         assertEquals(webDriver.getTitle(), "ReaderFeeder");
     }
 
-    @Test
+    @Ignore
     public void shouldDenyIllegalUserAccess() {
         webDriver.get("http://localhost:8080/twu");
 
@@ -51,7 +52,7 @@ public class LoginFunctionalTest {
         assertEquals(webDriver.getTitle(), "CAS \u2013 Central Authentication " + "Service");
     }
 
-    @Test
+    @Ignore
     public void shouldDenyIllegalUserAccess2() {
         webDriver.get("http://localhost:8080/twu");
 
@@ -62,7 +63,7 @@ public class LoginFunctionalTest {
         assertEquals(webDriver.getTitle(), "CAS \u2013 Central Authentication " + "Service");
     }
 
-    @Test
+    @Ignore
     public void shouldDenyIllegalUserAccess3() {
         webDriver.get("http://localhost:8080/twu");
 
@@ -73,7 +74,7 @@ public class LoginFunctionalTest {
         assertEquals(webDriver.getTitle(), "CAS \u2013 Central Authentication " + "Service");
     }
 
-    @Test
+    @Ignore
     public void shouldDenyIllegalUserAccess4() {
         webDriver.get("http://localhost:8080/twu");
         webDriver.findElement(By.id("username")).sendKeys("000000123dg.twu");
@@ -83,7 +84,7 @@ public class LoginFunctionalTest {
         assertEquals(webDriver.getTitle(), "CAS \u2013 Central Authentication " + "Service");
     }
 
-    @Test
+    @Ignore
     public void shouldShowUserNameAfterLoginSuccessfully() {
         webDriver.get("http://localhost:8080/twu");
 
@@ -94,7 +95,7 @@ public class LoginFunctionalTest {
         assertEquals(webDriver.findElement(By.className("username")).getText(), "test.twu");
     }
 
-    @Test
+    @Ignore
     public void shouldShowUserNameIfAlreadyLoggedIntoCAS(){ //Single sign on
         webDriver.get("https://castest.thoughtworks.com/cas/login");
         webDriver.findElement(By.id("username")).sendKeys("test.twu");
@@ -104,7 +105,7 @@ public class LoginFunctionalTest {
         assertEquals( "test.twu",webDriver.findElement(By.className("username")).getText());
     }
 
-    @Test
+    @Ignore
     //TODO: fixed test
     public void shouldStayOnSamePageOnRefresh(){
         webDriver.get("http://localhost:8080/twu");

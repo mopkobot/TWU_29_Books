@@ -2,6 +2,7 @@ package functional.com.thoughtworks.twu;
 import junit.framework.Assert;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -18,7 +19,7 @@ public class ViewBookFunctionalTest{
     public void setUp() {
         webDriver = new FirefoxDriver();
     }
-    @Test
+    @Ignore
     public void shouldValidateAllElementsPresent(){
         login();
         webDriver.get("127.0.0.1:8080/twu/viewbook?booktitle=The Casual Vacancy");
@@ -61,7 +62,7 @@ public class ViewBookFunctionalTest{
         webDriver.findElement(By.className("btn-submit")).click();
     }
 
-    @Test
+    @Ignore
     public void shouldDisplayBookNotFoundWhenBookIsNotPresent(){
         login();
 
@@ -69,7 +70,7 @@ public class ViewBookFunctionalTest{
         assertEquals("Could not find book",webDriver.findElement(By.className("title")).getText());
     }
 
-    @Test
+    @Ignore
     public void shouldShowTheSameBook() {
         login();
         webDriver.get("127.0.0.1:8080/twu/viewbook?booktitle=The Casual Vacancy");
@@ -78,7 +79,7 @@ public class ViewBookFunctionalTest{
         String title2 =webDriver.findElement(By.className("title")).getText();
         assertEquals(title1,title2);
     }
-    @Test
+    @Ignore
     public void shouldShowBookEvenIfItHasSameName(){
         login();
         webDriver.get("127.0.0.1:8080/twu/viewbook?booktitle=The Book Of The Dead");
