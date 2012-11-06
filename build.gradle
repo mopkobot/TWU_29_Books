@@ -84,6 +84,14 @@ test {
     }
 }
 
+task integrationTest(type: Test) {
+    include '**/com/thoughtworks/twu/persistence/**/*.*'
+
+    beforeTest { descriptor ->
+        logger.lifecycle("Running test: " + descriptor)
+    }
+}
+
 task functionalTest(type: Test) {
     include '**/functional/com/thoughtworks/**/*.*'
 
