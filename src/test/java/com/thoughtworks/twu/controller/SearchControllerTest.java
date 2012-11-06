@@ -1,6 +1,5 @@
 package com.thoughtworks.twu.controller;
 
-import com.thoughtworks.twu.controller.SearchController;
 import com.thoughtworks.twu.domain.Book;
 import com.thoughtworks.twu.service.SearchService;
 import org.junit.Before;
@@ -12,7 +11,6 @@ import java.util.List;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -45,7 +43,7 @@ public class SearchControllerTest {
         when(searchService.findBooks("Potter", "title")).thenReturn(expectedBooks);
 
         ModelAndView modelAndView = searchController.resultsPage("Potter", "title");
-        List<Book> actual = (List<Book>) modelAndView.getModel().get("book");
+        List<Book> actual = (List<Book>) modelAndView.getModel().get("books");
 
         assertThat(actual, is(expectedBooks));
     }

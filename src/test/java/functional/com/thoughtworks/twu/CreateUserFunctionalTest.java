@@ -20,7 +20,7 @@ public class CreateUserFunctionalTest {
 
     @Test
     public void shouldRedirectToCreateUserPage() {
-        assertEquals(webDriver.getTitle(), "ReaderFeeder Create Profile");
+        assertEquals("ReaderFeeder Create Profile", webDriver.getTitle());
     }
 
     @After
