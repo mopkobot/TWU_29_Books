@@ -7,4 +7,4 @@ CREATE TABLE if not exists changelog (
   applied_by VARCHAR(100) NOT NULL,
   description VARCHAR(500) NOT NULL,
   constraint pk_changelog primary key (change_number)
-);
+)ENGINE=InnoDB;

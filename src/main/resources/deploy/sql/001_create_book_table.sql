@@ -8,4 +8,4 @@ create table if not exists books (
     ISBN10 varchar(10) null,
     ISBN13 varchar(14) null,
     constraint pk_book primary key (id)
-);
+)ENGINE=InnoDB;
