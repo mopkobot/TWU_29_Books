@@ -78,4 +78,11 @@ public class ViewBookFunctionalTest{
         String title2 =webDriver.findElement(By.className("title")).getText();
         assertEquals(title1,title2);
     }
+    @Test
+    public void shouldShowBookEvenIfItHasSameName(){
+        login();
+        webDriver.get("127.0.0.1:8080/twu/viewbook?booktitle=The Book Of The Dead");
+        String title= webDriver.findElement(By.className("title")).getText();
+        assertEquals("The Book Of The Dead",title);
+    }
 }
