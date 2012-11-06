@@ -1,10 +1,12 @@
 package com.thoughtworks.twu.controller;
 
+import com.thoughtworks.twu.domain.User;
 import com.thoughtworks.twu.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -20,11 +22,15 @@ public class UserController {
     }
 
     @RequestMapping(value = "/redirect", method = RequestMethod.GET)
-    public String redirect(HttpServletRequest httpServletRequest) {
+    public ModelAndView redirect(HttpServletRequest httpServletRequest) {
         String remoteUser = httpServletRequest.getRemoteUser();
-        if(userService.isUserExisted(remoteUser))
-            return "/welcome";
+        ModelAndView modelAndView = new ModelAndView("welcome");
+        User user = userService.getUserByCasname(remoteUser);
+        if(userService.isUserExisted(remoteUser)) {
+            modelAndView.addObject("user",user);
+            return modelAndView;
+        }
         else
-            return "/create-user-profile";
+            return new ModelAndView("create-user-profile");
     }
 }

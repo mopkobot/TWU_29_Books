@@ -1,4 +1,3 @@
-
 create table if not exists users (
     id Integer not null auto_increment,
     casname varchar(30) not null,
