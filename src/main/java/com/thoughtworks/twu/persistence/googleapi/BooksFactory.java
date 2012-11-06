@@ -6,8 +6,10 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.services.books.Books;
 
 public class BooksFactory {
+    //TODO: move ApiKey to configuration
+    public static final String googleApiKey = "AIzaSyAMR4F-UvVtgGByBiSa6vwHRpYitMy2jLY";
 
-    public static Books newBooks(String googleApiKey) {
+    public static Books newBooks() {
         return new Books.Builder(new NetHttpTransport(), new JacksonFactory(), null)
                 .setApplicationName("Google-BooksSample/1.0").setJsonHttpRequestInitializer(new GoogleKeyInitializer(googleApiKey))
                 .build();

@@ -3,6 +3,7 @@ package com.thoughtworks.twu.persistence.googleapi;
 import com.google.api.services.books.Books;
 import com.google.api.services.books.model.Volumes;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -10,7 +11,6 @@ import java.io.IOException;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Matchers.longThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -54,7 +54,7 @@ public class GoogleSearchClientTest {
         Books.Volumes.List list = mock(Books.Volumes.List.class);
         when(volumes.list("isbn:1234567890")).thenReturn(list);
 
-        when(list.setMaxResults((long)20)).thenReturn(list);
+        when(list.setMaxResults((long) 20)).thenReturn(list);
 
         Volumes expectedVolumes = new Volumes();
         when(list.execute()).thenReturn(expectedVolumes);
@@ -63,10 +63,13 @@ public class GoogleSearchClientTest {
         assertThat(result, is(expectedVolumes));
     }
 
-    @Test
+    //TODO: move to functional testing
+    @Ignore
     public void shouldReturnOnlyTwentyResults() throws IOException {
-        GoogleSearchClient googleSearchClient = new GoogleSearchClient();
-        Volumes actualResult = googleSearchClient.performSearch("Potter","title");
-        assertThat(actualResult.getItems().size(), is(20));
+        GoogleSearchClient searchClient = new GoogleSearchClient();
+
+        int searchResult  = searchClient.performSearch("Happy", "title").getItems().size();
+
+        assertThat(searchResult, is(20));
     }
 }

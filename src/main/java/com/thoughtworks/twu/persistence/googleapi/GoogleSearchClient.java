@@ -1,9 +1,5 @@
 package com.thoughtworks.twu.persistence.googleapi;
 
-import com.google.api.client.googleapis.services.GoogleKeyInitializer;
-import com.google.api.client.http.javanet.NetHttpTransport;
-import com.google.api.client.http.json.JsonHttpRequestInitializer;
-import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.services.books.Books;
 import com.google.api.services.books.model.Volumes;
 import org.springframework.stereotype.Component;
@@ -21,21 +17,17 @@ public class GoogleSearchClient {
     }
 
     public GoogleSearchClient() {
-        JsonHttpRequestInitializer credential = new GoogleKeyInitializer("AIzaSyAMR4F-UvVtgGByBiSa6vwHRpYitMy2jLY");
-        this.books = new Books.Builder(new NetHttpTransport(), new JacksonFactory(), null)
-                .setApplicationName("Google-BooksSample/1.0")
-                .setJsonHttpRequestInitializer(credential)
-                .build();
+        this.books = BooksFactory.newBooks();
     }
 
-    public String buildQuery(String searchTerm, String searchType) {
-        if (searchType.equals("isbn")) {
-            return "isbn:" + searchTerm;
+    public String buildQuery(String searchValue, String searchType) {
+        if (searchType.toLowerCase().equals("isbn")) {
+            return "isbn:" + searchValue;
         }
-        return "in" + searchType + ":" + searchTerm;
+        return "in" + searchType.toLowerCase() + ":" + searchValue;
     }
 
-
+    //TODO: move MaxResults to a config file, easily accessible by client
     public Volumes performSearch(String searchTerm, String searchType) throws IOException {
         return books.volumes().list(buildQuery(searchTerm, searchType)).setMaxResults((long) 20).execute();
     }

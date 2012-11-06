@@ -17,7 +17,7 @@ public class SearchService {
         this.googleBookSource = googleBookSource;
     }
 
-    public List<Book> findBooks(String titleValue, String title) throws IOException {
-        return googleBookSource.search(titleValue, title);
+    public List<Book> findBooks(String searchValue, String searchType) throws IOException {
+        return googleBookSource.search(searchValue, searchType);
     }
 }
