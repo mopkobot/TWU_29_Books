@@ -29,11 +29,12 @@ public class SearchController {
 
 
     @RequestMapping(value = "/search_book", method = RequestMethod.POST)
-    public ModelAndView resultsPage(@RequestParam(value = "bookValue", defaultValue = "") String searchValue, @RequestParam(value = "searchType", defaultValue = "") String searchType) throws IOException {
+    public ModelAndView resultsPage(@RequestParam(value = "searchValue", defaultValue = "") String searchValue, @RequestParam(value = "searchType", defaultValue = "") String searchType) throws IOException {
         ModelAndView modelAndView = new ModelAndView("/search_book");
         if (!searchValue.isEmpty()) {
             List<Book> books = searchService.findBooks(searchValue, searchType);
             modelAndView.addObject("books", books);
+            modelAndView.addObject("searchValue", searchValue);
         }
         return modelAndView;
     }
