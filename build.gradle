@@ -97,6 +97,7 @@ task functionalTest(type: Test) {
 
     beforeTest { descriptor ->
         logger.lifecycle("Running test: " + descriptor)
+        setupTestData()
     }
 
     doFirst {
@@ -159,6 +160,18 @@ task updateDatabase  << {
             dir: './src/main/resources/deploy/sql',
             dbms: 'mysql'
     )
+}
+
+def setupTestData(){
+    ant.sql(driver: dbDriver,
+            url: dbUrl,
+            userid: dbUsername,
+            password: dbPassword,
+            encoding: 'UTF-8',
+            classpath: configurations.compile.asPath) {
+        fileset(file: './src/main/resources/deploy/sql/setup_test_data.sql')
+    }
+
 }
 
 def startJetty() {
