@@ -33,7 +33,7 @@ public class SearchControllerTest {
 
         String actualViewName = searchModelANdView.getViewName();
 
-        assertThat(actualViewName, is("/search_book"));
+        assertThat(actualViewName, is("searchBook"));
     }
 
     @Test
