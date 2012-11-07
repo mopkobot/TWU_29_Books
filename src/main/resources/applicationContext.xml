@@ -38,7 +38,7 @@
     </bean>
 
     <bean id="authenticationFilter" class="org.jasig.cas.client.authentication.AuthenticationFilter">
-        <property name="casServerLoginUrl" value="https://castest.thoughtworks.com:443/cas/login"/>
+        <property name="casServerLoginUrl" value="${casServerLoginUrl}"/>
         <property name="renew" value="false"/>
         <property name="gateway" value="false"/>
         <property name="service" value="${casService}"/>
@@ -48,7 +48,7 @@
         <property name="service" value="${casService}"/>
         <property name="ticketValidator">
             <bean class="org.jasig.cas.client.validation.Cas10TicketValidator">
-                <constructor-arg index="0" value="https://castest.thoughtworks.com:443/cas"/>
+                <constructor-arg index="0" value="${casServerUrl}"/>
             </bean>
         </property>
         <property name="redirectAfterValidation" value="true"/>
