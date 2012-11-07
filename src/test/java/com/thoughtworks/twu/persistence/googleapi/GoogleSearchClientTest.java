@@ -55,7 +55,7 @@ public class GoogleSearchClientTest {
         when(volumes.list("isbn:1234567890")).thenReturn(list);
 
         when(list.setMaxResults((long) 20)).thenReturn(list);
-
+        when(list.setOrderBy("RELEVANCE")).thenReturn(list);
         Volumes expectedVolumes = new Volumes();
         when(list.execute()).thenReturn(expectedVolumes);
 

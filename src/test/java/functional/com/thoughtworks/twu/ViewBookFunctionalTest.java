@@ -1,9 +1,6 @@
 package functional.com.thoughtworks.twu;
-import junit.framework.Assert;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
-import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -31,15 +28,16 @@ public class ViewBookFunctionalTest{
     }
     private void assertOnIsbn() {
 
-        assertEquals(webDriver.findElement(By.className("isbn")).isDisplayed(), true);
+        assertEquals(true, webDriver.findElement(By.className("isbn")).isDisplayed());
     }
 
     private void assertOnAuthor() {
-        assertEquals(webDriver.findElement(By.className("author")).isDisplayed(), true);
+        assertEquals(true, webDriver.findElement(By.className("author"))
+                .isDisplayed());
     }
     private void assertOnBookTitle() {
         WebElement titleElement = locateElement("h1.title");
-        Assert.assertEquals("The Casual Vacancy", titleElement.getText());
+        assertEquals("The Casual Vacancy", titleElement.getText());
     }
 
     private void assertOnBookCover() {

@@ -14,6 +14,7 @@
     <input type="submit" value="Go!" id="search"/>
 </form>
 <#if books??>
+<p>Your search was sorted by relevance.</p>
 <ul class="book-list">
     <#list books as book>
         <li class="book">

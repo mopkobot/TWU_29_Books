@@ -1,7 +1,6 @@
 package functional.com.thoughtworks.twu;
 
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -9,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import static org.hamcrest.core.IsNull.notNullValue;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 public class LoginFunctionalTest {
@@ -25,7 +25,8 @@ public class LoginFunctionalTest {
         WebElement header = webDriver.findElement(By.id("cas"));
 
         assertThat(header, notNullValue());
-        Assert.assertEquals(webDriver.getTitle(), "CAS \u2013 Central Authentication " + "Service");
+        assertEquals("CAS \u2013 Central Authentication " + "Service",
+                webDriver.getTitle());
     }
 
     @Test
@@ -35,7 +36,8 @@ public class LoginFunctionalTest {
         webDriver.findElement(By.id("password")).sendKeys("Th0ughtW0rks@12");
         webDriver.findElement(By.className("btn-submit")).click();
 
-        Assert.assertEquals(webDriver.getTitle(), "ReaderFeeder Create Profile");
+        assertEquals("ReaderFeeder Create Profile",
+                (webDriver.getTitle()));
     }
 
     @Test
@@ -46,7 +48,8 @@ public class LoginFunctionalTest {
         webDriver.findElement(By.id("password")).sendKeys("000000@12");
         webDriver.findElement(By.className("btn-submit")).click();
 
-        Assert.assertEquals(webDriver.getTitle(), "CAS \u2013 Central Authentication " + "Service");
+        assertEquals("CAS \u2013 Central Authentication " + "Service"
+                , webDriver.getTitle());
     }
 
     @Test
@@ -57,7 +60,8 @@ public class LoginFunctionalTest {
         webDriver.findElement(By.id("password")).sendKeys("");
         webDriver.findElement(By.className("btn-submit")).click();
 
-        Assert.assertEquals(webDriver.getTitle(), "CAS \u2013 Central Authentication " + "Service");
+        assertEquals("CAS \u2013 Central Authentication " + "Service",
+                webDriver.getTitle());
     }
 
     @Test
@@ -68,7 +72,8 @@ public class LoginFunctionalTest {
         webDriver.findElement(By.id("password")).sendKeys("Th0ughtW0rks@12");
         webDriver.findElement(By.className("btn-submit")).click();
 
-        Assert.assertEquals(webDriver.getTitle(), "CAS \u2013 Central Authentication " + "Service");
+        assertEquals("CAS \u2013 Central Authentication " + "Service",
+                webDriver.getTitle());
     }
 
     @Test
@@ -78,7 +83,8 @@ public class LoginFunctionalTest {
         webDriver.findElement(By.id("password")).sendKeys("Th0ughtW0rks@12");
         webDriver.findElement(By.className("btn-submit")).click();
 
-        Assert.assertEquals(webDriver.getTitle(), "CAS \u2013 Central Authentication " + "Service");
+        assertEquals("CAS \u2013 Central Authentication " + "Service",
+                webDriver.getTitle());
     }
 
     @After

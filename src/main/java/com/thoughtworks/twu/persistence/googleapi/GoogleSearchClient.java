@@ -29,6 +29,8 @@ public class GoogleSearchClient {
 
     //TODO: move MaxResults to a config file, easily accessible by client
     public Volumes performSearch(String searchTerm, String searchType) throws IOException {
-        return books.volumes().list(buildQuery(searchTerm, searchType)).setMaxResults((long) 20).execute();
+        return books.volumes().list(buildQuery(searchTerm,
+                searchType)).setMaxResults((long) 20).setOrderBy("RELEVANCE")
+                .execute();
     }
 }

@@ -32,7 +32,7 @@ public class WelcomeFunctionalTest{
         webDriver.findElement(By.id("password")).sendKeys("Th0ughtW0rks@12");
         webDriver.findElement(By.className("btn-submit")).click();
 
-        assertEquals(webDriver.findElement(By.className("username")).getText(), "test.twu");
+        assertEquals("test.twu", webDriver.findElement(By.className("username")).getText());
     }
 
     @Ignore
