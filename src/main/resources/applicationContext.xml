@@ -51,6 +51,7 @@
                 <constructor-arg index="0" value="https://castest.thoughtworks.com:443/cas"/>
             </bean>
         </property>
+        <property name="redirectAfterValidation" value="true"/>
     </bean>
 
     <bean id="wrapperFilter" class="org.jasig.cas.client.util.HttpServletRequestWrapperFilter"/>
