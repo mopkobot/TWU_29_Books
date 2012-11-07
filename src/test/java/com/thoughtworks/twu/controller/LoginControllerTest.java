@@ -1,25 +1,50 @@
 package com.thoughtworks.twu.controller;
 
-import com.thoughtworks.twu.domain.User;
+import com.thoughtworks.twu.service.UserService;
 import org.junit.Test;
 import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.web.servlet.ModelAndView;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class LoginControllerTest {
+    private UserService userService;
+    private LoginController loginController;
+
     @Test
-    public void shouldSeeUserNameAfterLogin() {
-        LoginController loginController = new LoginController();
+    public void shouldRedirectToWelcomePageIfUserIsRegistered() {
+        userService = createUserServiceForRegisteredUser();
+        loginController = new LoginController(userService);
 
-        MockHttpServletRequest request = new MockHttpServletRequest();
-        request.setRemoteUser("test");
-        ModelAndView actualModelAndView = loginController.welcome(request);
+        MockHttpServletRequest httpServletRequest = new MockHttpServletRequest();
+        httpServletRequest.setRemoteUser("foo");
 
-        User user = (User)actualModelAndView.getModel().get("user");
-
-        assertThat(user.getName(), is("test"));
+        String redirect = loginController.redirect(httpServletRequest);
+        assertThat(redirect, is("/welcome"));
     }
 
+    @Test
+    public void shouldRedirectToCreateUserPageIfUserIsUnRegistered() {
+        userService = createUserServiceForUnRegisteredUser();
+        loginController = new LoginController(userService);
+        MockHttpServletRequest mockHttpServletRequest = new MockHttpServletRequest();
+        mockHttpServletRequest.setRemoteUser("foo");
+
+        String redirect = loginController.redirect(mockHttpServletRequest);
+        assertThat(redirect, is("/create-user-profile"));
+    }
+
+    private UserService createUserServiceForRegisteredUser() {
+        UserService service = mock(UserService.class);
+        when(service.isUserExisted("foo")).thenReturn(true);
+        return service;
+    }
+
+    private UserService createUserServiceForUnRegisteredUser() {
+        UserService service = mock(UserService.class);
+        when(service.isUserExisted("foo")).thenReturn(false);
+        return service;
+    }
 }

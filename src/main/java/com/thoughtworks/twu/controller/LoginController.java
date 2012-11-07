@@ -1,21 +1,30 @@
 package com.thoughtworks.twu.controller;
 
-import com.thoughtworks.twu.domain.User;
+import com.thoughtworks.twu.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class LoginController {
 
-    @RequestMapping(value = "/welcome", method = RequestMethod.GET)
-    public ModelAndView welcome(HttpServletRequest request) {
-        ModelAndView modelAndView = new ModelAndView("welcome");
-        String username = request.getRemoteUser();
-        modelAndView.addObject("user", new User("casname",username));
-        return modelAndView;
+
+    private UserService userService;
+
+    @Autowired
+    public LoginController(UserService userService) {
+        this.userService = userService;
+    }
+
+    @RequestMapping(value = "/identify-user", method = RequestMethod.GET)
+    public String redirect(HttpServletRequest httpServletRequest) {
+        String remoteUser = httpServletRequest.getRemoteUser();
+        if(userService.isUserExisted(remoteUser))
+            return "/welcome";
+        else
+            return "/create-user-profile";
     }
 }
