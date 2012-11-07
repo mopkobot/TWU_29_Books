@@ -24,13 +24,13 @@ public class SearchController {
 
     @RequestMapping(value = "/search_book", method = RequestMethod.GET)
     public ModelAndView searchPage() {
-        return new ModelAndView("/search_book");
+        return new ModelAndView("searchBook");
     }
 
 
     @RequestMapping(value = "/search_book", method = RequestMethod.POST)
     public ModelAndView resultsPage(@RequestParam(value = "searchValue", defaultValue = "") String searchValue, @RequestParam(value = "searchType", defaultValue = "") String searchType) throws IOException {
-        ModelAndView modelAndView = new ModelAndView("/search_book");
+        ModelAndView modelAndView = new ModelAndView("searchBook");
         if (!searchValue.isEmpty()) {
             List<Book> books = searchService.findBooks(searchValue, searchType);
             modelAndView.addObject("books", books);

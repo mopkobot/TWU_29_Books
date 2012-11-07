@@ -22,11 +22,75 @@ img.book-img {
     margin-left: 58px;
 }
 
+.book-author {
+    top: -30px;
+    font-size: 17px;
+    font-weight: normal;
+    font-family: arial,helvetica,sans-serif;
+    position: relative;
+    left: 35px;
+}
+
+.book {
+    height: 205px;
+    padding: 10px;
+    list-style: none;
+}
+
+.book-description {
+    position: relative;
+    left: 35px;
+    top: 55px;
+    margin-right: 60px;
+
+}
+
+.book-isbn10 {
+    position: relative;
+    left: 35px;
+    top: -20px;
+}
+
+.horizontal-line {
+    position: relative;
+    top: 55px;
+    left: -25px;
+    width: 95%;
+}
+
+.book-isbn13 {
+    position: relative;
+    top: -8px;
+    left: 35px;
+}
+
+.book-picture {
+    width: 110px;
+    float: left;
+    height: 150px;
+    padding: 18px;
+    border: 1px solid lightGrey;
+}
+
+.book-content {
+    width: 80%;
+    float: left;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
 .book-info {
     width: 57%;
     float: right;
 }
-
+.book-title {
+    font-size: 22px;
+    font-weight: bold;
+    cursor: auto;
+    position: relative;
+    top: -13px;
+    left: 15px;
+}
 .description {
     float: left;
     position: relative;
@@ -56,7 +120,7 @@ img.book-img {
 }
 
 .container {
-    width: 1024px;
+    width: 90%;
     margin-left: auto;
     margin-right: auto;
     *zoom: 1;

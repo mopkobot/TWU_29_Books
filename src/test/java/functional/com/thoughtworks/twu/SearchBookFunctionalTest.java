@@ -26,30 +26,45 @@ public class SearchBookFunctionalTest {
     }
 
     @Test
-    public void shouldDisplayDropBox(){
+    public void shouldDisplayDropBox() {
         webDriver.get("http://127.0.0.1:8080/twu/search_book");
         assertThat(webDriver.findElement(By.name("searchType")).isDisplayed(), is(true));
     }
 
     @Test
-    public void shouldDisplaySearchButton(){
+    public void shouldDisplaySearchButton() {
         webDriver.get("http://127.0.0.1:8080/twu/search_book");
         assertThat(webDriver.findElement(By.id("search")).isDisplayed(), is(true));
     }
 
     @Test
-    public void shouldDisplayBooksWhenGoButtonIsClicked(){
+    public void shouldDisplayBookDivInfoWhenGoButtonIsClicked() {
         webDriver.get("http://127.0.0.1:8080/twu/search_book");
         webDriver.findElement(By.name("searchValue")).sendKeys("9780316228534");
         webDriver.findElement(By.id("searchByISBN")).click();
         webDriver.findElement(By.id("search")).submit();
-        assertThat(webDriver.findElement(By.className("book-info")).isDisplayed(), is(true));
+        assertThat(webDriver.findElement(By.className("book-list")).isDisplayed
+                (), is(true));
+    }
+
+    @Test
+    public void shouldDisplayBookAuthorAndTitleWhenGoButtonIsClicked() {
+        webDriver.get("http://127.0.0.1:8080/twu/search_book");
+        webDriver.findElement(By.name("searchValue")).sendKeys("9780316228534");
+        webDriver.findElement(By.id("searchByISBN")).click();
+        webDriver.findElement(By.id("search")).submit();
+        assertThat(webDriver.findElement(By.className("book-picture"))
+                .isDisplayed
+                (), is(true));
+        assertThat(webDriver.findElement(By.className("book-title")).isDisplayed(), is(true));
+        assertThat(webDriver.findElement(By.className("book-author")).isDisplayed(), is(true));
     }
 
     @After
-    public void tearDown(){
+    public void tearDown() {
         webDriver.close();
     }
+
     private void login() {
         webDriver.get("http://localhost:8080/twu");
         webDriver.findElement(By.id("username")).sendKeys("test.twu");
