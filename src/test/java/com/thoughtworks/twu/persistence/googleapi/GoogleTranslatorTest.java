@@ -1,11 +1,15 @@
 package com.thoughtworks.twu.persistence.googleapi;
 
+import com.google.api.services.books.model.Volume;
+import com.google.api.services.books.model.Volumes;
 import com.thoughtworks.twu.domain.Book;
 import org.junit.Before;
 import org.junit.Ignore;
+import org.junit.Test;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.core.Is.is;
@@ -38,5 +42,24 @@ public class GoogleTranslatorTest {
         GoogleSearchClient googleSearchClient = new GoogleSearchClient();
         List<Book> result = translator.translate(googleSearchClient.performSearch("9780316228534", "ISBN"));
         assertThat(result, is(expected));
+    }
+
+    @Test
+    public void shouldTranslateEvenIfAuthorIsNotAvailable() {
+        final Volume.VolumeInfo.IndustryIdentifiers[] identifiers = {new Volume.VolumeInfo
+                .IndustryIdentifiers().setIdentifier("11111")};
+        final Volume.VolumeInfo volumeInfo = new Volume.VolumeInfo();
+        volumeInfo.setAuthors(null).setImageLinks(new Volume.VolumeInfo
+                .ImageLinks()).setTitle("Harry Potter").setDescription("Harry" +
+                " Potter - The Last Book").setIndustryIdentifiers(Arrays.asList(identifiers));
+
+        Volume volumeWithoutAuthor = new Volume().setVolumeInfo(volumeInfo);
+        final ArrayList<Volume> volumeArrayList = new ArrayList<Volume>();
+        volumeArrayList.add(volumeWithoutAuthor);
+        Volumes allVolumes = new Volumes().setItems(volumeArrayList);
+        final List<Book> actual = translator.translate(allVolumes);
+
+
+        assertThat(actual.size(), is(1));
     }
 }

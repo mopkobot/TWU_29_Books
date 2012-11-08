@@ -3,6 +3,7 @@ package com.thoughtworks.twu.persistence.googleapi;
 import com.google.api.services.books.model.Volume;
 import com.google.api.services.books.model.Volumes;
 import com.thoughtworks.twu.domain.Book;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -27,11 +28,13 @@ public class GoogleTranslator {
     }
 
     private String authors(Volume.VolumeInfo volumeInfo) {
-        String author = "";
+        if (volumeInfo.getAuthors() == null) return StringUtils.EMPTY;
+
+        StringBuffer authors = new StringBuffer();
         for (String item : volumeInfo.getAuthors()) {
-            author += item + " ";
+            authors.append(item).append(" ");
         }
-        return author.trim();
+        return authors.toString().trim();
     }
 
     private String imageLinks(Volume.VolumeInfo volumeInfo) {
