@@ -7,7 +7,7 @@ apply plugin: 'jasmineGradle'
 
 project.ext {
     dbDriver = 'com.mysql.jdbc.Driver'
-    testToBeRun = rootProject.hasProperty('funcTest') ? funcTest : '*.*'
+    testToBeRun = rootProject.hasProperty('file') ? file : '*'
     dbHostName =  rootProject.hasProperty('dbHost') ? dbHost : 'localhost'
     dbUrl = 'jdbc:mysql://' + dbHostName +
             ':3306/'
@@ -94,7 +94,7 @@ task integrationTest(type: Test) {
 }
 
 task functionalTest(type: Test) {
-    include '**/functional/com/thoughtworks/**/' + testToBeRun
+    include '**/functional/com/thoughtworks/**/' + testToBeRun + ".class"
 
     beforeTest { descriptor ->
         logger.lifecycle("Running test: " + descriptor)
