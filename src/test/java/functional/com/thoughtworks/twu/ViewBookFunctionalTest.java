@@ -26,7 +26,7 @@ public class ViewBookFunctionalTest{
 
     @Test
     public void shouldUnderstandViewBookPageWhenAllInformationIsPresent(){
-        goToURL("127.0.0.1:8080/twu/viewbook?booktitle=Lavanya and sanchari QAs");
+        goToURL("http://127.0.0.1:8080/twu/viewbook?booktitle=Lavanya and sanchari QAs");
 
         assertOnBookTitle("Lavanya and sanchari QAs");
         assertOnBookCover("http://ecx.images-amazon.com/images/I/51HVlrefdkL._SL500_AA300_.jpg");
@@ -37,7 +37,7 @@ public class ViewBookFunctionalTest{
 
     @Test
     public void shouldUnderstandViewBookPageWhenNotAllInformationIsPresent(){
-        goToURL("127.0.0.1:8080/twu/viewbook?booktitle=When devs are not coding");
+        goToURL("http://127.0.0.1:8080/twu/viewbook?booktitle=When devs are not coding");
 
         assertOnBookTitle("When devs are not coding");
         assertOnBookCover("http://127.0.0.1:8080/twu/static/images/default_image.gif");
@@ -48,7 +48,7 @@ public class ViewBookFunctionalTest{
 
     @Test
     public void shouldDisplayBookNotFoundWhenBookIsNotPresent(){
-        goToURL("127.0.0.1:8080/twu/viewbook?booktitle=alkdhaksdh");
+        goToURL("http://127.0.0.1:8080/twu/viewbook?booktitle=alkdhaksdh");
         assertOnBookTitle("Could not find book");
     }
 
