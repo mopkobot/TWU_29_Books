@@ -3,7 +3,6 @@ package com.thoughtworks.twu.persistence.googleapi;
 import com.google.api.services.books.Books;
 import com.google.api.services.books.model.Volumes;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -64,10 +63,12 @@ public class GoogleSearchClientTest {
     }
 
     //TODO: move to functional testing
-    @Ignore
+    @Test
     public void shouldReturnOnlyTwentyResults() throws IOException {
         GoogleSearchClient searchClient = new GoogleSearchClient();
 
+        Volumes volumes = searchClient.performSearch("9781416548898", "isbn");
+//        Volumes volumes = searchClient.performSearch("Gone with the wind", "title");
         int searchResult  = searchClient.performSearch("Happy", "title").getItems().size();
 
         assertThat(searchResult, is(20));
