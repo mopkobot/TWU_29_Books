@@ -6,13 +6,13 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 
@@ -21,11 +21,11 @@ import static org.junit.Assert.assertTrue;
 @TestExecutionListeners({TransactionalTestExecutionListener.class})
 public class CreateProfileFunctionalTest {
 
-    private WebDriver webDriver;
+    private HtmlUnitDriver webDriver;
 
     @Before
     public void setUp() {
-        webDriver = new FirefoxDriver();
+        webDriver = new HtmlUnitDriver();
         login();
     }
 
@@ -52,6 +52,12 @@ public class CreateProfileFunctionalTest {
         webDriver.get("http://localhost:8080/twu/identify-user");
         enterUserName();
         assertTrue(webDriver.findElement(By.className("welcome")).isDisplayed());
+    }
+
+    @Test
+    public void shouldStayOnSamePageOnRefresh(){
+        webDriver.navigate().refresh();
+        assertEquals("ReaderFeeder Create Profile", webDriver.getTitle());
     }
 
     @After

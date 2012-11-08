@@ -1,56 +1,41 @@
 package functional.com.thoughtworks.twu;
 
-import com.thoughtworks.twu.domain.User;
-import com.thoughtworks.twu.persistence.UserMapper;
+import com.thoughtworks.twu.persistence.IntegrationTest;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
+import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 
 import static org.junit.Assert.assertEquals;
 
-public class WelcomeFunctionalTest{
+@RunWith(SpringJUnit4ClassRunner.class)
+@TransactionConfiguration(defaultRollback=true)
+@TestExecutionListeners({TransactionalTestExecutionListener.class})
+public class WelcomeFunctionalTest {
     private HtmlUnitDriver webDriver;
-
-    @Autowired
-    private UserMapper userMapper;
 
     @Before
     public void setUp() {
         webDriver = new HtmlUnitDriver();
-        User user = new User("test.twu", "test");
-        userMapper.insertUser(user);
+        performSuccessfulLogin();
+        enterUserName();
     }
 
-    @Ignore
+    @Test
     public void shouldShowUserNameAfterLoginSuccessfully() {
-        webDriver.get("http://localhost:8080/twu");
-
-        webDriver.findElement(By.id("username")).sendKeys("test.twu");
-        webDriver.findElement(By.id("password")).sendKeys("Th0ughtW0rks@12");
-        webDriver.findElement(By.className("btn-submit")).click();
-
-        assertEquals("test.twu", webDriver.findElement(By.className("username")).getText());
+        assertEquals("test", webDriver.findElement(By.className("username")).getText());
     }
 
-    @Ignore
-    public void shouldShowUserNameIfAlreadyLoggedIntoCAS(){ //Single sign on
-        webDriver.get("https://castest.thoughtworks.com/cas/login");
-        webDriver.findElement(By.id("username")).sendKeys("test.twu");
-        webDriver.findElement(By.id("password")).sendKeys("Th0ughtW0rks@12");
-        webDriver.findElement(By.className("btn-submit")).click();
-        webDriver.get("http://localhost:8080/twu");
-        assertEquals( "test.twu",webDriver.findElement(By.className("username")).getText());
-    }
-
-    @Ignore
+    @Test
     public void shouldStayOnSamePageOnRefresh(){
-        webDriver.get("http://localhost:8080/twu");
-        webDriver.findElement(By.id("username")).sendKeys("test.twu");
-        webDriver.findElement(By.id("password")).sendKeys("Th0ughtW0rks@12");
-        webDriver.findElement(By.className("btn-submit")).click();
         webDriver.navigate().refresh();
         assertEquals("ReaderFeeder", webDriver.getTitle());
     }
@@ -58,5 +43,18 @@ public class WelcomeFunctionalTest{
     @After
     public void tearDown() {
         webDriver.close();
+    }
+
+    private void performSuccessfulLogin() {
+        webDriver.get("http://localhost:8080/twu");
+        webDriver.findElement(By.id("username")).sendKeys("test.twu");
+        webDriver.findElement(By.id("password")).sendKeys("Th0ughtW0rks@12");
+        webDriver.findElement(By.className("btn-submit")).click();
+    }
+
+    private void enterUserName() {
+        webDriver.get("http://localhost:8080/twu");
+        webDriver.findElement(By.name("username")).sendKeys("test");
+        webDriver.findElement(By.name("submit")).click();
     }
 }
