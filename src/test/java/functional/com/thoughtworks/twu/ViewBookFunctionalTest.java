@@ -84,7 +84,7 @@ public class ViewBookFunctionalTest{
 
     private void assertOnAuthor(String expectedAuthor) {
         WebElement authorElement = locateElement("h2.author");
-        assertThat(authorElement.getText(), is(expectedAuthor));
+        assertThat(authorElement.getText(), containsString(expectedAuthor));
     }
 
     private WebElement locateElement(String selector){
