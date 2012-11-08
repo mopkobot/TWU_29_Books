@@ -14,6 +14,7 @@ import java.util.List;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 public class GoogleTranslatorTest {
 
@@ -65,4 +66,13 @@ public class GoogleTranslatorTest {
 
         assertThat(actual.get(0), is(expected));
     }
+
+    @Test
+    public void shouldReturnEmptyCollectionIfNoBooksWereFound(){
+        Volumes allVolumes = new Volumes().setItems(null);
+        final List<Book> actual = translator.translate(allVolumes);
+
+        assertTrue(actual.isEmpty());
+    }
+
 }

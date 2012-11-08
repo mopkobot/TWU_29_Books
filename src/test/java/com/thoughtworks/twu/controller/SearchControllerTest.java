@@ -51,9 +51,20 @@ public class SearchControllerTest {
     @Test
     public void shouldNotRetrieveResultFromBookSearchWhenTitleIsEmpty() throws Exception {
         ModelAndView modelAndView = searchController.resultsPage("", "title");
-        List<Book> actual = (List<Book>) modelAndView.getModel().get("book");
+        List<Book> actual = (List<Book>) modelAndView.getModel().get("books");
 
         assertThat(actual,equalTo(null));
+    }
+
+    @Test
+    public void shouldSendErrorMessageWhenNoBooksWhereFound() throws
+            Exception {
+        ModelAndView modelAndView = searchController.resultsPage
+                ("fdfadafafda", "title");
+        String actual = (String) modelAndView.getModel().get("error");
+
+        assertThat(actual,is("No books were found matching your search " +
+                "criteria. Please try again with a new search criteria."));
     }
 
 }

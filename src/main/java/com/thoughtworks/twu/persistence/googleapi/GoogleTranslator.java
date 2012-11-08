@@ -15,6 +15,8 @@ public class GoogleTranslator {
 
     public List<Book> translate(Volumes volumes) {
         List<Book> books = new ArrayList<Book>();
+        if(volumes.getItems() == null) return books;
+
         for (Volume volume : volumes.getItems()) {
             Volume.VolumeInfo volumeInfo = volume.getVolumeInfo();
             books.add(new Book(authors(volumeInfo), title(volumeInfo), imageLinks(volumeInfo),

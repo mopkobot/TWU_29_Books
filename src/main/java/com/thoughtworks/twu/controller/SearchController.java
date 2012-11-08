@@ -15,6 +15,9 @@ import java.util.List;
 
 @Controller
 public class SearchController {
+    public static final String BOOKS_NOT_FOUND = "No books were found " +
+            "matching your search criteria. Please try again with a new search criteria.";
+
     private SearchService searchService;
 
     @Autowired
@@ -33,6 +36,9 @@ public class SearchController {
         ModelAndView modelAndView = new ModelAndView("searchBook");
         if (!searchValue.isEmpty()) {
             List<Book> books = searchService.findBooks(searchValue, searchType);
+            if(books.size() == 0){
+                modelAndView.addObject("error", BOOKS_NOT_FOUND);
+            }
             modelAndView.addObject("books", books);
             modelAndView.addObject("searchValue", searchValue);
         }
