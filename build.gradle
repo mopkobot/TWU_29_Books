@@ -7,6 +7,7 @@ apply plugin: 'jasmineGradle'
 
 project.ext {
     dbDriver = 'com.mysql.jdbc.Driver'
+    testToBeRun = rootProject.hasProperty('funcTest') ? funcTest : '*.*'
     dbHostName =  rootProject.hasProperty('dbHost') ? dbHost : 'localhost'
     dbUrl = 'jdbc:mysql://' + dbHostName +
             ':3306/'
@@ -93,7 +94,7 @@ task integrationTest(type: Test) {
 }
 
 task functionalTest(type: Test) {
-    include '**/functional/com/thoughtworks/**/*.*'
+    include '**/functional/com/thoughtworks/**/' + testToBeRun
 
     beforeTest { descriptor ->
         logger.lifecycle("Running test: " + descriptor)
