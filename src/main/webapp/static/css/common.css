@@ -16,6 +16,10 @@ img.book-img {
     height: 300px;
 }
 
+#error{
+    color:red;
+}
+
 .book-cover {
     float: left;
     padding: 20px;

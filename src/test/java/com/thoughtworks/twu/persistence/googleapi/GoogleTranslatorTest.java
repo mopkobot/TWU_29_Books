@@ -52,14 +52,17 @@ public class GoogleTranslatorTest {
         volumeInfo.setAuthors(null).setImageLinks(new Volume.VolumeInfo
                 .ImageLinks()).setTitle("Harry Potter").setDescription("Harry" +
                 " Potter - The Last Book").setIndustryIdentifiers(Arrays.asList(identifiers));
-
         Volume volumeWithoutAuthor = new Volume().setVolumeInfo(volumeInfo);
         final ArrayList<Volume> volumeArrayList = new ArrayList<Volume>();
         volumeArrayList.add(volumeWithoutAuthor);
         Volumes allVolumes = new Volumes().setItems(volumeArrayList);
         final List<Book> actual = translator.translate(allVolumes);
+        Book expected = new Book("","Harry Potter", null, "Harry Potter - " +
+                "The Last" +
+                " " +
+                "Book", "11111", "");
 
 
-        assertThat(actual.size(), is(1));
+        assertThat(actual.get(0), is(expected));
     }
 }
