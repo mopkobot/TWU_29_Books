@@ -37,7 +37,7 @@ public class LoginControllerTest {
         mockHttpServletRequest.setRemoteUser("foo");
         ModelAndView redirect = loginController.redirect(mockHttpServletRequest);
 
-        assertThat(redirect.getViewName(), is("create-user-profile"));
+        assertThat(redirect.getViewName(), is("createUserProfile"));
     }
 
     @Test

@@ -32,7 +32,7 @@ public class LoginController {
             return modelAndView;
         }
         else
-            return new ModelAndView("create-user-profile");
+            return new ModelAndView("createUserProfile");
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
