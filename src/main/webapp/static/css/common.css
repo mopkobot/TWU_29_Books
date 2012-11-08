@@ -83,10 +83,12 @@ img.book-img {
     padding-right: 20px;
 }
 
-.book-info {
+.book-info, .book-actions {
     width: 57%;
     float: right;
+    margin-bottom: 20px;
 }
+
 .book-title {
     font-size: 22px;
     font-weight: bold;
@@ -119,7 +121,6 @@ img.book-img {
 
 .isbn {
     font-size: 15px;
-    position: relative;
     top: 20px;
 }
 

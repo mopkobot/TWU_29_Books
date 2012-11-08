@@ -22,6 +22,9 @@
                     </#if>
                 </div>
             </div>
+            <div class="book-actions">
+                <button class="want-to-read">Want to read</button>
+            </div>
         </div>
 
         <section class="description" >

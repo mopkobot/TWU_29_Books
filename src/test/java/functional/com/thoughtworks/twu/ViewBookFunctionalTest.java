@@ -33,6 +33,8 @@ public class ViewBookFunctionalTest{
         assertOnAuthor("J.K. Rowling");
         assertOnIsbn("1234567890");
         assertOnBookDescription("The books chronicle the adventures of a wizard");
+
+        assertOnWantToReadButton();
     }
 
     @Test
@@ -54,9 +56,9 @@ public class ViewBookFunctionalTest{
 
     private void login() {
         webDriver.get("http://localhost:8080/twu");
-        webDriver.findElement(By.id("username")).sendKeys("test.twu");
-        webDriver.findElement(By.id("password")).sendKeys("Th0ughtW0rks@12");
-        webDriver.findElement(By.className("btn-submit")).click();
+        locateElementById("username").sendKeys("test.twu");
+        locateElementById("password").sendKeys("Th0ughtW0rks@12");
+        locateElementByCss(".btn-submit").click();
     }
 
     private void goToURL(String url) {
@@ -64,32 +66,45 @@ public class ViewBookFunctionalTest{
     }
 
     private void assertOnBookTitle(String expectedTitle) {
-        WebElement titleElement = locateElement("h1.title");
+        WebElement titleElement = locateElementByCss("h1.title");
         assertThat(titleElement.getText(), is(expectedTitle));
     }
 
     private void assertOnBookCover(String expectedCover) {
-        WebElement imageElement= locateElement("img.book-img");
+        WebElement imageElement= locateElementByCss("img.book-img");
         assertThat(imageElement.getAttribute("src"), is(expectedCover));
     }
 
     private void assertOnBookDescription(String expectedDescription) {
-        WebElement descriptionElement = locateElement("section.description");
+        WebElement descriptionElement = locateElementByCss("section.description");
         assertThat(descriptionElement.getText(), containsString(expectedDescription));
     }
 
     private void assertOnIsbn(String expectedIsbn) {
-        WebElement isbnElement = locateElement("div.isbn");
+        WebElement isbnElement = locateElementByCss("div.isbn");
         assertThat(isbnElement.getText(), containsString(expectedIsbn));
     }
 
     private void assertOnAuthor(String expectedAuthor) {
-        WebElement authorElement = locateElement("h2.author");
+        WebElement authorElement = locateElementByCss("h2.author");
         assertThat(authorElement.getText(), containsString(expectedAuthor));
     }
 
-    private WebElement locateElement(String selector){
-        return webDriver.findElement(By.cssSelector(selector));
+    private void assertOnWantToReadButton() {
+        WebElement wantToReadButton = locateElementByCss("button.want-to-read");
+        assertThat(wantToReadButton.isDisplayed(), is(true));
+    }
+
+    private WebElement locateElementById(String id) {
+        return locateElement(By.id(id));
+    }
+
+    private WebElement locateElementByCss(String selector){
+        return locateElement(By.cssSelector(selector));
+    }
+
+    private WebElement locateElement(By selector) {
+        return webDriver.findElement(selector);
     }
 
     @After
