@@ -5,10 +5,12 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 public class SearchBookFunctionalTest {
     WebDriver webDriver;
@@ -79,6 +81,18 @@ public class SearchBookFunctionalTest {
         webDriver.findElement(By.id("search")).submit();
         assertThat(webDriver.findElement(By.id("error")).getText(), is("No books were found matching your search " +
                 "criteria. Please try again with a new search criteria."));
+    }
+
+    @Test
+    public void shouldRememberThePreviousSearchType() {
+        webDriver.get("http://127.0.0.1:8080/twu/search_book");
+        webDriver.findElement(By.name("searchValue")).sendKeys("fasdfafasd");
+        webDriver.findElement(By.id("searchByISBN")).click();
+        webDriver.findElement(By.id("search")).submit();
+
+        final WebElement searchByISBN = webDriver.findElement(By.id("searchByISBN"));
+        assertTrue(searchByISBN.isSelected());
+
     }
 
     @After

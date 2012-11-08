@@ -41,6 +41,7 @@ public class SearchController {
             }
             modelAndView.addObject("books", books);
             modelAndView.addObject("searchValue", searchValue);
+            modelAndView.addObject("searchType", searchType);
         }
         return modelAndView;
     }

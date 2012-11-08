@@ -7,9 +7,13 @@
         <input type="text" name="searchValue" maxlength="100"/>
     </#if>
     <select name="searchType">
-        <option id="searchByTitle" value="title">Title</option>
-        <option id="searchByAuthor" value="author">Author</option>
-        <option id="searchByISBN" value="isbn">ISBN</option>
+        <option id="searchByTitle" value="title"
+                <#if searchType?? && searchType  =
+                "title">selected</#if>>Title</option>
+        <option id="searchByAuthor" value="author"
+                <#if searchType?? && searchType = "author">selected</#if>>Author</option>
+        <option id="searchByISBN" value="isbn"
+                <#if searchType?? && searchType = "isbn">selected</#if>>ISBN</option>
     </select>
     <input type="submit" value="Go!" id="search"/>
 </form>

@@ -67,4 +67,14 @@ public class SearchControllerTest {
                 "criteria. Please try again with a new search criteria."));
     }
 
+    @Test
+    public void shouldReturnSearchTypeToTheView() throws
+            Exception {
+        ModelAndView modelAndView = searchController.resultsPage
+                ("Example", "title");
+        String actual = (String) modelAndView.getModel().get("searchType");
+
+        assertThat(actual,is("title"));
+    }
+
 }
