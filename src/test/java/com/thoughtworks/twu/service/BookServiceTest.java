@@ -2,10 +2,13 @@ package com.thoughtworks.twu.service;
 
 import com.thoughtworks.twu.domain.Book;
 import com.thoughtworks.twu.persistence.BookMapper;
-import com.thoughtworks.twu.service.BookService;
+import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
 
@@ -17,9 +20,16 @@ public class BookServiceTest {
     private final String description = "this is a book about magic, I love it very much!!";
     private final String ISBN10 = "0156027321";
     private final String ISBN13 = "978-0156027328";
-    private Book book = new Book(author, title, image, description, ISBN10, ISBN13);
-    private BookMapper mockBookMapper = mock(BookMapper.class);
-    private BookService bookService = new BookService(mockBookMapper);
+    private Book book;
+    private BookMapper mockBookMapper;
+    private BookService bookService;
+
+    @Before
+    public void setUp(){
+        book = new Book(author, title, image, description, ISBN10, ISBN13);
+        mockBookMapper = mock(BookMapper.class);
+        bookService = new BookService(mockBookMapper);
+    }
 
     @Test
     public void shouldGetBookInfoFromDB(){
@@ -32,5 +42,19 @@ public class BookServiceTest {
     public void shouldInsertBookToDB(){
         bookService.insertBook(book);
         verify(mockBookMapper).insertBook(book);
+    }
+
+    @Test
+    public void shouldReturnTrueIfBookExistedInDB(){
+        ArrayList<Book> books = new ArrayList<Book>();
+        books.add(book);
+        when(mockBookMapper.getBooksByTitle(title)).thenReturn(books);
+        assertThat(bookService.isBookExisted(book), is(true));
+    }
+
+    @Test
+    public void shouldReturnFalseIfBookIsNotExistedInDB(){
+        Book anotherBook = new Book("Summer", title, image, description, ISBN10, ISBN13);
+        assertThat(bookService.isBookExisted(anotherBook), is(false));
     }
 }

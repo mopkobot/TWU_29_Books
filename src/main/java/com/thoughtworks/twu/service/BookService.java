@@ -5,6 +5,8 @@ import com.thoughtworks.twu.persistence.BookMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 //Job: Understands the interface of ORM
 @Service
 public class BookService {
@@ -23,5 +25,10 @@ public class BookService {
 
     public void insertBook(Book book) {
         bookMapper.insertBook(book);
+    }
+
+    public boolean isBookExisted(Book book) {
+        List<Book> bookList = bookMapper.getBooksByTitle(book.getTitle());
+        return bookList.contains(book);
     }
 }

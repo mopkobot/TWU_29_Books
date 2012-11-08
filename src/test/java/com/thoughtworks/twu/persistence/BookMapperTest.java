@@ -11,6 +11,9 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
+import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertThat;
 
@@ -36,5 +39,14 @@ public class BookMapperTest extends IntegrationTest{
         bookMapper.insertBook(book);
         Book result = bookMapper.getBookByTitle("title");
         assertThat(result, equalTo(book));
+    }
+
+    @Test
+    @Transactional
+    public void shouldReturnAListOfBooksWithSameTitle(){
+        bookMapper.insertBook(book);
+        bookMapper.insertBook(book);
+        List<Book> bookList = bookMapper.getBooksByTitle(book.getTitle());
+        assertThat(bookList.size(), is(2));
     }
 }
