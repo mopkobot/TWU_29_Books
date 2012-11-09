@@ -66,13 +66,17 @@ dependencies {
     sql 'mysql:mysql-connector-java:5.1.21'
 }
 
+task copyAssets(type: Copy) {
+    from 'src/main/javascript'
+    into 'src/main/webapp/static/javascript'
+}
+
 war {
-    into ('static/javascript') {
-        from 'src/main/javascript'
-    }
+    dependsOn copyAssets
 }
 
 jettyRun {
+    dependsOn copyAssets
     contextPath = 'twu'
 }
 
