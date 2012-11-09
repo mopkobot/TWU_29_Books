@@ -2,13 +2,17 @@ package functional.com.thoughtworks.twu;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
+import java.util.List;
+
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
@@ -93,6 +97,34 @@ public class SearchBookFunctionalTest {
         final WebElement searchByISBN = webDriver.findElement(By.id("searchByISBN"));
         assertTrue(searchByISBN.isSelected());
 
+    }
+
+    @Test
+    public void shouldStayOnSamePageOnRefresh() throws Exception {
+        webDriver.get("http://127.0.0.1:8080/twu/search_book");
+        webDriver.navigate().refresh();
+        assertEquals("Search Results", webDriver.getTitle());
+
+    }
+
+    @Test
+    public void shouldDisplayAMaximumOf20Results() throws Exception {
+        webDriver.get("http://127.0.0.1:8080/twu/search_book");
+        webDriver.findElement(By.name("searchValue")).sendKeys("Harry Potter");
+        webDriver.findElement(By.id("searchByTitle")).click();
+        webDriver.findElement(By.id("search")).submit();
+
+        List<WebElement> list = webDriver.findElements(By.className("book"));
+        assert(list.size()<=20);
+    }
+
+    @Test
+    public void shouldSearchByAuthor(){
+        webDriver.get("http://127.0.0.1:8080/twu/search_book");
+        webDriver.findElement(By.name("searchValue")).sendKeys("Paulo Coelho");
+        webDriver.findElement(By.id("searchByAuthor")).click();
+        webDriver.findElement(By.id("search")).submit();
+        assertThat(webDriver.findElement(By.className("book-list")).isDisplayed(), is(true));
     }
 
     @After
