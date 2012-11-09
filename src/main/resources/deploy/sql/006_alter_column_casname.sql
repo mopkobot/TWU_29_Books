@@ -1,0 +1,1 @@
+alter table users add constraint casname unique (casname);

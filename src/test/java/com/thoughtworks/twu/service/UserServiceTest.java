@@ -1,5 +1,6 @@
 package com.thoughtworks.twu.service;
 
+import com.thoughtworks.twu.domain.Book;
 import com.thoughtworks.twu.domain.User;
 import com.thoughtworks.twu.persistence.UserMapper;
 import org.junit.Before;
@@ -51,9 +52,22 @@ public class UserServiceTest {
         assertThat(ret, is("success"));
     }
 
+    @Test
+    public void shouldAddBookToWantToReadList() {
+        UserMapper userMapper = createUserMapper();
+        UserService service = new UserService(userMapper);
+
+        int expectedBookId = 1;
+        service.markBookAsWantToRead(expectedBookId);
+        Book actualBook = service.getBookFromWantToReadList(expectedBookId);
+
+        assertThat(actualBook.getId(), is(expectedBookId));
+    }
+
     private UserMapper createUserMapper() {
         UserMapper userMapper = mock(UserMapper.class);
         when(userMapper.getUserByCasname(casname)).thenReturn(user);
         return userMapper;
     }
 }
+
