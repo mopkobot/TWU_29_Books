@@ -12,6 +12,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.number.OrderingComparison.lessThanOrEqualTo;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
@@ -114,7 +115,7 @@ public class SearchBookFunctionalTest {
         webDriver.findElement(By.id("search")).submit();
 
         List<WebElement> list = webDriver.findElements(By.className("book"));
-        assert(list.size()<=20);
+        assertThat(list.size(), is(lessThanOrEqualTo(20)));
     }
 
     @Test
