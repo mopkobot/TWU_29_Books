@@ -3,6 +3,7 @@ package functional.com.thoughtworks.twu;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -28,6 +29,18 @@ public class CreateProfileFunctionalTest {
         webDriver = new HtmlUnitDriver();
         login();
     }
+    @Test
+    public void shouldGoToProfile(){
+        webDriver.get("http://localhost:8080/twu/identify-user");
+        assertTrue(webDriver.findElement(By.className("profile")).isDisplayed());
+    }
+
+    @Test
+    public void ProfileShouldHaveDetailsToBeFilled(){
+        webDriver.get("http://localhost:8080/twu/identify-user");
+        assertTrue(webDriver.findElement(By.className("user-form")).isDisplayed());
+
+    }
 
     @Test
     public void shouldDisplayLogo(){
@@ -44,21 +57,35 @@ public class CreateProfileFunctionalTest {
     @Test
     public void shouldDisplaySubmitButton(){
         webDriver.get("http://localhost:8080/twu/identify-user");
-        assertTrue(webDriver.findElement(By.name("submit")).isDisplayed());
+        assertTrue(webDriver.findElement(By.className("submit-btn")).isDisplayed());
     }
+
+   @Test
+    public void shouldStayOnSamePageOnRefresh(){
+       webDriver.get("http://localhost:8080/twu/identify-user");
+        webDriver.navigate().refresh();
+        assertEquals("ReaderFeeder Create Profile", webDriver.getTitle());
+    }
+
+
 
     @Test
     public void shouldRedirectToWelcomePageWhenSubmitUsername(){
         webDriver.get("http://localhost:8080/twu/identify-user");
         enterUserName();
+        assertTrue(webDriver.findElement(By.className("username")).isDisplayed());
         assertTrue(webDriver.findElement(By.className("welcome")).isDisplayed());
     }
 
-    @Test
-    public void shouldStayOnSamePageOnRefresh(){
+   @Test
+    public void shouldStayOnSamePageOnRefresh1(){
+       webDriver.get("http://localhost:8080/twu/identify-user");
         webDriver.navigate().refresh();
         assertEquals("ReaderFeeder Create Profile", webDriver.getTitle());
     }
+
+
+
 
     @After
     public void tearDown(){
