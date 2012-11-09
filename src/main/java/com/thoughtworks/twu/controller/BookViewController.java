@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 //Understands that response to url "viewbook" and send commands to its associated view
 @Controller
 public class BookViewController {
+    public static final String COULD_NOT_FIND_BOOK = "Could not find book";
     private BookService bookService;
 
     @Autowired
@@ -23,9 +24,10 @@ public class BookViewController {
     public ModelAndView viewBook(@RequestParam(value = "booktitle", defaultValue = "") String title) {
         ModelAndView modelAndView = new ModelAndView("viewbook");
         Book book = bookService.getBookByTitle(title);
-        if (book != null){
-            return modelAndView.addObject("book", book);
+        if (book == null){
+            return modelAndView.addObject("bookNotFound", COULD_NOT_FIND_BOOK);
         }
-        return modelAndView.addObject("bookNotFound", "Could not find book");
+
+        return modelAndView.addObject("book", book);
     }
 }
