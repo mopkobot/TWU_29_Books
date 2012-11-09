@@ -1,8 +1,8 @@
 <@layout.block title="Search Results"  >
 <form action="search_book" method="post">
     <#if searchValue??>
-        <input type="text" name="searchValue" value="${searchValue}"
-               maxlength="100"/>
+        <input type="text" name="searchValue"
+               value="${searchValue?js_string?j_string?html}"/>
     <#else>
         <input type="text" name="searchValue" maxlength="100"/>
     </#if>

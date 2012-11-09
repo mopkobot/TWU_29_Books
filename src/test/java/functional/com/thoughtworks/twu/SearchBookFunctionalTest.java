@@ -13,9 +13,7 @@ import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.number.OrderingComparison.lessThanOrEqualTo;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class SearchBookFunctionalTest {
     WebDriver webDriver;
@@ -116,6 +114,19 @@ public class SearchBookFunctionalTest {
 
         List<WebElement> list = webDriver.findElements(By.className("book"));
         assertThat(list.size(), is(lessThanOrEqualTo(20)));
+    }
+
+    @Test
+    public void shouldDisplayErrorMessageWhenNoValueInputted() throws
+            Exception {
+        webDriver.get("http://127.0.0.1:8080/twu/search_book");
+        webDriver.findElement(By.name("searchValue"));
+        webDriver.findElement(By.id("searchByTitle")).click();
+        webDriver.findElement(By.id("search")).submit();
+        assertThat(webDriver.findElement(By.id("error")).getText(),
+                is("Please input a value for your search, and try again."));
+
+
     }
 
     @Test
