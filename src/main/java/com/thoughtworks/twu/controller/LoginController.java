@@ -21,7 +21,7 @@ public class LoginController {
         this.userService = userService;
     }
 
-    @RequestMapping(value = "/identify-user", method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public ModelAndView redirect(HttpServletRequest httpServletRequest) {
         String remoteUser = httpServletRequest.getRemoteUser();
         ModelAndView modelAndView = new ModelAndView("welcome");
