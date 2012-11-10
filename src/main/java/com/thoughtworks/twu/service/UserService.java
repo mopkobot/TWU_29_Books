@@ -32,10 +32,10 @@ public class UserService {
 
 
     public void markBookAsWantToRead(int bookId) {
-        //To change body of created methods use File | Settings | File Templates.
     }
 
     public Book getBookFromWantToReadList(int bookId) {
+
         return new Book(bookId);
     }
 }

@@ -11,11 +11,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 
-import java.util.List;
-
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @TransactionConfiguration(defaultRollback=true )
@@ -50,9 +47,10 @@ public class UserMapperTest extends IntegrationTest{
         bookMapper.insertBook(book);
 
         Book bookFromDB = bookMapper.getBookByTitle("title");
-        userMapper.markBookAsWantToRead("foo", bookFromDB.getId());
+        int bookId = bookFromDB.getId();
+        userMapper.markBookAsWantToRead("foo", bookId);
 
-        List<Book> wantToReadBooksForUser = userMapper.getWantToReadListByUserCasname(user.getCasname());
-        assertTrue(wantToReadBooksForUser.contains(book));
+        int bookInWantToReadList = userMapper.isBookInWantToReadList(user.getCasname(), bookId);;
+        assertThat(bookInWantToReadList, is(1));
     }
 }
