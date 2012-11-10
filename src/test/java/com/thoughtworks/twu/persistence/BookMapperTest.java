@@ -17,24 +17,23 @@ import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertThat;
 
+//Job: Ensure that BookMapper can interact with DB as expected
 
-//Ensure that BookMapper could interact with DB as expected
 @RunWith(SpringJUnit4ClassRunner.class)
 @TransactionConfiguration(defaultRollback=true)
 @TestExecutionListeners({TransactionalTestExecutionListener.class})
+@Transactional
 public class BookMapperTest extends IntegrationTest{
     @Autowired
     private BookMapper bookMapper;
     private Book book;
 
     @Before
-    @Transactional
     public void setUp() {
         book = new Book("author", "title", "image_src", "description", "0156027321", "978-0156027328");
     }
 
     @Test
-    @Transactional
     public void shouldGetBookByTitle() {
         bookMapper.insertBook(book);
         Book result = bookMapper.getBookByTitle("title");
@@ -42,7 +41,6 @@ public class BookMapperTest extends IntegrationTest{
     }
 
     @Test
-    @Transactional
     public void shouldReturnAListOfBooksWithSameTitle(){
         bookMapper.insertBook(book);
         bookMapper.insertBook(book);

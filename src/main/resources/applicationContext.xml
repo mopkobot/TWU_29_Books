@@ -13,9 +13,20 @@
     <mvc:annotation-driven/>
     <context:component-scan base-package="com.thoughtworks.twu"/>
 
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:/properties/${READER_FEEDER:dev}.properties</value>
+                <value>classpath:/properties/db.properties</value>
+            </list>
+        </property>
+    </bean>
+
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://localhost:3306/readerfeeder?user=root" />
+        <property name="driverClassName" value="${mysql.driver}" />
+        <property name="url" value="${mysql.url}" />
+        <property name="username" value="${mysql.username}"/>
+        <property name="password" value="${mysql.password}"/>
     </bean>
 
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
@@ -33,9 +44,6 @@
         <property name="basePackage" value="com.thoughtworks.twu.persistence"/>
     </bean>
 
-    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="location" value="classpath:/properties/${READER_FEEDER:dev}.properties"/>
-    </bean>
 
     <bean id="authenticationFilter" class="org.jasig.cas.client.authentication.AuthenticationFilter">
         <property name="casServerLoginUrl" value="${casServerLoginUrl}"/>
