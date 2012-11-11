@@ -8,16 +8,20 @@ For Mac:
 1. Clone the project repository using git.
 2. Install HomeBrew
 3. Run "brew install gradle"
-4. Run "gradle loadData"
-5. Run "gradle build" to run all tests and build a WAR.
-6. Run "gradle jettyRun" to deploy using jetty.
+4. Run "gradle createDatabase" to create readerfeeder database
+5. Run "gradle createChangelogTable" to enable auto-migration
+6. Run "gradle updateDatabase" to load schemas and data for database
+7. Run "gradle build" to run all tests and build a WAR.
+8. Run "gradle jettyRun" to deploy using jetty.
 
 For linux:
 1. Clone the project repository using git.
 2. Run "yum install gradle"
-3. Run "gradle loadData"
-4. Run "gradle build" to run all tests and build a WAR.
-5. Run "gradle jettyRun" to deploy using jetty.
+3. Run "gradle createDatabase" to create readerfeeder database
+4. Run "gradle createChangelogTable" to enable auto-migration
+5. Run "gradle updateDatabase" to load schemas and data for database
+6. Run "gradle build" to run all tests and build a WAR.
+7. Run "gradle jettyRun" to deploy using jetty.
 
 IntelliJ IDEA Setup
 -------------------
