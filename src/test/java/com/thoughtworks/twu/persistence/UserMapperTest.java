@@ -15,7 +15,7 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@TransactionConfiguration(defaultRollback=true )
+@TransactionConfiguration(defaultRollback=true)
 @TestExecutionListeners({TransactionalTestExecutionListener.class})
 public class UserMapperTest extends IntegrationTest{
 

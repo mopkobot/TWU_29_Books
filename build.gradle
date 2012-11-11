@@ -75,9 +75,20 @@ war {
     dependsOn copyAssets
 }
 
+task setUpDatabase << {
+    println('Deploying Readerfeeder database')
+    runSQLScript('./src/main/resources/deploy/sql/drop_test_readerfeeder.sql')
+    updateDatabaseProperties('readerfeeder')
+}
+
 jettyRun {
     dependsOn copyAssets
+    dependsOn setUpDatabase
     contextPath = 'twu'
+}
+
+build.doFirst {
+    dependsOn setUpDatabase
 }
 
 test {
@@ -90,24 +101,43 @@ test {
     }
 }
 
+task setUpTestDatabase << {
+    logger.lifecycle("Deploying test database")
+    runSQLScript('./src/main/resources/deploy/sql/create_database_test_readerfeeder.sql')
+    deployDatabase('test_readerfeeder')
+    updateDatabaseProperties('test_readerfeeder')
+}
+
 task integrationTest(type: Test) {
+    dependsOn setUpTestDatabase
+
     include '**/com/thoughtworks/twu/persistence/**/*.*'
+    exclude '**/functional/com/thoughtworks/**/*.*'
+    exclude '**/smoke/com/thoughtworks/**/*.*'
 
     beforeTest { descriptor ->
         logger.lifecycle("Running test: " + descriptor)
+    }
+
+    doLast {
+        println('Deploying Readerfeeder database')
+        runSQLScript('./src/main/resources/deploy/sql/drop_test_readerfeeder.sql')
+        updateDatabaseProperties('readerfeeder')
     }
 }
 
 task functionalTest(type: Test) {
+    dependsOn setUpTestDatabase
+
     include '**/functional/com/thoughtworks/**/' + testToBeRun + ".class"
 
     beforeTest { descriptor ->
         logger.lifecycle("Running test: " + descriptor)
-        setupTestData()
     }
 
     doFirst {
         startJetty()
+        setupDataForFunctionalTest()
     }
 
     doLast {
@@ -132,25 +162,11 @@ task smokeTest(type: Test) {
 }
 
 task createDatabase << {
-    ant.sql(driver: dbDriver,
-            url: dbUrl,
-            userid: dbUsername,
-            password: dbPassword,
-            encoding: 'UTF-8',
-            classpath: configurations.compile.asPath) {
-        fileset(file: './src/main/resources/deploy/sql/create_database_readerfeeder.sql')
-    }
+    runSQLScript('./src/main/resources/deploy/sql/create_database_readerfeeder.sql')
 }
 
 task createChangelogTable << {
-    ant.sql(driver: dbDriver,
-            url: dbUrl,
-            userid: dbUsername,
-            password: dbPassword,
-            encoding: 'UTF-8',
-            classpath: configurations.compile.asPath) {
-        fileset(file: './src/main/resources/deploy/sql/create_changelog_table.sql')
-    }
+    runSQLScript('./src/main/resources/deploy/sql/create_changelog_table.sql')
 }
 
 ant.taskdef(name: 'dbdeploy',
@@ -159,8 +175,12 @@ ant.taskdef(name: 'dbdeploy',
 )
 
 task updateDatabase  << {
+    deployDatabase('readerfeeder')
+}
+
+def deployDatabase(dbName) {
     ant.dbdeploy(driver: dbDriver,
-            url: dbUrl+'readerfeeder',
+            url: dbUrl + dbName,
             userid: dbUsername,
             password: dbPassword,
             dir: './src/main/resources/deploy/sql',
@@ -168,16 +188,28 @@ task updateDatabase  << {
     )
 }
 
-def setupTestData(){
+def runSQLScript(scriptName) {
     ant.sql(driver: dbDriver,
             url: dbUrl,
             userid: dbUsername,
             password: dbPassword,
             encoding: 'UTF-8',
             classpath: configurations.compile.asPath) {
-        fileset(file: './src/main/resources/deploy/sql/setup_test_data.sql')
+        fileset(file: scriptName)
     }
+}
 
+def updateDatabaseProperties(dbName) {
+    Properties properties = new Properties();
+    properties.put("mysql.driver", dbDriver);
+    properties.put("mysql.url", dbUrl + dbName)
+    properties.put("mysql.username", dbUsername)
+    properties.put("mysql.password", dbPassword)
+    properties.save(new FileOutputStream("src/main/resources/properties/db.properties"), "Updated from Gradle")
+}
+
+def setupDataForFunctionalTest(){
+    runSQLScript('./src/main/resources/deploy/sql/setup_test_data.sql')
 }
 
 def startJetty() {
