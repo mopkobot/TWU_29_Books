@@ -111,7 +111,7 @@ task setUpTestDatabase << {
 task integrationTest(type: Test) {
     dependsOn setUpTestDatabase
 
-    include '**/com/thoughtworks/twu/persistence/**/*.*'
+    include '**/com/thoughtworks/twu/persistence/**/' + testToBeRun + '.class'
     exclude '**/functional/com/thoughtworks/**/*.*'
     exclude '**/smoke/com/thoughtworks/**/*.*'
 

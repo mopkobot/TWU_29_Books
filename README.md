@@ -43,9 +43,12 @@ rake jasmine: start jasmine server
 visit the link given by server to run all jasmine test
 
 
-Run specific functional test
---------------------------------
-If you like to run all the functional tests from a single test class:
+Run specific functional/integration test
+-----------------------------------------
+If you like to run all the functional or integration tests from a single test class:
 
 Assume you want to run all the tests from SearchBookFunctionalTest,
 you can use this command: gradle functionaltest -Pfile=SearchBookFunctionalTest
+
+Assume you want to run all the tests from BookMapperTest,
+you can use this command: gradle integrationtest -Pfile=SearchBookFunctionalTest
