@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="book-actions">
-                <button class="want-to-read">Want to read</button>
+                <button class="btn">Want to read</button>
             </div>
         </div>
 
