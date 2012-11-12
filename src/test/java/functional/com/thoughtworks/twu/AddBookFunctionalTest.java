@@ -23,7 +23,7 @@ public class AddBookFunctionalTest {
     @Test
     public void shouldRedirectToViewBookPageByClick() {
         webDriver.findElement(By.className("add-book")).click();
-        assertTrue(webDriver.findElement(By.tagName("title")).getText().contains("ReaderFeeder"));
+        assertTrue(webDriver.getTitle().contains("ReaderFeeder"));
     }
 
     @After

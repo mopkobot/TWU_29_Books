@@ -2,13 +2,17 @@ package functional.com.thoughtworks.twu;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
 import org.junit.Ignore;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
+import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 
 import java.util.List;
 
@@ -16,6 +20,9 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.number.OrderingComparison.lessThanOrEqualTo;
 import static org.junit.Assert.*;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@TransactionConfiguration(defaultRollback=true)
+@TestExecutionListeners({TransactionalTestExecutionListener.class})
 public class SearchBookFunctionalTest {
     WebDriver webDriver;
 
@@ -37,7 +44,7 @@ public class SearchBookFunctionalTest {
         CommonSteps.searchBook(webDriver,"9780316228534","searchByISBN");
         assertThat(webDriver.findElement(By.className("book-picture")).isDisplayed(), is(true));
         assertThat(webDriver.findElement(By.className("book-title")).getText(), is("The Casual Vacancy"));
-        assertThat(webDriver.findElement(By.className("book-author")).getText(),is("by J. K. Rowling"));
+        assertThat(webDriver.findElement(By.className("book-author")).getText(), is("by J. K. Rowling"));
     }
 
     @Test
@@ -60,7 +67,7 @@ public class SearchBookFunctionalTest {
 
     @Test
     public void shouldDisplayErrorMessageWhenBookIsNotFound() {
-        CommonSteps.searchBook(webDriver,"fasdfafasd","searchByTitle");
+        CommonSteps.searchBook(webDriver, "fasdfafasd", "searchByTitle");
         assertThat(webDriver.findElement(By.id("error")).getText(), is("No books were found matching your search " +"criteria. Please try again with a new search criteria."));
     }
 
@@ -91,8 +98,8 @@ public class SearchBookFunctionalTest {
 
     @Test
     public void shouldDisplayErrorMessageWhenNoValueInputted() throws Exception {
-        CommonSteps.searchBook(webDriver,"","searchByTitle");
-        assertThat(webDriver.findElement(By.id("error")).getText(),is("Please input a value for your search, and try again."));
+        CommonSteps.searchBook(webDriver, "", "searchByTitle");
+        assertThat(webDriver.findElement(By.id("error")).getText(), is("Please input a value for your search, and try again."));
     }
 
     @Test
