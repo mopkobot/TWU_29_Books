@@ -30,73 +30,47 @@ public class CreateProfileFunctionalTest {
     }
     @Test
     public void shouldGoToProfile(){
-        webDriver.get("http://localhost:8080/twu/identify-user");
         assertTrue(webDriver.findElement(By.className("profile")).isDisplayed());
     }
 
     @Test
-    public void ProfileShouldHaveDetailsToBeFilled(){
-        webDriver.get("http://localhost:8080/twu/identify-user");
-        assertTrue(webDriver.findElement(By.className("user-form")).isDisplayed());
-
-    }
-
-    @Test
     public void shouldDisplayLogo(){
-        webDriver.get("http://localhost:8080/twu/identify-user");
         assertTrue(webDriver.findElement(By.id("logo")).isDisplayed());
     }
 
     @Test
     public void shouldDisplayUserNameTextBox(){
-        webDriver.get("http://localhost:8080/twu/identify-user");
         assertTrue(webDriver.findElement(By.name("username")).isDisplayed());
     }
 
     @Test
-    public void shouldDisplaySubmitButton(){
-        webDriver.get("http://localhost:8080/twu/identify-user");
+    public void shouldDisplaySaveButton(){
         assertTrue(webDriver.findElement(By.className("submit-btn")).isDisplayed());
     }
 
    @Test
     public void shouldStayOnSamePageOnRefresh(){
-       webDriver.get("http://localhost:8080/twu/identify-user");
-       webDriver.navigate().refresh();
-       assertEquals("ReaderFeeder Create Profile", webDriver.getTitle());
-    }
-
-    @Test
-    public void shouldStayOnSamePageIfUsernameIsBlank() {
-        webDriver.get("http://localhost:8080/twu/identify-user");
-        webDriver.findElement(By.className("submit-btn")).click();
-
+        webDriver.navigate().refresh();
         assertEquals("ReaderFeeder Create Profile", webDriver.getTitle());
     }
 
     @Test
     public void shouldRedirectToWelcomePageWhenSubmitUsername(){
-        webDriver.get("http://localhost:8080/twu/identify-user");
-        enterUserName();
+        CommonSteps.saveProfileInformation(webDriver);
         assertTrue(webDriver.findElement(By.className("username")).isDisplayed());
         assertTrue(webDriver.findElement(By.className("welcome")).isDisplayed());
     }
 
    @Test
-    public void shouldStayOnSamePageOnRefresh1(){
-       webDriver.get("http://localhost:8080/twu/identify-user");
+    public void shouldStayOnSamePageOnRefreshAfterCreatingProfile(){
+        CommonSteps.saveProfileInformation(webDriver);
         webDriver.navigate().refresh();
-        assertEquals("ReaderFeeder Create Profile", webDriver.getTitle());
+        assertEquals("ReaderFeeder", webDriver.getTitle());
     }
-
     @After
     public void tearDown(){
         webDriver.close();
     }
-    private void enterUserName() {
-        webDriver.get("http://localhost:8080/twu");
-        webDriver.findElement(By.name("username")).sendKeys("barbie");
-        webDriver.findElement(By.name("submit")).click();
-    }
+
 
 }

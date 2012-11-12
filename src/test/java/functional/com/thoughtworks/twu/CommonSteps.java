@@ -9,4 +9,8 @@ public final class CommonSteps {
         webDriver.findElement(By.id("password")).sendKeys(password);
         webDriver.findElement(By.className("btn-submit")).click();
     }
+    public static void saveProfileInformation(WebDriver webDriver) {
+        webDriver.findElement(By.name("username")).sendKeys("Reader Feeder User");
+        webDriver.findElement(By.name("submit")).click();
+    }
 }
