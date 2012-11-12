@@ -2,7 +2,11 @@
     <#assign title="ReaderFeeder - "+ book.title>
 </#if>
 
+<<<<<<< HEAD
+<@layout.block title=title  >
+=======
 <@layout.block title=title>
+>>>>>>> 139 Ni & Summer: add jasmine test and javascript for add book to want to read list
     <#if book??>
         <form action="recommend" method="POST">
             <input type="hidden" name="bookId" value="${book.id}"/>

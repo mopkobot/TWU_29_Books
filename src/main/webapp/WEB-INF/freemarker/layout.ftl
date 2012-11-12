@@ -1,24 +1,26 @@
 <!DOCTYPE html>
 <#macro block title="ReaderFeeder">
-    <html>
-        <head>
-            <title>
-                ${title}
-            </title>
-            <link rel="stylesheet" type="text/css" href="static/css/common.css"/>
-        </head>
+<html>
+<head>
+    <title>
+    ${title}
+    </title>
+    <link rel="stylesheet" type="text/css" href="static/css/common.css"/>
+    <script type="text/javascript" language="javascript" src="static/javascript/lib/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" language="javascript" src="static/javascript/addBookToWantToReadList.js"></script>
+</head>
 
-        <body>
-            <header class="header">
+<body>
+<header class="header">
 
-            </header>
-            <div class="container">
-                <#nested>
-            </div>
+</header>
+<div class="container">
+    <#nested>
+</div>
 
-            <footer class="footer">
+<footer class="footer">
 
-            </footer>
-        </body>
-    </html>
+</footer>
+</body>
+</html>
 </#macro>

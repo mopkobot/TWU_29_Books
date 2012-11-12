@@ -18,7 +18,7 @@ public class UserService {
 
     public boolean isUserExisted(String casname) {
         User result = getUserByCasname(casname);
-        return result == null? false : true;
+        return result == null ? false : true;
     }
 
     public User getUserByCasname(String casname) {
@@ -31,11 +31,15 @@ public class UserService {
     }
 
 
-    public void markBookAsWantToRead(int bookId) {
+    public void markBookAsWantToRead(int bookId, String casname) {
+        userMapper.markBookAsWantToRead(casname, bookId);
     }
 
     public Book getBookFromWantToReadList(int bookId) {
-
         return new Book(bookId);
+    }
+
+    public Boolean isMarkedAsWantToRead(String casname, int bookId) {
+        return userMapper.isBookInWantToReadList(casname, bookId) != 0;
     }
 }
