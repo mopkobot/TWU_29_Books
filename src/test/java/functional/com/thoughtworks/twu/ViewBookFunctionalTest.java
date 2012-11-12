@@ -91,7 +91,7 @@ public class ViewBookFunctionalTest{
     }
 
     private void assertOnWantToReadButton() {
-        WebElement wantToReadButton = locateElementByCss("button.btn");
+        WebElement wantToReadButton = locateElementByCss("button.add-btn");
         assertThat(wantToReadButton.isDisplayed(), is(true));
     }
 
