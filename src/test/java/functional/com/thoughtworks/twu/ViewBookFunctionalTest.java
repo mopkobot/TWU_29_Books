@@ -19,7 +19,7 @@ public class ViewBookFunctionalTest{
     @Before
     public void setUp() {
         webDriver = new HtmlUnitDriver();
-        login();
+        CommonSteps.login(webDriver,"test.twu","Th0ughtW0rks@12");
     }
 
 
@@ -51,13 +51,6 @@ public class ViewBookFunctionalTest{
     public void shouldDisplayBookNotFoundWhenBookIsNotPresent(){
         goToURL("http://127.0.0.1:8080/twu/viewbook?booktitle=alkdhaksdh");
         assertOnBookTitle("Could not find book");
-    }
-
-    private void login() {
-        webDriver.get("http://localhost:8080/twu");
-        locateElementById("username").sendKeys("test.twu");
-        locateElementById("password").sendKeys("Th0ughtW0rks@12");
-        locateElementByCss(".btn-submit").click();
     }
 
     private void goToURL(String url) {

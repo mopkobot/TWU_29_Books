@@ -18,7 +18,7 @@ public class AddBookFunctionalTest {
     @Before
     public void setUp() {
         webDriver = new FirefoxDriver();
-        login();
+        CommonSteps.login(webDriver,"test.twu","Th0ughtW0rks@12");
         enterUserName();
         searchBook();
     }
@@ -43,12 +43,6 @@ public class AddBookFunctionalTest {
         webDriver.close();
     }
 
-    private void login() {
-        webDriver.get("http://localhost:8080/twu");
-        webDriver.findElement(By.id("username")).sendKeys("test.twu");
-        webDriver.findElement(By.id("password")).sendKeys("Th0ughtW0rks@12");
-        webDriver.findElement(By.className("btn-submit")).click();
-    }
 
     private void enterUserName() {
         webDriver.get("http://localhost:8080/twu");

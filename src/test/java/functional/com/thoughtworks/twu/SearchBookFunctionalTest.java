@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import java.util.List;
@@ -21,7 +22,7 @@ public class SearchBookFunctionalTest {
     @Before
     public void setUp() {
         webDriver = new HtmlUnitDriver();
-        login();
+        CommonSteps.login(webDriver,"test.twu","Th0ughtW0rks@12");
     }
 
     @Test
@@ -138,17 +139,19 @@ public class SearchBookFunctionalTest {
         assertThat(webDriver.findElement(By.className("book-list")).isDisplayed(), is(true));
     }
 
+    @Test
+    public void shouldDisplayTheSortOrderOfResults(){
+        webDriver.get("http://127.0.0.1:8080/twu/search_book");
+        webDriver.findElement(By.name("searchValue")).sendKeys("Agile Samurai");
+        webDriver.findElement(By.id("searchByTitle")).click();
+        webDriver.findElement(By.id("search")).submit();
+        assertEquals("Your search was sorted by relevance.", webDriver.findElement(By.tagName("p")).getText());
+
+    }
 
     @After
     public void tearDown() {
         webDriver.close();
-    }
-
-    private void login() {
-        webDriver.get("http://localhost:8080/twu");
-        webDriver.findElement(By.id("username")).sendKeys("test.twu");
-        webDriver.findElement(By.id("password")).sendKeys("Th0ughtW0rks@12");
-        webDriver.findElement(By.className("btn-submit")).click();
     }
 
 

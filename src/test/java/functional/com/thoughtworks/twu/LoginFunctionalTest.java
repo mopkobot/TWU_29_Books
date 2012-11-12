@@ -32,40 +32,34 @@ public class LoginFunctionalTest {
 
     @Test
     public void shouldValidateUserAndPasswordAndRedirectToReaderFeeder() {
-        String password = "Th0ughtW0rks@12";
-        performLogin("test.twu", password);
-
+        CommonSteps.login(webDriver,"test.twu", "Th0ughtW0rks@12");
         assertTrue(webDriver.getTitle().contains("ReaderFeeder"));
     }
 
     @Test
     public void shouldDenyIllegalUserAccess() {
-        performLogin("test.twu", "000000@12");
-
+        CommonSteps.login(webDriver,"test.twu", "000000@12");
         assertEquals("CAS \u2013 Central Authentication " + "Service"
                 , webDriver.getTitle());
     }
 
     @Test
     public void shouldDenyIllegalUserAccess2() {
-        performLogin("test.twu", "");
-
+        CommonSteps.login(webDriver,"test.twu", "");
         assertEquals("CAS \u2013 Central Authentication " + "Service",
                 webDriver.getTitle());
     }
 
     @Test
     public void shouldDenyIllegalUserAccess3() {
-        performLogin("", "Th0ughtW0rks@12");
-
+        CommonSteps.login(webDriver,"", "Th0ughtW0rks@12");
         assertEquals("CAS \u2013 Central Authentication " + "Service",
                 webDriver.getTitle());
     }
 
     @Test
     public void shouldDenyIllegalUserAccess4() {
-        performLogin("000000123dg.twu", "Th0ughtW0rks@12");
-
+        CommonSteps.login(webDriver,"000000123dg.twu", "Th0ughtW0rks@12");
         assertEquals("CAS \u2013 Central Authentication " + "Service",
                 webDriver.getTitle());
     }
@@ -84,13 +78,5 @@ public class LoginFunctionalTest {
     public void tearDown() {
         webDriver.close();
     }
-
-    private void performLogin(String casname, String password) {
-        webDriver.get("http://localhost:8080/twu");
-        webDriver.findElement(By.id("username")).sendKeys(casname);
-        webDriver.findElement(By.id("password")).sendKeys(password);
-        webDriver.findElement(By.className("btn-submit")).click();
-    }
-
 
 }

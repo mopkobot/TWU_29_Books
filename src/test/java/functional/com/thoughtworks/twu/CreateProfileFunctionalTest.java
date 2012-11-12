@@ -26,7 +26,7 @@ public class CreateProfileFunctionalTest {
     @Before
     public void setUp() {
         webDriver = new HtmlUnitDriver();
-        login();
+        CommonSteps.login(webDriver,"test.twu","Th0ughtW0rks@12");
     }
     @Test
     public void shouldGoToProfile(){
@@ -89,19 +89,9 @@ public class CreateProfileFunctionalTest {
         assertEquals("ReaderFeeder Create Profile", webDriver.getTitle());
     }
 
-
-
-
     @After
     public void tearDown(){
         webDriver.close();
-    }
-
-    private void login() {
-        webDriver.get("http://localhost:8080/twu");
-        webDriver.findElement(By.id("username")).sendKeys("test.twu");
-        webDriver.findElement(By.id("password")).sendKeys("Th0ughtW0rks@12");
-        webDriver.findElement(By.className("btn-submit")).click();
     }
     private void enterUserName() {
         webDriver.get("http://localhost:8080/twu");
