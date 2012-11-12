@@ -47,4 +47,12 @@ public class BookMapperTest extends IntegrationTest{
         List<Book> bookList = bookMapper.getBooksByTitle(book.getTitle());
         assertThat(bookList.size(), is(2));
     }
+
+    @Transactional
+    @Test
+    public void shouldGetBookById() {
+        Book expected = new Book("J.K. Rowling", "Harry Potter", "http://ecx.images-amazon.com/images/I/51HVlrefdkL._SL500_AA300_.jpg", "fantasy novel", "1234567890", null);
+        Book result = bookMapper.getBookById(1);
+        assertThat(result, equalTo(expected));
+    }
 }

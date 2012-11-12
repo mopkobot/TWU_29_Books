@@ -1,6 +1,5 @@
 package com.thoughtworks.twu.controller;
 
-import com.thoughtworks.twu.controller.BookViewController;
 import com.thoughtworks.twu.domain.Book;
 import com.thoughtworks.twu.service.BookService;
 import org.junit.Test;
@@ -12,6 +11,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class BookViewControllerTest {
@@ -46,6 +46,41 @@ public class BookViewControllerTest {
 
         String messageFromModelAndView = (String) modelAndView.getModel().get("bookNotFound");
         assertThat(messageFromModelAndView, is(expectedMessage));
+    }
+
+    @Test
+    public void shouldPassANotificationToTheViewThatBookWasRecommended() {
+        BookService bookService = mock(BookService.class);
+        Book book = getBook();
+        when(bookService.getBookByID(0)).thenReturn(book);
+        BookViewController bookViewController = new BookViewController(bookService);
+        ModelAndView viewBook = bookViewController.recommend("0");
+        String actualNotification = (String) viewBook.getModel().get("notification");
+
+        assertThat(actualNotification, is("Book was recommended successfully"));
+    }
+
+    @Test
+    public void shouldVerifyThatBookServiceReturnsBook() {
+        Book book = getBook();
+        BookService bookService = mock(BookService.class);
+        when(bookService.getBookByID(3)).thenReturn(book);
+        BookViewController bookViewController = new BookViewController(bookService);
+        bookViewController.recommend("3");
+
+        verify(bookService).getBookByID(3);
+    }
+
+    @Test
+    public void shouldVerifyThatBookServiceUpdatesCount() {
+        Book book = getBook();
+        BookService bookService = mock(BookService.class);
+        when(bookService.getBookByID(3)).thenReturn(book);
+
+        BookViewController bookViewController = new BookViewController(bookService);
+        bookViewController.recommend("3");
+
+        verify(bookService).updateRecommendCount(3);
     }
 
     private ModelAndView bookPageModelAndView(String title, boolean isValidTitle) throws IOException {

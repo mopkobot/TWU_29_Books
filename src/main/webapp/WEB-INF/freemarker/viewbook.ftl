@@ -3,8 +3,11 @@
 </#if>
 
 <@layout.block title=title  >
-
     <#if book??>
+        <form action="recommend" method="POST">
+            <input type="hidden" value="${book.id}"/>
+            <input type="submit" value="Recommend"/>
+        </form>
         <div class="book-head">
             <div class="book-cover">
                 <img class="book-img" src="${book.image}" alt="Picture not available"/>

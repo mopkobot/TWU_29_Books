@@ -15,6 +15,15 @@ public interface BookMapper {
     @Select("SELECT * FROM books WHERE title LIKE #{title}")
     Book getBookByTitle(String title);
 
+
     @Select("SELECT * FROM books WHERE title LIKE #{title}")
     List<Book> getBooksByTitle(String title);
+
+    @Select("select * from books where id=#{id}")
+    Book getBookById(int id);
+
+
+    int getBookRecommendCount(int id);
+
+    void updateRecommendCount(int id, int count);
 }

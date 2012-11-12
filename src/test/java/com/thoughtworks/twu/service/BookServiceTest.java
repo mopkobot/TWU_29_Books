@@ -20,9 +20,12 @@ public class BookServiceTest {
     private final String description = "this is a book about magic, I love it very much!!";
     private final String ISBN10 = "0156027321";
     private final String ISBN13 = "978-0156027328";
+
     private Book book;
     private BookMapper mockBookMapper;
     private BookService bookService;
+
+    private final int id = 1;
 
     @Before
     public void setUp(){
@@ -56,5 +59,25 @@ public class BookServiceTest {
     public void shouldReturnFalseIfBookIsNotExistedInDB(){
         Book anotherBook = new Book("Summer", title, image, description, ISBN10, ISBN13);
         assertThat(bookService.isBookExisted(anotherBook), is(false));
+    }
+
+    @Test
+    public void shouldGetBookById() {
+        when(mockBookMapper.getBookById(id)).thenReturn(book);
+        Book result = bookService.getBookByID(id);
+
+        assertThat(result, equalTo(book));
+        verify(mockBookMapper).getBookById(id);
+    }
+
+    @Test
+    public void shouldUpdateRecommendCountByOne() {
+        when(mockBookMapper.getBookRecommendCount(id)).thenReturn(1);
+
+        int recommendCount = bookService.updateRecommendCount(id);
+
+        assertThat(recommendCount, equalTo(2));
+        verify(mockBookMapper).getBookRecommendCount(id);
+        verify(mockBookMapper).updateRecommendCount(id, 2);
     }
 }

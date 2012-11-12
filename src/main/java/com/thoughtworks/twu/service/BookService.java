@@ -31,4 +31,14 @@ public class BookService {
         List<Book> bookList = bookMapper.getBooksByTitle(book.getTitle());
         return bookList.contains(book);
     }
+
+    public Book getBookByID(int id) {
+        return bookMapper.getBookById(id);
+    }
+
+    public int updateRecommendCount(int bookId) {
+        int recommendCount = bookMapper.getBookRecommendCount(bookId);
+        bookMapper.updateRecommendCount(bookId, ++recommendCount);
+        return recommendCount;
+    }
 }
