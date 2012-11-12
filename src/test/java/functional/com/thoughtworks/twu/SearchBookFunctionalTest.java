@@ -2,7 +2,6 @@ package functional.com.thoughtworks.twu;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -26,33 +25,6 @@ public class SearchBookFunctionalTest {
     }
 
     @Test
-    public void shouldDisplaySearchBox() {
-        webDriver.get("http://127.0.0.1:8080/twu/search_book");
-        assertThat(webDriver.findElement(By.name("searchValue")).isDisplayed(), is(true));
-    }
-
-    @Test
-    public void shouldDisplayDropBox(){
-        webDriver.get("http://127.0.0.1:8080/twu/search_book");
-        assertThat(webDriver.findElement(By.name("searchType")).isDisplayed(), is(true));
-    }
-
-    @Test
-    public void shouldDisplaySearchButton() {
-        webDriver.get("http://127.0.0.1:8080/twu/search_book");
-        assertThat(webDriver.findElement(By.id("search")).isDisplayed(), is(true));
-    }
-
-    @Ignore
-    public void shouldDisplayBookDivInfoWhenGoButtonIsClicked() {
-        webDriver.get("http://127.0.0.1:8080/twu/search_book");
-        webDriver.findElement(By.name("searchValue")).sendKeys("9780316228534");
-        webDriver.findElement(By.id("searchByISBN")).click();
-        webDriver.findElement(By.id("search")).submit();
-        assertThat(webDriver.findElement(By.className("book-list")).isDisplayed(), is(true));
-    }
-
-    @Test
     public void shouldNotDisplayByWhenBookDoesntHaveAuthor()
     {
         webDriver.get("http://127.0.0.1:8080/twu/search_book");
@@ -64,7 +36,9 @@ public class SearchBookFunctionalTest {
     }
 
     @Test
-    public void shouldDisplayBookAuthorAndTitleWhenGoButtonIsClicked() {
+    public void
+    shouldDisplayBookAuthorAndTitleWhenGoButtonIsClickedAndWeSearchByISBN
+            () {
         webDriver.get("http://127.0.0.1:8080/twu/search_book");
         webDriver.findElement(By.name("searchValue")).sendKeys("9780316228534");
         webDriver.findElement(By.id("searchByISBN")).click();
@@ -72,8 +46,44 @@ public class SearchBookFunctionalTest {
         assertThat(webDriver.findElement(By.className("book-picture"))
                 .isDisplayed
                 (), is(true));
-        assertThat(webDriver.findElement(By.className("book-title")).isDisplayed(), is(true));
-        assertThat(webDriver.findElement(By.className("book-author")).isDisplayed(), is(true));
+        assertThat(webDriver.findElement(By.className("book-title")).getText(),
+                is("The Casual Vacancy"));
+        assertThat(webDriver.findElement(By.className("book-author")).getText(),
+                is("by J. K. Rowling"));
+    }
+
+    @Test
+    public void
+    shouldDisplayBookAuthorAndTitleWhenGoButtonIsClickedAndWeSearchByTitle
+            () {
+        webDriver.get("http://127.0.0.1:8080/twu/search_book");
+        webDriver.findElement(By.name("searchValue")).sendKeys("mop");
+        webDriver.findElement(By.id("searchByTitle")).click();
+        webDriver.findElement(By.id("search")).submit();
+        assertThat(webDriver.findElement(By.className("book-picture"))
+                .isDisplayed
+                        (), is(true));
+        assertThat(webDriver.findElement(By.className("book-title")).getText(),
+                is("Monster mop"));
+        assertThat(webDriver.findElement(By.className("book-author")).getText(),
+                is("by Anthony Laurence"));
+    }
+
+    @Test
+    public void
+    shouldDisplayBookAuthorAndTitleWhenGoButtonIsClickedAndWeSearchByAuthor
+            () {
+        webDriver.get("http://127.0.0.1:8080/twu/search_book");
+        webDriver.findElement(By.name("searchValue")).sendKeys("Someone");
+        webDriver.findElement(By.id("searchByAuthor")).click();
+        webDriver.findElement(By.id("search")).submit();
+        assertThat(webDriver.findElement(By.className("book-picture"))
+                .isDisplayed
+                        (), is(true));
+        assertThat(webDriver.findElement(By.className("book-title")).getText(),
+                is("The Royal Yacht Britannia"));
+        assertThat(webDriver.findElement(By.className("book-author")).getText(),
+                is("by Someone Publishing Limited"));
     }
 
     @Test
@@ -93,9 +103,12 @@ public class SearchBookFunctionalTest {
         webDriver.findElement(By.id("searchByISBN")).click();
         webDriver.findElement(By.id("search")).submit();
 
-        final WebElement searchByISBN = webDriver.findElement(By.id("searchByISBN"));
-        assertTrue(searchByISBN.isSelected());
+        String actual =  webDriver.findElement(By.name("searchValue")).getAttribute("value");
 
+        final WebElement searchByISBN = webDriver.findElement(By.id("searchByISBN"));
+
+        assertTrue(searchByISBN.isSelected());
+        assertThat(actual, is("fasdfafasd"));
     }
 
     @Test
