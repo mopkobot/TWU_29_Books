@@ -27,86 +27,47 @@ public class SearchBookFunctionalTest {
     @Test
     public void shouldNotDisplayByWhenBookDoesntHaveAuthor()
     {
-        webDriver.get("http://127.0.0.1:8080/twu/search_book");
-        webDriver.findElement(By.name("searchValue")).sendKeys("Boys' Life");
-        webDriver.findElement(By.id("searchByTitle")).click();
-        webDriver.findElement(By.id("search")).submit();
-        assertThat(webDriver.findElement(By.className("book-author"))
-                .getText(), is(""));
+        CommonSteps.searchBook(webDriver,"Boys' Life","searchByTitle");
+        assertThat(webDriver.findElement(By.className("book-author")).getText(), is(""));
+    }
+
+    @Test
+    public void shouldDisplayBookAuthorAndTitleWhenGoButtonIsClickedAndWeSearchByISBN() {
+        CommonSteps.searchBook(webDriver,"9780316228534","searchByISBN");
+        assertThat(webDriver.findElement(By.className("book-picture")).isDisplayed(), is(true));
+        assertThat(webDriver.findElement(By.className("book-title")).getText(),is("The Casual Vacancy"));
+        assertThat(webDriver.findElement(By.className("book-author")).getText(),is("by J. K. Rowling"));
     }
 
     @Test
     public void
-    shouldDisplayBookAuthorAndTitleWhenGoButtonIsClickedAndWeSearchByISBN
-            () {
-        webDriver.get("http://127.0.0.1:8080/twu/search_book");
-        webDriver.findElement(By.name("searchValue")).sendKeys("9780316228534");
-        webDriver.findElement(By.id("searchByISBN")).click();
-        webDriver.findElement(By.id("search")).submit();
-        assertThat(webDriver.findElement(By.className("book-picture"))
-                .isDisplayed
-                (), is(true));
-        assertThat(webDriver.findElement(By.className("book-title")).getText(),
-                is("The Casual Vacancy"));
-        assertThat(webDriver.findElement(By.className("book-author")).getText(),
-                is("by J. K. Rowling"));
+    shouldDisplayBookAuthorAndTitleWhenGoButtonIsClickedAndWeSearchByTitle() {
+        CommonSteps.searchBook(webDriver,"mop","searchByTitle");
+        assertThat(webDriver.findElement(By.className("book-picture")).isDisplayed(), is(true));
+        assertThat(webDriver.findElement(By.className("book-title")).getText(),is("Monster mop"));
+        assertThat(webDriver.findElement(By.className("book-author")).getText(),is("by Anthony Laurence"));
     }
 
     @Test
     public void
-    shouldDisplayBookAuthorAndTitleWhenGoButtonIsClickedAndWeSearchByTitle
-            () {
-        webDriver.get("http://127.0.0.1:8080/twu/search_book");
-        webDriver.findElement(By.name("searchValue")).sendKeys("mop");
-        webDriver.findElement(By.id("searchByTitle")).click();
-        webDriver.findElement(By.id("search")).submit();
-        assertThat(webDriver.findElement(By.className("book-picture"))
-                .isDisplayed
-                        (), is(true));
-        assertThat(webDriver.findElement(By.className("book-title")).getText(),
-                is("Monster mop"));
-        assertThat(webDriver.findElement(By.className("book-author")).getText(),
-                is("by Anthony Laurence"));
-    }
-
-    @Test
-    public void
-    shouldDisplayBookAuthorAndTitleWhenGoButtonIsClickedAndWeSearchByAuthor
-            () {
-        webDriver.get("http://127.0.0.1:8080/twu/search_book");
-        webDriver.findElement(By.name("searchValue")).sendKeys("Someone");
-        webDriver.findElement(By.id("searchByAuthor")).click();
-        webDriver.findElement(By.id("search")).submit();
-        assertThat(webDriver.findElement(By.className("book-picture"))
-                .isDisplayed
-                        (), is(true));
-        assertThat(webDriver.findElement(By.className("book-title")).getText(),
-                is("The Royal Yacht Britannia"));
-        assertThat(webDriver.findElement(By.className("book-author")).getText(),
-                is("by Someone Publishing Limited"));
+    shouldDisplayBookAuthorAndTitleWhenGoButtonIsClickedAndWeSearchByAuthor() {
+        CommonSteps.searchBook(webDriver,"Someone","searchByAuthor");
+        assertThat(webDriver.findElement(By.className("book-picture")).isDisplayed(), is(true));
+        assertThat(webDriver.findElement(By.className("book-title")).getText(),is("The Royal Yacht Britannia"));
+        assertThat(webDriver.findElement(By.className("book-author")).getText(),is("by Someone Publishing Limited"));
     }
 
     @Test
     public void shouldDisplayErrorMessageWhenBookIsNotFound() {
-        webDriver.get("http://127.0.0.1:8080/twu/search_book");
-        webDriver.findElement(By.name("searchValue")).sendKeys("fasdfafasd");
-        webDriver.findElement(By.id("searchByTitle")).click();
-        webDriver.findElement(By.id("search")).submit();
-        assertThat(webDriver.findElement(By.id("error")).getText(), is("No books were found matching your search " +
-                "criteria. Please try again with a new search criteria."));
+        CommonSteps.searchBook(webDriver,"fasdfafasd","searchByTitle");
+        assertThat(webDriver.findElement(By.id("error")).getText(), is("No books were found matching your search " +"criteria. Please try again with a new search criteria."));
     }
 
     @Test
     public void shouldRememberThePreviousSearchType() {
-        webDriver.get("http://127.0.0.1:8080/twu/search_book");
-        webDriver.findElement(By.name("searchValue")).sendKeys("fasdfafasd");
-        webDriver.findElement(By.id("searchByISBN")).click();
-        webDriver.findElement(By.id("search")).submit();
-
+        CommonSteps.searchBook(webDriver,"fasdfafasd","searchByISBN");
         String actual =  webDriver.findElement(By.name("searchValue")).getAttribute("value");
-
         final WebElement searchByISBN = webDriver.findElement(By.id("searchByISBN"));
-
         assertTrue(searchByISBN.isSelected());
         assertThat(actual, is("fasdfafasd"));
     }
@@ -121,45 +82,28 @@ public class SearchBookFunctionalTest {
 
     @Test
     public void shouldDisplayAMaximumOf20Results() throws Exception {
+        CommonSteps.searchBook(webDriver,"Harry Potter","searchByTitle");
         webDriver.get("http://127.0.0.1:8080/twu/search_book");
-        webDriver.findElement(By.name("searchValue")).sendKeys("Harry Potter");
-        webDriver.findElement(By.id("searchByTitle")).click();
-        webDriver.findElement(By.id("search")).submit();
-
         List<WebElement> list = webDriver.findElements(By.className("book"));
         assertThat(list.size(), is(lessThanOrEqualTo(20)));
     }
 
     @Test
-    public void shouldDisplayErrorMessageWhenNoValueInputted() throws
-            Exception {
-        webDriver.get("http://127.0.0.1:8080/twu/search_book");
-        webDriver.findElement(By.name("searchValue"));
-        webDriver.findElement(By.id("searchByTitle")).click();
-        webDriver.findElement(By.id("search")).submit();
-        assertThat(webDriver.findElement(By.id("error")).getText(),
-                is("Please input a value for your search, and try again."));
-
-
+    public void shouldDisplayErrorMessageWhenNoValueInputted() throws Exception {
+        CommonSteps.searchBook(webDriver,"","searchByTitle");
+        assertThat(webDriver.findElement(By.id("error")).getText(),is("Please input a value for your search, and try again."));
     }
 
     @Test
     public void shouldSearchByAuthor(){
-        webDriver.get("http://127.0.0.1:8080/twu/search_book");
-        webDriver.findElement(By.name("searchValue")).sendKeys("Paulo Coelho");
-        webDriver.findElement(By.id("searchByAuthor")).click();
-        webDriver.findElement(By.id("search")).submit();
+        CommonSteps.searchBook(webDriver,"Paulo Coelho","searchByAuthor");
         assertThat(webDriver.findElement(By.className("book-list")).isDisplayed(), is(true));
     }
 
     @Test
     public void shouldDisplayTheSortOrderOfResults(){
-        webDriver.get("http://127.0.0.1:8080/twu/search_book");
-        webDriver.findElement(By.name("searchValue")).sendKeys("Agile Samurai");
-        webDriver.findElement(By.id("searchByTitle")).click();
-        webDriver.findElement(By.id("search")).submit();
+        CommonSteps.searchBook(webDriver,"Agile Samurai","searchByTitle");
         assertEquals("Your search was sorted by relevance.", webDriver.findElement(By.tagName("p")).getText());
-
     }
 
     @After

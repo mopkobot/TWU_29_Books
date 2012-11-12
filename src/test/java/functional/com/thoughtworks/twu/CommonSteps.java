@@ -13,4 +13,11 @@ public final class CommonSteps {
         webDriver.findElement(By.name("username")).sendKeys("Reader Feeder User");
         webDriver.findElement(By.name("submit")).click();
     }
+
+    public static void searchBook(WebDriver webDriver, String searchQuery, String searchFilter) {
+        webDriver.get("http://127.0.0.1:8080/twu/search_book");
+        webDriver.findElement(By.name("searchValue")).sendKeys(searchQuery);
+        webDriver.findElement(By.id(searchFilter)).click();
+        webDriver.findElement(By.id("search")).submit();
+    }
 }
