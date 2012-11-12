@@ -192,6 +192,24 @@ img.book-img {
     top: 20px;
 }
 
+.recommendations {
+    float:right;
+    margin-right: 50px;
+}
+
+.recommend-btn {
+    position: relative;
+    left: 60px;
+    width: 60px;
+}
+
+.recommend-text {
+    position: relative;
+    left: 15px;
+    font-size: 15px;
+    top: 20px;
+}
+
 .profile {
     position: absolute;
     top: 59px;
