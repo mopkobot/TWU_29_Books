@@ -75,20 +75,9 @@ war {
     dependsOn copyAssets
 }
 
-task setUpDatabase << {
-    println('Deploying Readerfeeder database')
-    runSQLScript('./src/main/resources/deploy/sql/drop_test_readerfeeder.sql')
-    updateDatabaseProperties('readerfeeder')
-}
-
 jettyRun {
     dependsOn copyAssets
-    dependsOn setUpDatabase
     contextPath = 'twu'
-}
-
-build.doFirst {
-    dependsOn setUpDatabase
 }
 
 test {
@@ -101,16 +90,7 @@ test {
     }
 }
 
-task setUpTestDatabase << {
-    logger.lifecycle("Deploying test database")
-    runSQLScript('./src/main/resources/deploy/sql/create_database_test_readerfeeder.sql')
-    deployDatabase('test_readerfeeder')
-    updateDatabaseProperties('test_readerfeeder')
-}
-
 task integrationTest(type: Test) {
-    dependsOn setUpTestDatabase
-
     include '**/com/thoughtworks/twu/persistence/**/' + testToBeRun + '.class'
     exclude '**/functional/com/thoughtworks/**/*.*'
     exclude '**/smoke/com/thoughtworks/**/*.*'
@@ -127,8 +107,6 @@ task integrationTest(type: Test) {
 }
 
 task functionalTest(type: Test) {
-    dependsOn setUpTestDatabase
-
     include '**/functional/com/thoughtworks/**/' + testToBeRun + ".class"
 
     beforeTest { descriptor ->
