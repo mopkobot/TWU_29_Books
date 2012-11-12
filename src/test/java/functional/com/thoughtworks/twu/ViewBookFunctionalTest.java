@@ -7,7 +7,6 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -91,7 +90,7 @@ public class ViewBookFunctionalTest{
     }
 
     private void assertOnWantToReadButton() {
-        WebElement wantToReadButton = locateElementByCss("button.want-to-read");
+        WebElement wantToReadButton = locateElementByCss("button.btn");
         assertThat(wantToReadButton.isDisplayed(), is(true));
     }
 

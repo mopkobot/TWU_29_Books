@@ -1,4 +1,4 @@
-use readerfeeder;
+use test_readerfeeder;
 
 delete from users where casname="test.twu";
 

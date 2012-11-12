@@ -133,11 +133,11 @@ task functionalTest(type: Test) {
 
     beforeTest { descriptor ->
         logger.lifecycle("Running test: " + descriptor)
+        setupDataForFunctionalTest()
     }
 
     doFirst {
         startJetty()
-        setupDataForFunctionalTest()
     }
 
     doLast {
