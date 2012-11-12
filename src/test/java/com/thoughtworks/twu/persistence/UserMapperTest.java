@@ -50,7 +50,7 @@ public class UserMapperTest extends IntegrationTest{
         int bookId = bookFromDB.getId();
         userMapper.markBookAsWantToRead("foo", bookId);
 
-        int bookInWantToReadList = userMapper.isBookInWantToReadList(user.getCasname(), bookId);;
+        int bookInWantToReadList = userMapper.isBookInWantToReadList(user.getCasname(), bookId);
         assertThat(bookInWantToReadList, is(1));
     }
 }

@@ -61,18 +61,18 @@ public class UserServiceTest {
     }
 
     @Test
-    public void shouldReturnFalseWhenBookIsNotMarkedAsWantToReadInDB(){
+    public void shouldReturnFalseWhenBookIsNotMarkedAsWantToReadInDB() {
         userMapper.insertUser(user);
         BookMapper bookMapper = mock(BookMapper.class);
 
-        Book book = new Book("author", "title", "image_src", "description", "0156027321", "978-0156027328");
+        Book book = new Book("author", "title", "image_src", "description", "0156027321", "978-0156027328", 0);
         bookMapper.insertBook(book);
 
-        assertThat(userService.isMarkedAsWantToRead(user.getCasname(), book.getId()),is(false));
+        assertThat(userService.isMarkedAsWantToRead(user.getCasname(), book.getId()), is(false));
     }
 
     @Test
-    public void shouldReturnTrueWhenBookIsMarkedAsWantToReadInDB(){
+    public void shouldReturnTrueWhenBookIsMarkedAsWantToReadInDB() {
         int bookId = 1;
         userService.markBookAsWantToRead(bookId, user.getCasname());
 
