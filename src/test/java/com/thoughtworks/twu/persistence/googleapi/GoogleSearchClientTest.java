@@ -66,9 +66,6 @@ public class GoogleSearchClientTest {
     @Test
     public void shouldReturnOnlyTwentyResults() throws IOException {
         GoogleSearchClient searchClient = new GoogleSearchClient();
-
-        Volumes volumes = searchClient.performSearch("9781416548898", "isbn");
-//        Volumes volumes = searchClient.performSearch("Gone with the wind", "title");
         int searchResult  = searchClient.performSearch("Happy", "title").getItems().size();
 
         assertThat(searchResult, is(20));

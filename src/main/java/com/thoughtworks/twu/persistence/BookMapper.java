@@ -2,7 +2,6 @@ package com.thoughtworks.twu.persistence;
 
 import com.thoughtworks.twu.domain.Book;
 import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -17,5 +16,5 @@ public interface BookMapper {
     Book getBookByTitle(String title);
 
     @Select("SELECT * FROM books WHERE title LIKE #{title}")
-    List<Book> getBooksByTitle(@Param("title") String title);
+    List<Book> getBooksByTitle(String title);
 }

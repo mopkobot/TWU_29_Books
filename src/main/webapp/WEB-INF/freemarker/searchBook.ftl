@@ -25,20 +25,19 @@
     <ul class="book-list">
         <#list books as book>
             <li class="book">
-                <img class="book-picture" src="${book.image}"/>
+                <a href="/twu/viewbook" class="add-book">
+                    <img class="book-picture" src="${book.image}"/>
 
-                <div class="book-content">
-                    <h3 class="book-title">${book.title}</h3>
+                    <div class="book-content">
+                        <h3 class="book-title">${book.title}</h3>
 
-                    <div class="book-author">
-                        <#if book.author?has_content>
-                            by ${book.author}
-                        </#if>
+                        <div class="book-author">
+                            <#if book.author?has_content>
+                                by ${book.author}
+                            </#if>
+                        </div>
                     </div>
-                </div>
-                <div class="view-book-btn">
-                    <a href="/twu/viewbook">View Book</a>
-                </div>
+                </a>
             </li>
         </#list>
     </ul>
