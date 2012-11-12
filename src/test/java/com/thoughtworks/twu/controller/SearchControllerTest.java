@@ -39,7 +39,7 @@ public class SearchControllerTest {
     @Test
     public void shouldRetrieveResultFromBookSearch() throws Exception {
         List expectedBooks = new ArrayList<Book>();
-        expectedBooks.add(new Book("J.K. Rowling", "Potter", "blah", "blah", "blah", "blah"));
+        expectedBooks.add(new Book("J.K. Rowling", "Potter", "blah", "blah", "blah", "blah", 0));
         when(searchService.findBooks("Potter", "title")).thenReturn(expectedBooks);
 
         ModelAndView modelAndView = searchController.resultsPage("Potter", "title");

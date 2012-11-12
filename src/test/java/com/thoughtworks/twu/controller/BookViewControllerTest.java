@@ -80,7 +80,7 @@ public class BookViewControllerTest {
         BookViewController bookViewController = new BookViewController(bookService);
         bookViewController.recommend("3");
 
-        verify(bookService).updateRecommendCount(3);
+        verify(bookService).updateRecommendCount(book);
     }
 
     private ModelAndView bookPageModelAndView(String title, boolean isValidTitle) throws IOException {
@@ -100,6 +100,7 @@ public class BookViewControllerTest {
         String description = "This is a book about life, I love it very much!!";
         String ISBN10 = "0156027321";
         String ISBN13 = "978-0156027328";
-        return new Book(author, title, image, description, ISBN10, ISBN13);
+        int recommendCount = 0;
+        return new Book(author, title, image, description, ISBN10, ISBN13, recommendCount);
     }
 }

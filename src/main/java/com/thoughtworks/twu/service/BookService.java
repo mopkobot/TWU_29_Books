@@ -36,9 +36,11 @@ public class BookService {
         return bookMapper.getBookById(id);
     }
 
-    public int updateRecommendCount(int bookId) {
-        int recommendCount = bookMapper.getBookRecommendCount(bookId);
-        bookMapper.updateRecommendCount(bookId, ++recommendCount);
+    public int updateRecommendCount(Book book) {
+        int recommendCount = book.getRecommendCount();
+        recommendCount++;
+        book.setRecommendCount(recommendCount);
+        bookMapper.updateRecommendCount(book);
         return recommendCount;
     }
 }

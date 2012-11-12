@@ -39,7 +39,7 @@ public class GoogleTranslatorTest {
                         "the biggest war the town has yet seen. Who will triumph in an election fraught with passion, duplicity " +
                         "and unexpected revelations? A big novel about a small town, The Casual Vacancyis J.K. Rowling's first " +
                         "novel for adults. It is the work of a storyteller like no other.",
-                "0316228532", "9780316228534"));
+                "0316228532", "9780316228534", 0));
         GoogleSearchClient googleSearchClient = new GoogleSearchClient();
         List<Book> result = translator.translate(googleSearchClient.performSearch("9780316228534", "ISBN"));
         assertThat(result, is(expected));
@@ -61,7 +61,7 @@ public class GoogleTranslatorTest {
         Book expected = new Book("","Harry Potter", null, "Harry Potter - " +
                 "The Last" +
                 " " +
-                "Book", "11111", "");
+                "Book", "11111", "", 0);
 
 
         assertThat(actual.get(0), is(expected));

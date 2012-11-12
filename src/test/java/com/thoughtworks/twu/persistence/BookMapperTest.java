@@ -30,7 +30,7 @@ public class BookMapperTest extends IntegrationTest{
 
     @Before
     public void setUp() {
-        book = new Book("author", "title", "image_src", "description", "0156027321", "978-0156027328");
+        book = new Book("author", "title", "image_src", "description", "0156027321", "978-0156027328", 1);
     }
 
     @Test
@@ -48,11 +48,22 @@ public class BookMapperTest extends IntegrationTest{
         assertThat(bookList.size(), is(2));
     }
 
-    @Transactional
     @Test
     public void shouldGetBookById() {
-        Book expected = new Book("J.K. Rowling", "Harry Potter", "http://ecx.images-amazon.com/images/I/51HVlrefdkL._SL500_AA300_.jpg", "fantasy novel", "1234567890", null);
-        Book result = bookMapper.getBookById(1);
-        assertThat(result, equalTo(expected));
+        bookMapper.insertBook(book);
+        Book result = bookMapper.getBookByTitle("title");
+
+        assertThat(bookMapper.getBookById(result.getId()), is(result));
+    }
+
+    @Test
+    public void shouldUpdateRecommendationCount() {
+        bookMapper.insertBook(book);
+        Book result = bookMapper.getBookByTitle("title");
+
+        result.setRecommendCount(2);
+        bookMapper.updateRecommendCount(result);
+
+        assertThat(result.getRecommendCount(), is(2));
     }
 }

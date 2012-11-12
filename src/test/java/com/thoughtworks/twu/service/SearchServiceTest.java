@@ -17,7 +17,7 @@ public class SearchServiceTest {
     @Test
     public void shouldFindBooksByTitle() throws IOException {
         List<Book> expectedBooks = new ArrayList<Book>();
-        expectedBooks.add(new Book("J.K. Rowling", "Potter", "blah", "blah", "blah", "blah"));
+        expectedBooks.add(new Book("J.K. Rowling", "Potter", "blah", "blah", "blah", "blah", 0));
 
         GoogleBookSource googleBookSource = mock(GoogleBookSource.class);
         when(googleBookSource.search("Potter", "title")).thenReturn(expectedBooks);

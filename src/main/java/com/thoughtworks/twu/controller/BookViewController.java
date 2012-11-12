@@ -41,9 +41,9 @@ public class BookViewController {
             view = new ModelAndView(new RedirectView("/viewbook?booktitle=", true));
             return view;
         }
-        bookService.updateRecommendCount(Integer.parseInt(bookId));
+        bookService.updateRecommendCount(book);
         view = new ModelAndView(new RedirectView("/viewbook?booktitle="+ book.getTitle(), true));
-        view.addObject("notification", "Book was recommended successfully");
+        view.addObject("notification", RECOMMENDED_SUCCESFULLY);
         return view;
     }
 }

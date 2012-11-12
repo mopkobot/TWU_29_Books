@@ -5,9 +5,10 @@
 <@layout.block title=title  >
     <#if book??>
         <form action="recommend" method="POST">
-            <input type="hidden" value="${book.id}"/>
+            <input type="hidden" name="bookId" value="${book.id}"/>
             <input type="submit" value="Recommend"/>
         </form>
+        <p>${book.recommendCount}</p>
         <div class="book-head">
             <div class="book-cover">
                 <img class="book-img" src="${book.image}" alt="Picture not available"/>

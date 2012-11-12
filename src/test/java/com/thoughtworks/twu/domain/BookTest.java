@@ -1,7 +1,5 @@
 package com.thoughtworks.twu.domain;
 
-import com.thoughtworks.twu.domain.Book;
-import org.junit.Before;
 import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;
@@ -16,7 +14,7 @@ public class BookTest {
 
     @Test
     public void shouldUnderstandBook() {
-        book = new Book("author", "title", "image-src", "description", "isbn10", "isbn13");
+        book = new Book("author", "title", "image-src", "description", "isbn10", "isbn13", 0);
 
         assertThat(book.getAuthor(), is("author"));
         assertThat(book.getTitle(), is("title"));
@@ -24,29 +22,30 @@ public class BookTest {
         assertThat(book.getDescription(), is("description"));
         assertThat(book.getISBN10(), is("isbn10"));
         assertThat(book.getISBN13(), is("isbn13"));
+        assertThat(book.getRecommendCount(), is(0));
     }
 
     @Test
     public void shouldAssignDefaultImageWhenBookHasNoImage() throws Exception {
-        book = new Book("author", "title", "", "description", "isbn10", "isbn13");
+        book = new Book("author", "title", "", "description", "isbn10", "isbn13", 0);
         assertThat(book.getImage(), is(Book.DEFAULT_IMAGE_SRC));
     }
 
     @Test
     public void shouldNotAssignDefaultImageWhenBookImageIsAvailable() throws Exception {
-        book = new Book("author", "title", "image-src", "description", "isbn10", "isbn13");
+        book = new Book("author", "title", "image-src", "description", "isbn10", "isbn13", 0);
         assertThat(book.getImage(), is(not(Book.DEFAULT_IMAGE_SRC)));
     }
 
     @Test
     public void shouldAssignDefaultDescriptionWhenBookHasNoDescription() throws Exception {
-        book = new Book("author", "title", "image-src", "  ", "isbn10", "isbn13");
+        book = new Book("author", "title", "image-src", "  ", "isbn10", "isbn13", 0);
         assertThat(book.getDescription(), is(Book.DEFAULT_DESCRIPTION));
     }
 
     @Test
     public void shouldNotAssignDefaultDescriptionWhenBookDescriptionIsAvailable() throws Exception {
-        book = new Book("author", "title", "image-src", "description", "isbn10", "isbn13");
+        book = new Book("author", "title", "image-src", "description", "isbn10", "isbn13", 0);
         assertThat(book.getDescription(), is(not(Book.DEFAULT_DESCRIPTION)));
     }
 }

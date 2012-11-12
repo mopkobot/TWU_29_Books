@@ -4,7 +4,6 @@ import com.google.api.services.books.model.Volumes;
 import com.thoughtworks.twu.domain.Book;
 import com.thoughtworks.twu.persistence.googleapi.GoogleSearchClient;
 import com.thoughtworks.twu.persistence.googleapi.GoogleTranslator;
-import com.thoughtworks.twu.persistence.GoogleBookSource;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -26,7 +25,7 @@ public class GoogleBookSourceTest {
         when(googleSearchClient.performSearch("Potter", "title")).thenReturn(volumes);
 
         List<Book> expectedBooks = new ArrayList<Book>();
-        expectedBooks.add(new Book("J.K. Rowling", "Potter", "blah", "blah", "blah", "blah"));
+        expectedBooks.add(new Book("J.K. Rowling", "Potter", "blah", "blah", "blah", "blah", 0));
         when(googleTranslator.translate(volumes)).thenReturn(expectedBooks);
 
         GoogleBookSource googleBookSource = new GoogleBookSource(googleSearchClient, googleTranslator);

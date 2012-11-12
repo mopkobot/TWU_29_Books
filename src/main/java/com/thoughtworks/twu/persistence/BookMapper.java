@@ -3,6 +3,7 @@ package com.thoughtworks.twu.persistence;
 import com.thoughtworks.twu.domain.Book;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -22,8 +23,6 @@ public interface BookMapper {
     @Select("select * from books where id=#{id}")
     Book getBookById(int id);
 
-
-    int getBookRecommendCount(int id);
-
-    void updateRecommendCount(int id, int count);
+    @Update("update books set recommendCount=#{recommendCount} where id=#{id}")
+    void updateRecommendCount(Book book);
 }
