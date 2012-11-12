@@ -18,7 +18,7 @@
                 <#if searchType?? && searchType = "isbn">selected</#if>>ISBN
         </option>
     </select>
-    <input type="submit" value="Go!" id="search"/>
+    <input type="submit" value="Search" id="search"/>
 </form>
     <#if books?has_content>
     <p>Your search was sorted by relevance.</p>

@@ -36,18 +36,27 @@ public class SearchController {
     @RequestMapping(value = "/search_book", method = RequestMethod.POST)
     public ModelAndView resultsPage(@RequestParam(value = "searchValue", defaultValue = "") String searchValue, @RequestParam(value = "searchType", defaultValue = "") String searchType) throws IOException {
         ModelAndView modelAndView = new ModelAndView("searchBook");
-        if (!searchValue.isEmpty()) {
-            List<Book> books = searchService.findBooks(searchValue,
-                    searchType);
-            if(books.size() == 0){
-                modelAndView.addObject("error", BOOKS_NOT_FOUND);
-            }
-            modelAndView.addObject("books", books);
-            modelAndView.addObject("searchValue", searchValue);
-            modelAndView.addObject("searchType", searchType);
-            return modelAndView;
+        if (searchValue.isEmpty()) {
+            return addParametersToViewWhenBookIsNotFound(searchType, modelAndView);
         }
+        return addParametersForABookInView(searchValue, searchType, modelAndView);
+    }
+
+    private ModelAndView addParametersToViewWhenBookIsNotFound(String
+                                                                       searchType, ModelAndView modelAndView) {
         modelAndView.addObject("error", NO_VALUE_PROVIDED);
+        modelAndView.addObject("searchType", searchType);
+        return modelAndView;
+    }
+
+    private ModelAndView addParametersForABookInView(String searchValue, String searchType, ModelAndView modelAndView) throws IOException {
+        List<Book> books = searchService.findBooks(searchValue,
+                searchType);
+        if(books.size() == 0){
+            modelAndView.addObject("error", BOOKS_NOT_FOUND);
+        }
+        modelAndView.addObject("books", books);
+        modelAndView.addObject("searchValue", searchValue);
         modelAndView.addObject("searchType", searchType);
         return modelAndView;
     }
