@@ -9,7 +9,6 @@
     <script type="text/javascript" language="javascript" src="static/javascript/lib/jquery-1.8.2.min.js"></script>
     <script type="text/javascript" language="javascript" src="static/javascript/addBookToWantToReadList.js"></script>
 </head>
-
 <body>
 <div class="navbar-fixed-top">
     <div class="logo"><a href="/twu"><img src="static/images/logo.gif"

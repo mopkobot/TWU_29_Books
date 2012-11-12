@@ -2,11 +2,14 @@ package functional.com.thoughtworks.twu;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 public class AddBookFunctionalTest {
@@ -21,13 +24,21 @@ public class AddBookFunctionalTest {
     }
 
     @Test
+    @Ignore
     public void shouldRedirectToViewBookPageByClick() {
-        webDriver.findElement(By.className("add-book")).click();
-        assertTrue(webDriver.getTitle().contains("ReaderFeeder"));
+        webDriver.findElement(By.className("view-book-btn")).click();
+
+        assertTrue(webDriver.findElement(By.tagName("title")).getText().contains("ReaderFeeder"));
+    }
+
+    @Test
+    public void shouldDisplayViewButtonOnSearchResultPage() {
+        assertThat(webDriver.findElement(By.className("view-book-btn")).isDisplayed(), is(true));
     }
 
     @After
     public void tearDown(){
         webDriver.close();
     }
+
 }
