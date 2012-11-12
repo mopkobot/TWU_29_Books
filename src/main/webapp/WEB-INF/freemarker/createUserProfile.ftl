@@ -14,8 +14,8 @@
 </div>
 <div class="user-form">
 <form method="POST" action="/twu/save">
-    <pre style="font-size: 24px">Choose Your Username:  <input type="text" name="username"/></pre>
-    <input type="submit" name="submit" value="Submit" class="submit-btn"/>
+    <pre style="font-size: 24px">Choose your Username:  <input type="text" name="username"/></pre>
+    <input type="submit" name="submit" value="Save" class="submit-btn"/>
 </form>
 </div>
 </div>

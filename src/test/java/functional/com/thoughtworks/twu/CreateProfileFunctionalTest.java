@@ -3,7 +3,6 @@ package functional.com.thoughtworks.twu;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -63,11 +62,17 @@ public class CreateProfileFunctionalTest {
    @Test
     public void shouldStayOnSamePageOnRefresh(){
        webDriver.get("http://localhost:8080/twu/identify-user");
-        webDriver.navigate().refresh();
-        assertEquals("ReaderFeeder Create Profile", webDriver.getTitle());
+       webDriver.navigate().refresh();
+       assertEquals("ReaderFeeder Create Profile", webDriver.getTitle());
     }
 
+    @Test
+    public void shouldStayOnSamePageIfUsernameIsBlank() {
+        webDriver.get("http://localhost:8080/twu/identify-user");
+        webDriver.findElement(By.className("submit-btn")).click();
 
+        assertEquals("ReaderFeeder Create Profile", webDriver.getTitle());
+    }
 
     @Test
     public void shouldRedirectToWelcomePageWhenSubmitUsername(){

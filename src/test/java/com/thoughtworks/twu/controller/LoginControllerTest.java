@@ -46,11 +46,27 @@ public class LoginControllerTest {
         loginController = new LoginController(userService);
 
         MockHttpServletRequest request = new MockHttpServletRequest();
+        request.setRemoteUser("foo");
         request.setParameter("username", "foo");
         ModelAndView ret = loginController.saveUser(request);
 
         User expectUser = (User)ret.getModelMap().get("user");
         assertThat(expectUser.getName(), is("foo"));
+    }
+
+    @Test
+    public void shouldStayOnSamePageIfUsernameIsBlank(){
+        userService = createUserServiceForUnRegisteredUser();
+        loginController = new LoginController(userService);
+
+        MockHttpServletRequest request = new MockHttpServletRequest();
+        request.setRemoteUser("foo");
+        request.setParameter("username", "");
+
+        ModelAndView actualModelAndView = loginController.saveUser(request);
+
+        assertThat(actualModelAndView.getViewName(), is("createUserProfile"));
+
     }
 
     private UserService createUserServiceForRegisteredUser() {
