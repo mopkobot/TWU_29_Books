@@ -3,6 +3,7 @@ package functional.com.thoughtworks.twu;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.Ignore;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -21,7 +22,7 @@ public class SearchBookFunctionalTest {
     @Before
     public void setUp() {
         webDriver = new HtmlUnitDriver();
-        CommonSteps.login(webDriver,"test.twu","Th0ughtW0rks@12");
+        CommonSteps.login(webDriver, "test.twu", "Th0ughtW0rks@12");
     }
 
     @Test
@@ -35,7 +36,7 @@ public class SearchBookFunctionalTest {
     public void shouldDisplayBookAuthorAndTitleWhenGoButtonIsClickedAndWeSearchByISBN() {
         CommonSteps.searchBook(webDriver,"9780316228534","searchByISBN");
         assertThat(webDriver.findElement(By.className("book-picture")).isDisplayed(), is(true));
-        assertThat(webDriver.findElement(By.className("book-title")).getText(),is("The Casual Vacancy"));
+        assertThat(webDriver.findElement(By.className("book-title")).getText(), is("The Casual Vacancy"));
         assertThat(webDriver.findElement(By.className("book-author")).getText(),is("by J. K. Rowling"));
     }
 
@@ -44,7 +45,7 @@ public class SearchBookFunctionalTest {
     shouldDisplayBookAuthorAndTitleWhenGoButtonIsClickedAndWeSearchByTitle() {
         CommonSteps.searchBook(webDriver,"mop","searchByTitle");
         assertThat(webDriver.findElement(By.className("book-picture")).isDisplayed(), is(true));
-        assertThat(webDriver.findElement(By.className("book-title")).getText(),is("Monster mop"));
+        assertThat(webDriver.findElement(By.className("book-title")).getText(), is("Monster mop"));
         assertThat(webDriver.findElement(By.className("book-author")).getText(),is("by Anthony Laurence"));
     }
 
@@ -104,6 +105,19 @@ public class SearchBookFunctionalTest {
     public void shouldDisplayTheSortOrderOfResults(){
         CommonSteps.searchBook(webDriver,"Agile Samurai","searchByTitle");
         assertEquals("Your search was sorted by relevance.", webDriver.findElement(By.tagName("p")).getText());
+    }
+
+    @Test
+    public void shouldDisplayTitleAsDefaultFilter() throws Exception {
+        webDriver.get("http://127.0.0.1:8080/twu/search_book");
+        assertEquals(true, webDriver.findElement(By.id("searchByTitle")).isSelected());
+    }
+
+    @Ignore
+    public void shouldWorkWithBrowserBackButton() throws Exception {
+        CommonSteps.searchBook(webDriver,"9781934356586","searchByISBN");
+        webDriver.navigate().back();
+        assertEquals("9781934356586",webDriver.findElement(By.name("searchValue")).getText());
     }
 
     @After
