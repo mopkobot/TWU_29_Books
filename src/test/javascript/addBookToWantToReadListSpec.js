@@ -5,6 +5,12 @@ describe("should add book to want to read list", function () {
 
         setFixtures(fixtures);
 
+        window = {
+            location:{
+                reload:function(){}
+            }
+        };
+
         var postUrl;
 
         var actual;
@@ -14,6 +20,7 @@ describe("should add book to want to read list", function () {
             postUrl = resource;
             actual = param;
         });
+
         $('.add-btn').click();
 
         expect($.post).toHaveBeenCalled();
