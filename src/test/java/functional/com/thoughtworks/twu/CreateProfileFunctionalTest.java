@@ -61,6 +61,12 @@ public class CreateProfileFunctionalTest {
     }
 
     @Test
+    public void shouldNotAcceptOnlySpacesInNameField() {
+        CommonSteps.saveProfileInformation(webDriver,"     ");
+        assertEquals("ReaderFeeder Create Profile",webDriver.getTitle());
+    }
+
+    @Test
     public void shouldRedirectToWelcomePageWhenSubmitUsername(){
         CommonSteps.saveProfileInformation(webDriver,"Reader Feeder User");
         assertTrue(webDriver.findElement(By.className("username")).isDisplayed());
