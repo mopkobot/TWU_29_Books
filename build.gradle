@@ -111,6 +111,9 @@ task functionalTest(type: Test) {
 
     beforeTest { descriptor ->
         logger.lifecycle("Running test: " + descriptor)
+    }
+
+    afterTest {
         setupDataForFunctionalTest()
     }
 
