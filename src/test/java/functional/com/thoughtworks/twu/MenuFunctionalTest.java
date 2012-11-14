@@ -50,11 +50,41 @@ public class MenuFunctionalTest {
     @Test
     public void shouldAlwaysDisplaySearchForBook() {
         checkSearchFunctionality();
-
-        CommonSteps.goToURL(webDriver, "http://127.0.0.1:8080/twu/viewbook");
-
-        checkSearchFunctionality();
+        WebElement searchTextElement = CommonSteps.locateElementByCss(webDriver, ".navbar-search .search-query");
+        WebElement searchDropDownElement = CommonSteps.locateElementByCss(webDriver, ".navbar.dropdown-menu");
+        WebElement searchButtonElement = webDriver.findElement(By.id("search"));
+        assertThat(searchTextElement.getAttribute("type"), is("text"));
+        assertTrue(searchDropDownElement.isDisplayed());
+        assertThat(searchButtonElement.getAttribute("value"), is("Search"));
     }
+
+
+    @Test
+    public void menuShouldBeVisibleOnViewBookPage() {
+        CommonSteps.goToURL(webDriver, "http://127.0.0.1:8080/twu/viewbook");
+        WebElement searchTextElementForNextPage = CommonSteps.locateElementByCss(webDriver, ".navbar-search .search-query");
+        WebElement searchDropDownElementForNextPage = CommonSteps.locateElementByCss(webDriver, ".navbar.dropdown-menu");
+        WebElement searchButtonElementForNextPage = webDriver.findElement(By.id("search"));
+        assertThat(searchTextElementForNextPage.getAttribute("type"), is("text"));
+        assertTrue(searchDropDownElementForNextPage.isDisplayed());
+        assertThat(searchButtonElementForNextPage.getAttribute("value"), is("Search"));
+    }
+
+    @Test
+    public void shouldGoToMyBookshelfWhenClickedOnLogo() {
+        WebElement imageElement = CommonSteps.locateElementByCss(webDriver, ".logo img");
+        assertThat(imageElement.getAttribute("src"), endsWith("/static/images/logo.gif"));
+        webDriver.findElement(By.className("logo")).click();
+        assertTrue(webDriver.findElement(By.className("bookshelf")).isDisplayed());
+    }
+
+    @Test
+    public void shouldGotToMyBookshelfWhenClickedOnUsername() {
+        webDriver.findElement(By.className("navbar-username")).click();
+        assertTrue(webDriver.findElement(By.className("bookshelf")).isDisplayed());
+    }
+
+
 
     @After
     public void tearDown() {
