@@ -31,7 +31,7 @@ public class UserMapperTest extends IntegrationTest{
     @Before
     public void setUp() {
         user = new User("foo", "foobar");
-        book = new Book("author", "title", "image_src", "description", "0156027321", "978-0156027328", 0);
+        book = new Book("author", "title", "image_src", "description", "0156027321", "978-0156027328");
     }
 
     @Test

@@ -13,14 +13,13 @@ public class Book {
     private String ISBN13;
     private int recommendCount;
 
-    public Book(String author, String title, String image, String description, String ISBN10, String ISBN13, int recommendCount) {
+    public Book(String author, String title, String image, String description, String ISBN10, String ISBN13) {
         this.author = author;
         this.title = title;
         this.image = image;
         this.description = description;
         this.ISBN10 = ISBN10;
         this.ISBN13 = ISBN13;
-        this.recommendCount = recommendCount;
     }
 
     private Book() {

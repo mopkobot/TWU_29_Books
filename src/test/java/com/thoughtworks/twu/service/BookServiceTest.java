@@ -29,7 +29,7 @@ public class BookServiceTest {
 
     @Before
     public void setUp(){
-        book = new Book(author, title, image, description, ISBN10, ISBN13, 1);
+        book = new Book(author, title, image, description, ISBN10, ISBN13);
         mockBookMapper = mock(BookMapper.class);
         bookService = new BookService(mockBookMapper);
     }
@@ -57,7 +57,7 @@ public class BookServiceTest {
 
     @Test
     public void shouldReturnFalseIfBookIsNotExistedInDB(){
-        Book anotherBook = new Book("Summer", title, image, description, ISBN10, ISBN13, 0);
+        Book anotherBook = new Book("Summer", title, image, description, ISBN10, ISBN13);
         assertThat(bookService.isBookExisted(anotherBook), is(false));
     }
 
@@ -74,7 +74,7 @@ public class BookServiceTest {
     public void shouldUpdateRecommendCountByOne() {
         int recommendCount = bookService.updateRecommendCount(book);
 
-        assertThat(recommendCount, equalTo(2));
+        assertThat(recommendCount, equalTo(1));
         verify(mockBookMapper).updateRecommendCount(book);
     }
 }

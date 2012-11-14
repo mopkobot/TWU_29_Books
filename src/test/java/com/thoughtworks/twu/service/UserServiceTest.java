@@ -65,7 +65,7 @@ public class UserServiceTest {
         userMapper.insertUser(user);
         BookMapper bookMapper = mock(BookMapper.class);
 
-        Book book = new Book("author", "title", "image_src", "description", "0156027321", "978-0156027328", 0);
+        Book book = new Book("author", "title", "image_src", "description", "0156027321", "978-0156027328");
         bookMapper.insertBook(book);
 
         assertThat(userService.isMarkedAsWantToRead(user.getCasname(), book.getId()), is(false));

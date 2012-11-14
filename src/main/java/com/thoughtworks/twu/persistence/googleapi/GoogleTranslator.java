@@ -20,7 +20,7 @@ public class GoogleTranslator {
         for (Volume volume : volumes.getItems()) {
             Volume.VolumeInfo volumeInfo = volume.getVolumeInfo();
             books.add(new Book(authors(volumeInfo), title(volumeInfo), imageLinks(volumeInfo),
-                    volumeInfo.getDescription(), ISBN10(volumeInfo), ISBN13(volumeInfo), 0));
+                    volumeInfo.getDescription(), ISBN10(volumeInfo), ISBN13(volumeInfo)));
         }
         return books;
     }

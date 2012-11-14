@@ -14,7 +14,7 @@ public class BookTest {
 
     @Test
     public void shouldUnderstandBook() {
-        book = new Book("author", "title", "image-src", "description", "isbn10", "isbn13", 0);
+        book = new Book("author", "title", "image-src", "description", "isbn10", "isbn13");
 
         assertThat(book.getAuthor(), is("author"));
         assertThat(book.getTitle(), is("title"));
@@ -27,25 +27,25 @@ public class BookTest {
 
     @Test
     public void shouldAssignDefaultImageWhenBookHasNoImage() throws Exception {
-        book = new Book("author", "title", "", "description", "isbn10", "isbn13", 0);
+        book = new Book("author", "title", "", "description", "isbn10", "isbn13");
         assertThat(book.getImage(), is(Book.DEFAULT_IMAGE_SRC));
     }
 
     @Test
     public void shouldNotAssignDefaultImageWhenBookImageIsAvailable() throws Exception {
-        book = new Book("author", "title", "image-src", "description", "isbn10", "isbn13", 0);
+        book = new Book("author", "title", "image-src", "description", "isbn10", "isbn13");
         assertThat(book.getImage(), is(not(Book.DEFAULT_IMAGE_SRC)));
     }
 
     @Test
     public void shouldAssignDefaultDescriptionWhenBookHasNoDescription() throws Exception {
-        book = new Book("author", "title", "image-src", "  ", "isbn10", "isbn13", 0);
+        book = new Book("author", "title", "image-src", "  ", "isbn10", "isbn13");
         assertThat(book.getDescription(), is(Book.DEFAULT_DESCRIPTION));
     }
 
     @Test
     public void shouldNotAssignDefaultDescriptionWhenBookDescriptionIsAvailable() throws Exception {
-        book = new Book("author", "title", "image-src", "description", "isbn10", "isbn13", 0);
+        book = new Book("author", "title", "image-src", "description", "isbn10", "isbn13");
         assertThat(book.getDescription(), is(not(Book.DEFAULT_DESCRIPTION)));
     }
 }

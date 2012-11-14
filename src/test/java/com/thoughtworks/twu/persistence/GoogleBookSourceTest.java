@@ -25,7 +25,7 @@ public class GoogleBookSourceTest {
         when(googleSearchClient.performSearch("Potter", "title")).thenReturn(volumes);
 
         List<Book> expectedBooks = new ArrayList<Book>();
-        expectedBooks.add(new Book("J.K. Rowling", "Potter", "blah", "blah", "blah", "blah", 0));
+        expectedBooks.add(new Book("J.K. Rowling", "Potter", "blah", "blah", "blah", "blah"));
         when(googleTranslator.translate(volumes)).thenReturn(expectedBooks);
 
         GoogleBookSource googleBookSource = new GoogleBookSource(googleSearchClient, googleTranslator);

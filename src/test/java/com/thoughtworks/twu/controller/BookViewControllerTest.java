@@ -100,7 +100,6 @@ public class BookViewControllerTest {
         String description = "This is a book about life, I love it very much!!";
         String ISBN10 = "0156027321";
         String ISBN13 = "978-0156027328";
-        int recommendCount = 0;
-        return new Book(author, title, image, description, ISBN10, ISBN13, recommendCount);
+        return new Book(author, title, image, description, ISBN10, ISBN13);
     }
 }
