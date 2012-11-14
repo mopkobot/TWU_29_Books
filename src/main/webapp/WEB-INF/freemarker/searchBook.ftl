@@ -1,26 +1,5 @@
 <@layout.block title="Search Results"  >
 
-<form action="search_book" method="post">
-    <#if searchValue??>
-        <input type="text" name="searchValue"
-               value="${searchValue?js_string?j_string?html}"/>
-    <#else>
-        <input type="text" name="searchValue" maxlength="100"/>
-    </#if>
-    <select name="searchType">
-        <option id="searchByTitle" value="title"
-                <#if searchType?? && searchType  =
-                "title">selected</#if>>Title
-        </option>
-        <option id="searchByAuthor" value="author"
-                <#if searchType?? && searchType = "author">selected</#if>>Author
-        </option>
-        <option id="searchByISBN" value="isbn"
-                <#if searchType?? && searchType = "isbn">selected</#if>>ISBN
-        </option>
-    </select>
-    <input type="submit" value="Search" id="search"/>
-</form>
     <#if books?has_content>
     <p>Your search was sorted by relevance.</p>
     <ul class="book-list">
