@@ -29,7 +29,6 @@ public class BookViewController {
         if (book == null){
             return modelAndView.addObject("bookNotFound", COULD_NOT_FIND_BOOK);
         }
-
         return modelAndView.addObject("book", book);
     }
 

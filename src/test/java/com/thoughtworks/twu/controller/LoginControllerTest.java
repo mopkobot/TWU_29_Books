@@ -61,7 +61,7 @@ public class LoginControllerTest {
 
         MockHttpServletRequest request = new MockHttpServletRequest();
         request.setRemoteUser("foo");
-        request.setParameter("username", "");
+        request.setParameter("username", "  ");
 
         ModelAndView actualModelAndView = loginController.saveUser(request);
 

@@ -40,7 +40,7 @@ public class LoginController {
     public ModelAndView saveUser(HttpServletRequest request) {
         String casname = request.getRemoteUser();
         String username = (String) request.getParameter("username");
-        if(username.isEmpty()){
+        if(username.trim().isEmpty()){
             return new ModelAndView("createUserProfile");
         }
         User user = new User(casname, username);
