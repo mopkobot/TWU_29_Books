@@ -58,7 +58,7 @@ public class GoogleTranslator {
     private String ISBN13(Volume.VolumeInfo volumeInfo) {
         List<Volume.VolumeInfo.IndustryIdentifiers> industryIdentifiers = volumeInfo.getIndustryIdentifiers();
         if (industryIdentifiers != null && industryIdentifiers.size() >= 2) {
-            return volumeInfo.getIndustryIdentifiers().get(1).getIdentifier();
+            return volumeInfo.getIndustryIdentifiers().get(1).getIdentifier().replaceAll("-","");
         }
         return "";
     }

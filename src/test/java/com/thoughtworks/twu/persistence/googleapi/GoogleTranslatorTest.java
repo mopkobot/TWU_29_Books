@@ -57,6 +57,7 @@ public class GoogleTranslatorTest {
         final ArrayList<Volume> volumeArrayList = new ArrayList<Volume>();
         volumeArrayList.add(volumeWithoutAuthor);
         Volumes allVolumes = new Volumes().setItems(volumeArrayList);
+
         final List<Book> actual = translator.translate(allVolumes);
         Book expected = new Book("","Harry Potter", null, "Harry Potter - " +
                 "The Last" +
@@ -66,6 +67,25 @@ public class GoogleTranslatorTest {
 
         assertThat(actual.get(0), is(expected));
     }
+    @Test
+    public void shouldTranslateISBN13ToBeWithoutDash() {
+        final Volume.VolumeInfo.IndustryIdentifiers[] identifiers = {new Volume.VolumeInfo
+                .IndustryIdentifiers().setIdentifier("11111"),new Volume.VolumeInfo
+                .IndustryIdentifiers().setIdentifier("111-11")};
+        final Volume.VolumeInfo volumeInfo = new Volume.VolumeInfo();
+        volumeInfo.setIndustryIdentifiers(Arrays.asList(identifiers));
+        Volume volume = new Volume().setVolumeInfo(volumeInfo);
+        final ArrayList<Volume> volumeArrayList = new ArrayList<Volume>();
+        volumeArrayList.add(volume);
+        Volumes allVolumes = new Volumes().setItems(volumeArrayList);
+
+        final List<Book> actual = translator.translate(allVolumes);
+        Book expected = new Book("",null, null, null, "11111", "11111");
+
+
+        assertThat(actual.get(0), is(expected));
+    }
+
 
     @Test
     public void shouldReturnEmptyCollectionIfNoBooksWereFound(){

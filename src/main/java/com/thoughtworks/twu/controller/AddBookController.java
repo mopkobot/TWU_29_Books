@@ -33,6 +33,7 @@ public class AddBookController {
         }
 
         Book result = bookService.getBookByTitle(book.getTitle());
-        return modelAndView.addObject("book", result);
+        modelAndView.addObject("book", result);
+        return modelAndView.addObject("notification","");
     }
 }

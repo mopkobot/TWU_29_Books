@@ -7,16 +7,12 @@ import org.junit.Test;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import javax.swing.*;
 import java.io.IOException;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class BookViewControllerTest {
 
@@ -57,9 +53,10 @@ public class BookViewControllerTest {
     public void shouldHaveEmptyNotificationWhenUserViewsBookForFirstTime(){
         BookService bookService = mock(BookService.class);
         Book book = getBook();
-        when(bookService.getBookByTitle(book.getTitle())).thenReturn(book);
+        when(bookService.getBookByID(book.getId())).thenReturn(book);
         BookViewController bookViewController = new BookViewController(bookService);
-        ModelAndView viewBook = bookViewController.viewBook(book.getTitle(), "");
+
+        ModelAndView viewBook = bookViewController.viewBook(Integer.toString(book.getId()), "");
         String actualNotification = (String) viewBook.getModel().get("notification");
 
         assertThat(actualNotification, is(""));

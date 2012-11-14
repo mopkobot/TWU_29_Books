@@ -22,7 +22,7 @@ public class BookViewController {
 
     @RequestMapping(value = "/viewbook", method = RequestMethod.GET)
 
-    public ModelAndView viewBook(@RequestParam(value = "bookId", defaultValue = "") String bookId,
+    public ModelAndView viewBook(@RequestParam(value = "bookId", defaultValue = "0") String bookId,
                                 @RequestParam(value = "notification", defaultValue = "") String notification) {
         ModelAndView modelAndView = new ModelAndView("viewbook");
         Book book = bookService.getBookByID(Integer.parseInt(bookId));
