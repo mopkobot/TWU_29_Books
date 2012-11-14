@@ -16,7 +16,7 @@
                             </#if>
                         </div>
                     </div>
-                    <form action="viewbook" method="POST">
+                    <form action="add_book" method="POST">
                         <input type="submit" name="view-book-btn" value="View Book" class="view-book-btn"/>
                         <input type = "hidden" name="author" value="${book.author}">
                         <input type = "hidden" name="title" value="${book.title}">

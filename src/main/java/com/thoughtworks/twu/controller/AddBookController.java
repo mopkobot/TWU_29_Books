@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 public class AddBookController {
@@ -19,20 +19,17 @@ public class AddBookController {
         this.bookService = bookService;
     }
 
-    @RequestMapping(value = "/viewbook", method = RequestMethod.POST)
-    public ModelAndView addBook(@RequestParam(value = "author", defaultValue = "") String author,
+    @RequestMapping(value = "/add_book", method = RequestMethod.POST)
+    public RedirectView addBook(@RequestParam(value = "author", defaultValue = "") String author,
                                 @RequestParam(value = "title", defaultValue = "") String title,
                                 @RequestParam(value = "image", defaultValue = "") String image,
                                 @RequestParam(value = "description", defaultValue = "") String description,
                                 @RequestParam(value = "ISBN10", defaultValue = "") String ISBN10,
                                 @RequestParam(value = "ISBN13", defaultValue = "") String ISBN13) {
-        ModelAndView modelAndView = new ModelAndView("viewbook");
         Book book = new Book(author, title, image, description, ISBN10, ISBN13);
         if (!bookService.isBookFromResultsListInDB(book)) {
             bookService.insertBook(book);
         }
-        Book result = bookService.getBookByID(bookService.updateBook(book).getId());
-        modelAndView.addObject("book", result);
-        return modelAndView.addObject("notification", "");
+        return new RedirectView("/viewbook?bookId=" + bookService.updateBook(book).getId(),true);
     }
 }

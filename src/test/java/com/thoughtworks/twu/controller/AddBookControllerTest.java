@@ -4,7 +4,10 @@ import com.thoughtworks.twu.domain.Book;
 import com.thoughtworks.twu.service.BookService;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.web.servlet.view.RedirectView;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
 
 public class AddBookControllerTest {
@@ -37,10 +40,10 @@ public class AddBookControllerTest {
     }
 
     @Test
-    public  void  shouldRetrieveBookByIdFromDB(){
+    public void shouldRedirectToViewBook(){
         Book book = arrangeBookID();
-        addBookController.addBook(book.getAuthor(), book.getTitle(), book.getImage(), book.getDescription(), book.getISBN10(), book.getISBN13());
-        verify(bookService).getBookByID(book.getId());
+        RedirectView redirectView = addBookController.addBook(book.getAuthor(), book.getTitle(), book.getImage(), book.getDescription(), book.getISBN10(), book.getISBN13());
+        assertThat(redirectView.getUrl(), is("/viewbook?bookId=" + book.getId()));
     }
 
     private Book getBook() {
@@ -55,9 +58,8 @@ public class AddBookControllerTest {
 
     private Book arrangeBookID() {
         Book book = getBook();
-        Book result = book;
-        result.setId(3);
-        when(bookService.updateBook(book)).thenReturn(result);
+        book.setId(3);
+        when(bookService.updateBook(book)).thenReturn(book);
         return book;
     }
 
