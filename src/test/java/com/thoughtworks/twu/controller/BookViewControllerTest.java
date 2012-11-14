@@ -4,12 +4,15 @@ import com.thoughtworks.twu.domain.Book;
 import com.thoughtworks.twu.service.BookService;
 import org.junit.Test;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
+import javax.swing.*;
 import java.io.IOException;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -49,15 +52,27 @@ public class BookViewControllerTest {
     }
 
     @Test
+    public void shouldHaveEmptyNotificationWhenUserViewsBookForFirstTime(){
+        BookService bookService = mock(BookService.class);
+        Book book = getBook();
+        when(bookService.getBookByTitle(book.getTitle())).thenReturn(book);
+        BookViewController bookViewController = new BookViewController(bookService);
+        ModelAndView viewBook = bookViewController.viewBook(book.getTitle(), "");
+        String actualNotification = (String) viewBook.getModel().get("notification");
+
+        assertThat(actualNotification, is(""));
+    }
+
+    @Test
     public void shouldPassANotificationToTheViewThatBookWasRecommended() {
         BookService bookService = mock(BookService.class);
         Book book = getBook();
         when(bookService.getBookByID(0)).thenReturn(book);
         BookViewController bookViewController = new BookViewController(bookService);
-        ModelAndView viewBook = bookViewController.recommend("0");
-        String actualNotification = (String) viewBook.getModel().get("notification");
+        RedirectView viewBook = bookViewController.recommend("0");
+        String actualNotification = viewBook.getUrl();
 
-        assertThat(actualNotification, is("Book was recommended successfully"));
+        assertThat(actualNotification, is("/viewbook?booktitle="+book.getTitle()+"&notification="+BookViewController.RECOMMENDED_SUCCESFULLY));
     }
 
     @Test
@@ -90,7 +105,7 @@ public class BookViewControllerTest {
         when(bookService.getBookByTitle(title)).thenReturn(book);
 
         BookViewController bookViewController = new BookViewController(bookService);
-        return bookViewController.viewBook(title);
+        return bookViewController.viewBook(title,"");
     }
 
     private Book getBook() {

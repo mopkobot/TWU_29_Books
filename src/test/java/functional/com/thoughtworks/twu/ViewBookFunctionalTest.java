@@ -5,6 +5,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
@@ -55,9 +56,47 @@ public class ViewBookFunctionalTest{
     }
 
     @Test
+    public void shouldDisplayTheRecommendButton(){
+        goToURL("http://127.0.0.1:8080/twu/viewbook?booktitle=When devs are not coding");
+        assertOnRecommendButton();
+
+    }
+
+    @Test
+    public void shouldUnderstandViewBookPageWithNotificationWhenUserRecommendsABook(){
+        goToURL("http://127.0.0.1:8080/twu/viewbook?booktitle=When devs are not coding");
+        assertOnNotification();
+    }
+
+    @Test
     public void shouldDisplayBookNotFoundWhenBookIsNotPresent(){
         CommonSteps.goToURL(webDriver, "http://127.0.0.1:8080/twu/viewbook?booktitle=alkdhaksdh");
         assertOnBookTitle("Could not find book");
+    }
+
+    @Test
+    public void shouldDisplayTheNumberOfRecommendations(){
+        goToURL("http://127.0.0.1:8080/twu/viewbook?booktitle=When devs are not coding");
+        assertOnRecommendationsText();
+    }
+
+    private void assertOnRecommendationsText() {
+        WebElement recommendationTextElement = locateElementByCss("div.recommend-text");
+        assertThat(recommendationTextElement.isDisplayed(), is(true));
+    }
+
+    private void assertOnNotification() {
+        WebElement notificationElement = locateElementByCss("h3.notification");
+        assertThat(notificationElement.isDisplayed(), is(true));
+    }
+
+    private void assertOnRecommendButton() {
+        WebElement recommendButtonElement = locateElementByCss("input.recommend-btn");
+        assertThat(recommendButtonElement.isDisplayed(), is(true));
+    }
+
+    private void goToURL(String url) {
+        webDriver.get(url);
     }
 
     private void assertOnBookTitle(String expectedTitle) {
@@ -88,6 +127,14 @@ public class ViewBookFunctionalTest{
     private void assertOnWantToReadButton() {
         WebElement wantToReadButton = CommonSteps.locateElementByCss(webDriver, "button.add-btn");
         assertThat(wantToReadButton.isDisplayed(), is(true));
+    }
+
+    private WebElement locateElementByCss(String selector){
+        return locateElement(By.cssSelector(selector));
+    }
+
+    private WebElement locateElement(By selector) {
+        return webDriver.findElement(selector);
     }
 
     @After

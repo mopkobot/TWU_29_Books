@@ -4,6 +4,7 @@
 
 <@layout.block title=title>
     <#if book??>
+    <h3 class="notification">${notification}</h3>
         <div class="book-head">
             <div class="book-cover">
                 <img class="book-img" src="${book.image}" alt="Picture not available"/>
