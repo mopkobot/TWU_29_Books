@@ -14,6 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 
+import static junit.framework.Assert.assertEquals;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.internal.matchers.StringContains.containsString;
@@ -79,6 +80,26 @@ public class ViewBookFunctionalTest{
         goToURL("http://127.0.0.1:8080/twu/viewbook?booktitle=When devs are not coding");
         assertOnRecommendationsText();
     }
+
+    @Test
+    public void shouldDisplayIncrementedRecommendCountWhenUserClicksRecommendButton(){
+        goToURL("http://127.0.0.1:8080/twu/viewbook?booktitle=When devs are not coding");
+        int recommendCountBeforeRecommend = getRecommendationCount();
+
+        webDriver.findElement(By.className("recommend-btn")).click();
+
+        int recommendCountAfterRecommend = getRecommendationCount();
+
+        assertEquals(recommendCountBeforeRecommend+1,recommendCountAfterRecommend);
+    }
+
+    private int getRecommendationCount() {
+        String recommendCountMessage = webDriver.findElement(By.className("recommend-text")).getText();
+        int positionOfR = recommendCountMessage.indexOf("R");
+        String recommendCountStringBeforeRecommend = recommendCountMessage.substring(0,positionOfR).trim();
+        return Integer.parseInt(recommendCountStringBeforeRecommend);
+    }
+
 
     private void assertOnRecommendationsText() {
         WebElement recommendationTextElement = locateElementByCss("div.recommend-text");
