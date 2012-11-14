@@ -13,7 +13,7 @@
                 <h1 class="title">${book.title}</h1>
                 <div class="recommendations">
                     <form action="recommend" method="POST">
-                        <input type="hidden" name="bookId" value="${book.id}"/>
+                        <input type="hidden" name="bookId" value="${book.id?c}"/>
                         <input class="recommend-btn" type="image" value="Recommend" src="static/images/rec_but.png" />
                         <div class="recommend-text">${book.recommendCount} Recommendation/s</div>
                     </form>
