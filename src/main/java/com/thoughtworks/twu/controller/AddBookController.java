@@ -28,12 +28,11 @@ public class AddBookController {
                                 @RequestParam(value = "ISBN13", defaultValue = "") String ISBN13) {
         ModelAndView modelAndView = new ModelAndView("viewbook");
         Book book = new Book(author, title, image, description, ISBN10, ISBN13);
-        if (!bookService.isBookInDB(book)) {
+        if (!bookService.isBookFromResultsListInDB(book)) {
             bookService.insertBook(book);
         }
-
-        Book result = bookService.getBookByTitle(book.getTitle());
+        Book result = bookService.getBookByID(bookService.updateBook(book).getId());
         modelAndView.addObject("book", result);
-        return modelAndView.addObject("notification","");
+        return modelAndView.addObject("notification", "");
     }
 }

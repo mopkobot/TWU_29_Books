@@ -21,25 +21,26 @@ public class AddBookControllerTest {
 
     @Test
     public void shouldAddBookToDBIfNotInSystem(){
-        Book expected = getBook();
-        when(bookService.isBookInDB(expected)).thenReturn(false);
-        addBookController.addBook( expected.getAuthor(),expected.getTitle(),expected.getImage(),expected.getDescription(),expected.getISBN10(),expected.getISBN13());
-        verify(bookService).insertBook(expected);
+        Book book = arrangeBookID();
+        when(bookService.isBookFromResultsListInDB(book)).thenReturn(false);
+        addBookController.addBook(book.getAuthor(), book.getTitle(), book.getImage(), book.getDescription(), book.getISBN10(), book.getISBN13());
+        verify(bookService).insertBook(book);
     }
+
 
     @Test
     public void shouldNotAddBookToDBIfItIsInSystem(){
-        Book expected = getBook();
-        when(bookService.isBookInDB(expected)).thenReturn(true);
-        addBookController.addBook( expected.getAuthor(),expected.getTitle(),expected.getImage(),expected.getDescription(),expected.getISBN10(),expected.getISBN13());
-        verify(bookService,times(0)).insertBook(expected);
+        Book book = arrangeBookID();
+        when(bookService.isBookFromResultsListInDB(book)).thenReturn(true);
+        addBookController.addBook(book.getAuthor(), book.getTitle(), book.getImage(), book.getDescription(), book.getISBN10(), book.getISBN13());
+        verify(bookService,times(0)).insertBook(book);
     }
 
     @Test
-    public  void  shouldRetrieveBookByTitleFromDB(){
-        Book expected = getBook();
-        addBookController.addBook( expected.getAuthor(),expected.getTitle(),expected.getImage(),expected.getDescription(),expected.getISBN10(),expected.getISBN13());
-        verify(bookService).getBookByTitle(expected.getTitle());
+    public  void  shouldRetrieveBookByIdFromDB(){
+        Book book = arrangeBookID();
+        addBookController.addBook(book.getAuthor(), book.getTitle(), book.getImage(), book.getDescription(), book.getISBN10(), book.getISBN13());
+        verify(bookService).getBookByID(book.getId());
     }
 
     private Book getBook() {
@@ -50,6 +51,14 @@ public class AddBookControllerTest {
         String ISBN10 = "0156027321";
         String ISBN13 = "978-0156027328";
         return new Book(author, title, image, description, ISBN10, ISBN13);
+    }
+
+    private Book arrangeBookID() {
+        Book book = getBook();
+        Book result = book;
+        result.setId(3);
+        when(bookService.updateBook(book)).thenReturn(result);
+        return book;
     }
 
 }

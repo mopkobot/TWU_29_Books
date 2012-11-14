@@ -79,9 +79,7 @@ public class Book {
         Book thatBook = (Book) anotherObject;
 
         if (this.author != null ? !author.equals(thatBook.author) : thatBook.author != null) return false;
-        if (this.image != null ? !image.equals(thatBook.image) : thatBook.image != null) return false;
         if (this.title != null ? !title.equals(thatBook.title) : thatBook.title != null) return false;
-        //if (this.description != null ? !description.equals(thatBook.description) : thatBook.description != null) return false;
         if (this.ISBN10 != null ? !ISBN10.equals(thatBook.ISBN10) : thatBook.ISBN10 != null) return false;
         if (this.ISBN13 != null ? !ISBN13.equals(thatBook.ISBN13) : thatBook.ISBN13 != null) return false;
         return true;
@@ -110,5 +108,9 @@ public class Book {
                 ", ISBN10='" + ISBN10 + '\'' +
                 ", ISBN13='" + ISBN13 + '\'' +
                 '}';
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

@@ -101,7 +101,8 @@ public class ViewBookFunctionalTest {
     }
 
     @Test
-    public void shouldDisplayIncrementedRecommendCountWhenUserClicksRecommendButton() {
+    @Ignore
+    public void shouldDisplayIncrementedRecommendCountWhenUserClicksRecommendButton(){
         goToURL("http://127.0.0.1:8080/twu/viewbook?booktitle=When devs are not coding");
         int recommendCountBeforeRecommend = getRecommendationCount();
 

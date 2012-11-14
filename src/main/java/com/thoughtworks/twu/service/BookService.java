@@ -27,9 +27,9 @@ public class BookService {
         bookMapper.insertBook(book);
     }
 
-    public boolean isBookInDB(Book book) {
+    public boolean isBookFromResultsListInDB(Book book) {
         List<Book> bookList = bookMapper.getBooksByTitle(book.getTitle());
-        return bookList.contains(book);
+        return bookList.contains(book);//change comparison at some point
     }
 
     public Book getBookByID(int id) {
@@ -42,5 +42,13 @@ public class BookService {
         book.setRecommendCount(recommendCount);
         bookMapper.updateRecommendCount(book);
         return recommendCount;
+    }
+
+    public Book updateBook(Book book) {
+        List<Book> bookList = bookMapper.getBooksByTitle(book.getTitle());
+        for(Book item: bookList){
+            if(item.equals(book)) return item;
+        }
+        return null;
     }
 }

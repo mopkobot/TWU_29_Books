@@ -52,13 +52,13 @@ public class BookServiceTest {
         ArrayList<Book> books = new ArrayList<Book>();
         books.add(book);
         when(mockBookMapper.getBooksByTitle(title)).thenReturn(books);
-        assertThat(bookService.isBookInDB(book), is(true));
+        assertThat(bookService.isBookFromResultsListInDB(book), is(true));
     }
 
     @Test
     public void shouldReturnFalseIfBookIsNotExistedInDB(){
         Book anotherBook = new Book("Summer", title, image, description, ISBN10, ISBN13);
-        assertThat(bookService.isBookInDB(anotherBook), is(false));
+        assertThat(bookService.isBookFromResultsListInDB(anotherBook), is(false));
     }
 
     @Test
@@ -76,5 +76,18 @@ public class BookServiceTest {
 
         assertThat(recommendCount, equalTo(1));
         verify(mockBookMapper).updateRecommendCount(book);
+    }
+
+    @Test
+    public void shouldReturnBookWithIDWhenTheBookIsInDB(){
+        ArrayList<Book> bookList = new ArrayList<Book>();
+        Book result = book;
+        result.setId(2);
+        bookList.add(result);
+
+        when(mockBookMapper.getBooksByTitle(book.getTitle())).thenReturn(bookList);
+
+        book = bookService.updateBook(book);
+        assertThat(book.getId(),is(2));
     }
 }
