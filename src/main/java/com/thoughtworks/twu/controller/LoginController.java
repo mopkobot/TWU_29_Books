@@ -13,7 +13,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
-@SessionAttributes("user")
+@SessionAttributes({"user"})
 public class LoginController {
 
     private UserService userService;

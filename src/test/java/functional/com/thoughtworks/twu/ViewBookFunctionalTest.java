@@ -19,6 +19,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 
+import static functional.com.thoughtworks.twu.CommonSteps.goToURL;
 import static junit.framework.Assert.assertEquals;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -38,12 +39,15 @@ public class ViewBookFunctionalTest {
     public void setUp() {
         webDriver = new HtmlUnitDriver();
         CommonSteps.login(webDriver, "test.twu", "Th0ughtW0rks@12");
+        CommonSteps.saveProfileInformation(webDriver, "Reader Feeder User");
     }
 
 
     @Test
     public void shouldUnderstandViewBookPageWhenAllInformationIsPresent() {
+
         goToURL("http://127.0.0.1:8080/twu/viewbook?bookId=1377");
+
 
         assertOnBookTitle("Lavanya and sanchari QAs");
         assertOnBookCover("http://ecx.images-amazon.com/images/I/51HVlrefdkL._SL500_AA300_.jpg");
@@ -112,6 +116,17 @@ public class ViewBookFunctionalTest {
     }
 
 
+    @Test
+    public void shouldAddBookToMyWantToReadListWhenButtonIsClicked() throws InterruptedException {
+        CommonSteps.goToURL(webDriver,
+                "http://127.0.0.1:8080/twu/viewbook?booktitle=The" +
+                        " Couch");
+        webDriver.findElement(By.className("add-btn")).click();
+
+        assertThat(webDriver.findElement(By.className("add-btn")).isEnabled(), is(false));
+
+    }
+
     private void assertOnRecommendationsText() {
         WebElement recommendationTextElement = locateElementByCss("div.recommend-text");
         assertThat(recommendationTextElement.isDisplayed(), is(true));
@@ -126,10 +141,6 @@ public class ViewBookFunctionalTest {
     private void assertOnRecommendButton() {
         WebElement recommendButtonElement = locateElementByCss("input.recommend-btn");
         assertThat(recommendButtonElement.isDisplayed(), is(true));
-    }
-
-    private void goToURL(String url) {
-        webDriver.get(url);
     }
 
     private void assertOnBookTitle(String expectedTitle) {
@@ -165,6 +176,10 @@ public class ViewBookFunctionalTest {
 
     private WebElement locateElementByCss(String selector) {
         return locateElement(By.cssSelector(selector));
+    }
+
+    private void goToURL(String url){
+        webDriver.get(url);
     }
 
     private WebElement locateElement(By selector) {
