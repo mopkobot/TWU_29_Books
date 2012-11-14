@@ -6,6 +6,8 @@ import com.thoughtworks.twu.persistence.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
     @Autowired
@@ -41,5 +43,9 @@ public class UserService {
 
     public Boolean isMarkedAsWantToRead(String casname, int bookId) {
         return userMapper.isBookInWantToReadList(casname, bookId) != 0;
+    }
+
+    public List<Book> getBooksFromWantToReadList(String casname) {
+        return userMapper.getBooksInWantToReadList(casname);
     }
 }

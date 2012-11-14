@@ -42,7 +42,7 @@ public class UserMapperTest extends IntegrationTest{
     }
 
     @Test
-    public void shouldAddBooksToUserWantToReadList() throws Exception {
+    public void shouldAddBooksToUserWantToReadList() {
         userMapper.insertUser(user);
         bookMapper.insertBook(book);
 
@@ -52,5 +52,10 @@ public class UserMapperTest extends IntegrationTest{
 
         int bookInWantToReadList = userMapper.isBookInWantToReadList(user.getCasname(), bookId);
         assertThat(bookInWantToReadList, is(1));
+    }
+
+    @Test
+    public void shouldGetBooksInWantToReadList() {
+
     }
 }
