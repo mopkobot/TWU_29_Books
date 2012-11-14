@@ -52,12 +52,14 @@ input[type="submit"] {
 }
 
 .logo img {
-    width: 26%;
     padding: 1px;
-
+    height: 56px;
+    width: 212px;
 }
 
 .navbar-fixed-top {
+    display: block;
+    min-width: 650px;
     height: 60px;
     position: fixed;
     top: 0;
@@ -121,6 +123,7 @@ input[type="submit"] {
     float: right;
     padding-top: 5px;
     padding-right: 30px;
+    display: block;
 }
 
 .container {
@@ -345,12 +348,6 @@ img.book-img {
     position: relative;
     right: 84px;
 }
-
-#logo {
-    font-family: arial;
-    font-size: 22px;
-}
-
 .notification {
     font-size: 20px;
 }
