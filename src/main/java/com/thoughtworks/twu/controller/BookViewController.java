@@ -37,9 +37,9 @@ public class BookViewController {
     public RedirectView recommend(@RequestParam(value = "bookId", defaultValue = "") int bookId) {
         Book book = bookService.getBookByID(bookId);
         if (book == null) {
-            return new RedirectView("/viewbook?booktitle=", true);
+            return new RedirectView("/viewbook?bookId=", true);
         }
         bookService.updateRecommendCount(book);
-        return new RedirectView("/viewbook?booktitle="+ book.getTitle() + "&notification=" + RECOMMENDED_SUCCESFULLY, true);
+        return new RedirectView("/viewbook?bookId="+ book.getId() + "&notification=" + RECOMMENDED_SUCCESFULLY, true);
     }
 }

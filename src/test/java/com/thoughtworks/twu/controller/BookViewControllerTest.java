@@ -71,7 +71,7 @@ public class BookViewControllerTest {
         RedirectView viewBook = bookViewController.recommend(0);
         String actualNotification = viewBook.getUrl();
 
-        assertThat(actualNotification, is("/viewbook?booktitle="+book.getTitle()+"&notification="+BookViewController.RECOMMENDED_SUCCESFULLY));
+        assertThat(actualNotification, is("/viewbook?bookId="+book.getId()+"&notification="+BookViewController.RECOMMENDED_SUCCESFULLY));
     }
 
     @Test
