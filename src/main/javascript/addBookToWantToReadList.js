@@ -7,15 +7,16 @@ function addBookToWantToReadList() {
         $.post("add-book-to-want", requestData, function () {
         });
         window.location.reload();
+
     });
+
 }
 
-window.onload = function()
-{
+window.onload = function() {
     var requestData = {
         bookId:$('.bookId').text()
     };
-    $.post("add-book-to-want", requestData, function (response) {
+    $.post("check-book", requestData, function (response) {
         if(response == "already saved") {
             $('.add-btn').attr('disabled', 'disabled');
         }

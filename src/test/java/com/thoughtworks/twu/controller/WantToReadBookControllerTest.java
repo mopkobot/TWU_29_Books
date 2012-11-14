@@ -5,6 +5,7 @@ import com.thoughtworks.twu.service.UserService;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.servlet.ModelAndView;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -12,6 +13,8 @@ import static org.mockito.Mockito.*;
 
 @Controller
 public class WantToReadBookControllerTest {
+    public static final String ERROR_MESSAGE = "You have already added the book!";
+    public static final String NOTIFICATION_MESSAGE = "Book was successfully added to want to read list";
     private UserService userService;
 
     private WantToReadBookController controller;
@@ -20,26 +23,28 @@ public class WantToReadBookControllerTest {
     @Before
     public void setUp() {
         userService = mock(UserService.class);
-        controller = new WantToReadBookController(userService);
+        controller = new WantToReadBookController(userService, null);
         user = new User("test.twu", "test");
     }
 
     @Test
     public void shouldSuccessfullyAddBookToWantToReadList() {
-        String response = controller.markBookAsWantToRead(1, user);
+        ModelAndView modelAndView = controller.markBookAsWantToRead(1, user);
 
-        assertThat(response, is("saved"));
+        String actual = (String) modelAndView.getModel().get("notification");
+        assertThat(actual, is(NOTIFICATION_MESSAGE));
     }
 
     @Test
     public void shouldNotAddBookToWantTOReadListWhenTheBookIsAlreadyAdded() {
-        when(userService.isMarkedAsWantToRead(user.getCasname(),1)).thenReturn(false);
+        when(userService.isMarkedAsWantToRead(user.getCasname(), 1)).thenReturn(false);
         controller.markBookAsWantToRead(1, user);
 
-        when(userService.isMarkedAsWantToRead(user.getCasname(),1)).thenReturn(true);
-        String response = controller.markBookAsWantToRead(1, user);
+        when(userService.isMarkedAsWantToRead(user.getCasname(), 1)).thenReturn(true);
+        ModelAndView modelAndView = controller.markBookAsWantToRead(1, user);
 
         verify(userService, times(1)).markBookAsWantToRead(1, user.getCasname());
-        assertThat(response, is("already saved"));
+        String actual = (String) modelAndView.getModel().get("notification");
+        assertThat(actual, is(ERROR_MESSAGE));
     }
 }

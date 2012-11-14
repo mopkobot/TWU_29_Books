@@ -3,6 +3,9 @@
 </#if>
 
 <@layout.block title=title>
+<#if notification??>
+    <div class="alert alert-success">${notification}</div>
+</#if>
     <#if book??>
     <#if notification?has_content>
     <h3 class="alert alert-success">${notification}</h3>
@@ -43,7 +46,7 @@
             <blockquote> ${book.description}  </blockquote>
         </section>
     <#else>
-        <p><h1 class="title">${bookNotFound}</h1></p>
+        <p><h1 class="title"><#if bookNotFound??>${bookNotFound}</#if></h1></p>
     </#if>
 
 </@layout.block>
