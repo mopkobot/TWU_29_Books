@@ -1,5 +1,4 @@
 use readerfeeder;
-
 delete from readings where user_casname="test.twu";
 delete from users where casname="test.twu";
 
