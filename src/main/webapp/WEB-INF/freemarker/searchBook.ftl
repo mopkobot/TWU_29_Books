@@ -39,7 +39,12 @@
                     </div>
                     <form action="addBook" method="POST">
                         <input type="submit" name="view-book-btn" value="View Book" class="view-book-btn"/>
+                        <input type = "hidden" name="author" value="${book.author}">
                         <input type = "hidden" name="title" value="${book.title}">
+                        <input type = "hidden" name="image" value="${book.image}">
+                        <input type = "hidden" name="description" value="${book.description}">
+                        <input type = "hidden" name="ISBN10" value="${book.ISBN10}">
+                        <input type = "hidden" name="ISBN13" value="${book.ISBN13}">
                     </form>
             </li>
         </#list>

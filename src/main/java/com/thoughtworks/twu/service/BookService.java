@@ -27,7 +27,7 @@ public class BookService {
         bookMapper.insertBook(book);
     }
 
-    public boolean isBookExisted(Book book) {
+    public boolean isBookInDB(Book book) {
         List<Book> bookList = bookMapper.getBooksByTitle(book.getTitle());
         return bookList.contains(book);
     }

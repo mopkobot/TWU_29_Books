@@ -3,14 +3,9 @@ package com.thoughtworks.twu.controller;
 import com.thoughtworks.twu.domain.Book;
 import com.thoughtworks.twu.service.BookService;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
-import org.springframework.web.servlet.ModelAndView;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class AddBookControllerTest {
     private BookService bookService;
@@ -23,16 +18,28 @@ public class AddBookControllerTest {
         addBookController = new AddBookController(bookService);
     }
 
+
     @Test
-    @Ignore
-    public void shouldAddBook() {
-        Book expectedBook = getBook();
-        ModelAndView modelAndView = addBookController.addBook(expectedBook);
-        int bookID = 1;//how to retrieve the book id form the db???
-        Book actualBook = (Book)modelAndView.getModel().get("bookId");
-        assertThat(expectedBook,is(actualBook));
+    public void shouldAddBookToDBIfNotInSystem(){
+        Book expected = getBook();
+        when(bookService.isBookInDB(expected)).thenReturn(false);
+        addBookController.addBook( expected.getAuthor(),expected.getTitle(),expected.getImage(),expected.getDescription(),expected.getISBN10(),expected.getISBN13());
+        verify(bookService).insertBook(expected);
+    }
 
+    @Test
+    public void shouldNotAddBookToDBIfItIsInSystem(){
+        Book expected = getBook();
+        when(bookService.isBookInDB(expected)).thenReturn(true);
+        addBookController.addBook( expected.getAuthor(),expected.getTitle(),expected.getImage(),expected.getDescription(),expected.getISBN10(),expected.getISBN13());
+        verify(bookService,times(0)).insertBook(expected);
+    }
 
+    @Test
+    public  void  shouldRetrieveBookByTitleFromDB(){
+        Book expected = getBook();
+        addBookController.addBook( expected.getAuthor(),expected.getTitle(),expected.getImage(),expected.getDescription(),expected.getISBN10(),expected.getISBN13());
+        verify(bookService).getBookByTitle(expected.getTitle());
     }
 
     private Book getBook() {

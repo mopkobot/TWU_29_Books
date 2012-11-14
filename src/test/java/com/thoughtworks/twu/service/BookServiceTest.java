@@ -52,13 +52,13 @@ public class BookServiceTest {
         ArrayList<Book> books = new ArrayList<Book>();
         books.add(book);
         when(mockBookMapper.getBooksByTitle(title)).thenReturn(books);
-        assertThat(bookService.isBookExisted(book), is(true));
+        assertThat(bookService.isBookInDB(book), is(true));
     }
 
     @Test
     public void shouldReturnFalseIfBookIsNotExistedInDB(){
         Book anotherBook = new Book("Summer", title, image, description, ISBN10, ISBN13);
-        assertThat(bookService.isBookExisted(anotherBook), is(false));
+        assertThat(bookService.isBookInDB(anotherBook), is(false));
     }
 
     @Test
