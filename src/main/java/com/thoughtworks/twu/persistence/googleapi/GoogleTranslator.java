@@ -15,7 +15,7 @@ public class GoogleTranslator {
 
     public List<Book> translate(Volumes volumes) {
         List<Book> books = new ArrayList<Book>();
-        if(volumes.getItems() == null) return books;
+        if (volumes.getItems() == null) return books;
 
         for (Volume volume : volumes.getItems()) {
             Volume.VolumeInfo volumeInfo = volume.getVolumeInfo();
@@ -48,18 +48,20 @@ public class GoogleTranslator {
     }
 
     private String ISBN10(Volume.VolumeInfo volumeInfo) {
+        return getISBNs(volumeInfo, "ISBN_10");
+    }
+
+    private String getISBNs(Volume.VolumeInfo volumeInfo, String ISBN) {
         List<Volume.VolumeInfo.IndustryIdentifiers> industryIdentifiers = volumeInfo.getIndustryIdentifiers();
         if (industryIdentifiers != null && industryIdentifiers.size() >= 1) {
-            return volumeInfo.getIndustryIdentifiers().get(0).getIdentifier();
+            for(Volume.VolumeInfo.IndustryIdentifiers identifier: industryIdentifiers){
+                if(identifier.getType().equals(ISBN)) return identifier.getIdentifier();
+            }
         }
         return "";
     }
 
     private String ISBN13(Volume.VolumeInfo volumeInfo) {
-        List<Volume.VolumeInfo.IndustryIdentifiers> industryIdentifiers = volumeInfo.getIndustryIdentifiers();
-        if (industryIdentifiers != null && industryIdentifiers.size() >= 2) {
-            return volumeInfo.getIndustryIdentifiers().get(1).getIdentifier().replaceAll("-","");
-        }
-        return "";
+        return getISBNs(volumeInfo, "ISBN_13").replaceAll("-","");
     }
 }

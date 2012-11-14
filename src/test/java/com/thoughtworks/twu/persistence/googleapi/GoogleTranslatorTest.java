@@ -48,7 +48,7 @@ public class GoogleTranslatorTest {
     @Test
     public void shouldTranslateEvenIfAuthorIsNotAvailable() {
         final Volume.VolumeInfo.IndustryIdentifiers[] identifiers = {new Volume.VolumeInfo
-                .IndustryIdentifiers().setIdentifier("11111")};
+                .IndustryIdentifiers().setType("ISBN_10").setIdentifier("11111")};
         final Volume.VolumeInfo volumeInfo = new Volume.VolumeInfo();
         volumeInfo.setAuthors(null).setImageLinks(new Volume.VolumeInfo
                 .ImageLinks()).setTitle("Harry Potter").setDescription("Harry" +
@@ -59,7 +59,7 @@ public class GoogleTranslatorTest {
         Volumes allVolumes = new Volumes().setItems(volumeArrayList);
 
         final List<Book> actual = translator.translate(allVolumes);
-        Book expected = new Book("","Harry Potter", null, "Harry Potter - " +
+        Book expected = new Book("", "Harry Potter", null, "Harry Potter - " +
                 "The Last" +
                 " " +
                 "Book", "11111", "");
@@ -67,11 +67,12 @@ public class GoogleTranslatorTest {
 
         assertThat(actual.get(0), is(expected));
     }
+
     @Test
     public void shouldTranslateISBN13ToBeWithoutDash() {
         final Volume.VolumeInfo.IndustryIdentifiers[] identifiers = {new Volume.VolumeInfo
-                .IndustryIdentifiers().setIdentifier("11111"),new Volume.VolumeInfo
-                .IndustryIdentifiers().setIdentifier("111-11")};
+                .IndustryIdentifiers().setType("ISBN_10").setIdentifier("11111"), new Volume.VolumeInfo
+                .IndustryIdentifiers().setType("ISBN_13").setIdentifier("111-11")};
         final Volume.VolumeInfo volumeInfo = new Volume.VolumeInfo();
         volumeInfo.setIndustryIdentifiers(Arrays.asList(identifiers));
         Volume volume = new Volume().setVolumeInfo(volumeInfo);
@@ -80,15 +81,31 @@ public class GoogleTranslatorTest {
         Volumes allVolumes = new Volumes().setItems(volumeArrayList);
 
         final List<Book> actual = translator.translate(allVolumes);
-        Book expected = new Book("",null, null, null, "11111", "11111");
+        Book expected = new Book("", null, null, null, "11111", "11111");
 
 
         assertThat(actual.get(0), is(expected));
     }
 
+    @Test
+    public void shouldNotTranslateISBN10WhenThereIsNoISBN10() {
+        final Volume.VolumeInfo.IndustryIdentifiers[] identifiers = {new Volume.VolumeInfo
+                .IndustryIdentifiers().setType("Other").setIdentifier("11111")};
+        final Volume.VolumeInfo volumeInfo = new Volume.VolumeInfo();
+        volumeInfo.setIndustryIdentifiers(Arrays.asList(identifiers));
+        Volume volume = new Volume().setVolumeInfo(volumeInfo);
+        final ArrayList<Volume> volumeArrayList = new ArrayList<Volume>();
+        volumeArrayList.add(volume);
+        Volumes allVolumes = new Volumes().setItems(volumeArrayList);
+
+        final List<Book> actual = translator.translate(allVolumes);
+        Book expected = new Book("", null, null, null, "", "");
+
+        assertThat(actual.get(0), is(expected));
+    }
 
     @Test
-    public void shouldReturnEmptyCollectionIfNoBooksWereFound(){
+    public void shouldReturnEmptyCollectionIfNoBooksWereFound() {
         Volumes allVolumes = new Volumes().setItems(null);
         final List<Book> actual = translator.translate(allVolumes);
 
