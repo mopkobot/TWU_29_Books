@@ -55,15 +55,21 @@ public class CreateProfileFunctionalTest {
     }
 
     @Test
+    public void shouldNotAllowBlankNameField(){
+        CommonSteps.saveProfileInformation(webDriver,"");
+        assertEquals("ReaderFeeder Create Profile",webDriver.getTitle());
+    }
+
+    @Test
     public void shouldRedirectToWelcomePageWhenSubmitUsername(){
-        CommonSteps.saveProfileInformation(webDriver);
+        CommonSteps.saveProfileInformation(webDriver,"Reader Feeder User");
         assertTrue(webDriver.findElement(By.className("username")).isDisplayed());
         assertTrue(webDriver.findElement(By.className("welcome")).isDisplayed());
     }
 
    @Test
     public void shouldStayOnSamePageOnRefreshAfterCreatingProfile(){
-        CommonSteps.saveProfileInformation(webDriver);
+        CommonSteps.saveProfileInformation(webDriver,"Reader Feeder User");
         webDriver.navigate().refresh();
         assertEquals("ReaderFeeder", webDriver.getTitle());
     }

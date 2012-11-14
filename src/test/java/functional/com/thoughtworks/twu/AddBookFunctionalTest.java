@@ -19,7 +19,7 @@ public class AddBookFunctionalTest {
     public void setUp() {
         webDriver = new HtmlUnitDriver();
         CommonSteps.login(webDriver,"test.twu","Th0ughtW0rks@12");
-        CommonSteps.saveProfileInformation(webDriver);
+        CommonSteps.saveProfileInformation(webDriver,"Reader Feeder User");
         CommonSteps.searchBook(webDriver,"9780316228534","searchByISBN");
     }
 
