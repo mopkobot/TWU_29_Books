@@ -31,13 +31,11 @@ public class MenuFunctionalTest {
 
     @Test
     public void shouldAlwaysDisplayLogo() {
-        WebElement imageElement = CommonSteps.locateElementByCss(webDriver, ".logo img");
-        assertThat(imageElement.getAttribute("src"), endsWith("/static/images/logo.gif"));
+        checkLogoFunctionality();
 
         CommonSteps.goToURL(webDriver, "http://127.0.0.1:8080/twu/viewbook");
 
-        WebElement imageElementForNextPage = CommonSteps.locateElementByCss(webDriver, ".logo img");
-        assertThat(imageElementForNextPage.getAttribute("src"), endsWith("/static/images/logo.gif"));
+        checkLogoFunctionality();
     }
 
     @Test
@@ -51,25 +49,29 @@ public class MenuFunctionalTest {
 
     @Test
     public void shouldAlwaysDisplaySearchForBook() {
+        checkSearchFunctionality();
+
+        CommonSteps.goToURL(webDriver, "http://127.0.0.1:8080/twu/viewbook");
+
+        checkSearchFunctionality();
+    }
+
+    @After
+    public void tearDown() {
+        webDriver.close();
+    }
+
+    private void checkSearchFunctionality() {
         WebElement searchTextElement = CommonSteps.locateElementByCss(webDriver, ".navbar-search .search-query");
         WebElement searchDropDownElement = CommonSteps.locateElementByCss(webDriver, ".navbar.dropdown-menu");
         WebElement searchButtonElement = webDriver.findElement(By.id("search"));
         assertThat(searchTextElement.getAttribute("type"), is("text"));
         assertTrue(searchDropDownElement.isDisplayed());
         assertThat(searchButtonElement.getAttribute("value"), is("Search"));
-
-        CommonSteps.goToURL(webDriver, "http://127.0.0.1:8080/twu/viewbook");
-
-        WebElement searchTextElementForNextPage = CommonSteps.locateElementByCss(webDriver, ".navbar-search .search-query");
-        WebElement searchDropDownElementForNextPage = CommonSteps.locateElementByCss(webDriver, ".navbar.dropdown-menu");
-        WebElement searchButtonElementForNextPage = webDriver.findElement(By.id("search"));
-        assertThat(searchTextElementForNextPage.getAttribute("type"), is("text"));
-        assertTrue(searchDropDownElementForNextPage.isDisplayed());
-        assertThat(searchButtonElementForNextPage.getAttribute("value"), is("Search"));
     }
 
-    @After
-    public void tearDown() {
-        webDriver.close();
+    private void checkLogoFunctionality() {
+        WebElement imageElement = CommonSteps.locateElementByCss(webDriver, ".logo img");
+        assertThat(imageElement.getAttribute("src"), endsWith("/static/images/logo.gif"));
     }
 }
