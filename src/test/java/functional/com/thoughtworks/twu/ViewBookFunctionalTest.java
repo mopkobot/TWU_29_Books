@@ -9,6 +9,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
@@ -94,6 +96,9 @@ public class ViewBookFunctionalTest{
     }
 
     private int getRecommendationCount() {
+        WebDriverWait wait = new WebDriverWait(webDriver, 10);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("recommend-text")));
+
         String recommendCountMessage = webDriver.findElement(By.className("recommend-text")).getText();
         int positionOfR = recommendCountMessage.indexOf("R");
         String recommendCountStringBeforeRecommend = recommendCountMessage.substring(0,positionOfR).trim();
