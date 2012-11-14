@@ -45,10 +45,7 @@ public class ViewBookFunctionalTest {
 
     @Test
     public void shouldUnderstandViewBookPageWhenAllInformationIsPresent() {
-
         goToURL("http://127.0.0.1:8080/twu/viewbook?bookId=1377");
-
-
         assertOnBookTitle("Lavanya and sanchari QAs");
         assertOnBookCover("http://ecx.images-amazon.com/images/I/51HVlrefdkL._SL500_AA300_.jpg");
         assertOnAuthor("J.K. Rowling");
@@ -118,11 +115,13 @@ public class ViewBookFunctionalTest {
 
     @Test
     public void shouldAddBookToMyWantToReadListWhenButtonIsClicked() throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(webDriver, 10);
         CommonSteps.goToURL(webDriver,
                 "http://127.0.0.1:8080/twu/viewbook?booktitle=The" +
                         " Couch");
         webDriver.findElement(By.className("add-btn")).click();
-
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className
+                ("add-btn")));
         assertThat(webDriver.findElement(By.className("add-btn")).isEnabled(), is(false));
 
     }
@@ -169,7 +168,8 @@ public class ViewBookFunctionalTest {
     }
 
     private void assertOnWantToReadButton() {
-        WebElement wantToReadButton = CommonSteps.locateElementByCss(webDriver, "button.add-btn");
+        WebElement wantToReadButton = webDriver.findElement(By.className
+                ("add-btn"));
         assertThat(wantToReadButton.isDisplayed(), is(true));
     }
 

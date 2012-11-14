@@ -1,5 +1,6 @@
 package functional.com.thoughtworks.twu;
 
+import com.thoughtworks.twu.persistence.IntegrationTest;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,7 +17,7 @@ import static org.junit.Assert.assertEquals;
 @RunWith(SpringJUnit4ClassRunner.class)
 @TransactionConfiguration(defaultRollback=true)
 @TestExecutionListeners({TransactionalTestExecutionListener.class})
-public class WelcomeFunctionalTest {
+public class WelcomeFunctionalTest extends IntegrationTest{
     private HtmlUnitDriver webDriver;
 
     @Before
