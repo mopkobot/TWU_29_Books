@@ -4,7 +4,9 @@ import com.thoughtworks.twu.domain.Book;
 import com.thoughtworks.twu.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -23,14 +25,22 @@ public class BookViewController {
     @RequestMapping(value = "/viewbook", method = RequestMethod.GET)
 
     public ModelAndView viewBook(@RequestParam(value = "bookId", defaultValue = "0") String bookId,
-                                @RequestParam(value = "notification", defaultValue = "") String notification) {
+                                 @RequestParam(value = "notification", defaultValue = "") String notification) {
         ModelAndView modelAndView = new ModelAndView("viewbook");
-        Book book = bookService.getBookByID(Integer.parseInt(bookId));
-        if (book == null){
+        Book book = getBookByID(bookId);
+        if (book == null) {
             return modelAndView.addObject("bookNotFound", COULD_NOT_FIND_BOOK);
         }
-        modelAndView.addObject("notification",notification);
+        modelAndView.addObject("notification", notification);
         return modelAndView.addObject("book", book);
+    }
+
+    private Book getBookByID(String bookId) {
+        try {
+            return bookService.getBookByID(Integer.parseInt(bookId));
+        } catch (NumberFormatException e) {
+            return null;
+        }
     }
 
     @RequestMapping(value = "/recommend", method = RequestMethod.POST)
@@ -40,6 +50,6 @@ public class BookViewController {
             return new RedirectView("/viewbook?bookId=", true);
         }
         bookService.updateRecommendCount(book);
-        return new RedirectView("/viewbook?bookId="+ book.getId() + "&notification=" + RECOMMENDED_SUCCESFULLY, true);
+        return new RedirectView("/viewbook?bookId=" + book.getId() + "&notification=" + RECOMMENDED_SUCCESFULLY, true);
     }
 }

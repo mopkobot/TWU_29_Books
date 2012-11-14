@@ -2,7 +2,6 @@ package com.thoughtworks.twu.controller;
 
 import com.thoughtworks.twu.domain.Book;
 import com.thoughtworks.twu.service.BookService;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
@@ -17,7 +16,7 @@ import static org.mockito.Mockito.*;
 public class BookViewControllerTest {
 
     @Test
-    public void shouldPassBookToBookViewPageWhenTitleIsValid() throws IOException {
+    public void shouldPassBookToBookViewPageWhenIDIsValid() throws IOException {
         Book expectedBook = getBook();
 
         String id = "100";
@@ -29,7 +28,7 @@ public class BookViewControllerTest {
     }
 
     @Test
-    public void shouldPassNotFoundMessageWhenTitleIsInvalid() throws Exception {
+    public void shouldPassNotFoundMessageWhenIDIsInvalid() throws Exception {
         String invalidID = "1000";
         String expectedMessage = "Could not find book";
         ModelAndView modelAndView = bookPageModelAndView(invalidID, false);
@@ -39,8 +38,7 @@ public class BookViewControllerTest {
     }
 
     @Test
-    @Ignore //We have to find a way to deal with empty or other charactors
-    public void shouldPassNotFoundMessageWhenTitleIsEmpty() throws Exception {
+    public void shouldPassNotFoundMessageWhenIDIsEmpty() throws Exception {
         String emptyID = "   ";
         String expectedMessage = "Could not find book";
         ModelAndView modelAndView = bookPageModelAndView(emptyID, false);
@@ -50,7 +48,7 @@ public class BookViewControllerTest {
     }
 
     @Test
-    public void shouldHaveEmptyNotificationWhenUserViewsBookForFirstTime(){
+    public void shouldHaveEmptyNotificationWhenUserViewsBookForFirstTime() {
         BookService bookService = mock(BookService.class);
         Book book = getBook();
         when(bookService.getBookByID(book.getId())).thenReturn(book);
@@ -71,7 +69,7 @@ public class BookViewControllerTest {
         RedirectView viewBook = bookViewController.recommend(0);
         String actualNotification = viewBook.getUrl();
 
-        assertThat(actualNotification, is("/viewbook?bookId="+book.getId()+"&notification="+BookViewController.RECOMMENDED_SUCCESFULLY));
+        assertThat(actualNotification, is("/viewbook?bookId=" + book.getId() + "&notification=" + BookViewController.RECOMMENDED_SUCCESFULLY));
     }
 
     @Test
@@ -100,11 +98,13 @@ public class BookViewControllerTest {
     private ModelAndView bookPageModelAndView(String ID, boolean isValidID) throws IOException {
         BookService bookService = mock(BookService.class);
         Book book = (isValidID) ? getBook() : null;
-
-        when(bookService.getBookByID(Integer.parseInt(ID))).thenReturn(book);
+        try {
+            when(bookService.getBookByID(Integer.parseInt(ID))).thenReturn(book);
+        }catch (NumberFormatException e){
+        }
 
         BookViewController bookViewController = new BookViewController(bookService);
-        return bookViewController.viewBook(ID,"");
+        return bookViewController.viewBook(ID, "");
     }
 
     private Book getBook() {
