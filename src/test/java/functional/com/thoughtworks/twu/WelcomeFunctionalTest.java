@@ -22,13 +22,13 @@ public class WelcomeFunctionalTest {
     @Before
     public void setUp() {
         webDriver = new HtmlUnitDriver();
-        performSuccessfulLogin();
-        enterUserName();
+        CommonSteps.login(webDriver,"test.twu","Th0ughtW0rks@12");
+        CommonSteps.saveProfileInformation(webDriver,"Reader Feeder User");
     }
 
     @Test
     public void shouldShowUserNameAfterLoginSuccessfully() {
-        assertEquals("test", webDriver.findElement(By.className("username")).getText());
+        assertEquals("Reader Feeder User", webDriver.findElement(By.className("username")).getText());
     }
 
     @Test
@@ -40,18 +40,5 @@ public class WelcomeFunctionalTest {
     @After
     public void tearDown() {
         webDriver.close();
-    }
-
-    private void performSuccessfulLogin() {
-        webDriver.get("http://localhost:8080/twu");
-        webDriver.findElement(By.id("username")).sendKeys("test.twu");
-        webDriver.findElement(By.id("password")).sendKeys("Th0ughtW0rks@12");
-        webDriver.findElement(By.className("btn-submit")).click();
-    }
-
-    private void enterUserName() {
-        webDriver.get("http://localhost:8080/twu");
-        webDriver.findElement(By.name("username")).sendKeys("test");
-        webDriver.findElement(By.name("submit")).click();
     }
 }
