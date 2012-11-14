@@ -3,9 +3,7 @@
 </#if>
 
 <@layout.block title=title>
-<#if notification??>
-    <div class="alert alert-success">${notification}</div>
-</#if>
+
     <#if book??>
     <#if notification?has_content>
     <h3 class="alert alert-success">${notification}</h3>
@@ -38,7 +36,10 @@
                 </div>
             </div>
             <div class="book-actions">
-                <button class="add-btn">Want to read</button>
+                <form action="add-book-to-want" method="POST">
+                    <input type="hidden" name="bookId" value="${book.id}"/>
+                    <input type="submit" value="Want to read" class="add-btn"/>
+                </form>
             </div>
         </div>
 

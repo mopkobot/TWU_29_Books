@@ -1,14 +1,13 @@
 package com.thoughtworks.twu.controller;
 
+import com.thoughtworks.twu.domain.Book;
 import com.thoughtworks.twu.domain.User;
+import com.thoughtworks.twu.service.BookService;
 import com.thoughtworks.twu.service.UserService;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.servlet.ModelAndView;
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
 
 @Controller
@@ -19,20 +18,21 @@ public class WantToReadBookControllerTest {
 
     private WantToReadBookController controller;
     private User user;
+    private BookService bookService;
 
     @Before
     public void setUp() {
         userService = mock(UserService.class);
-        controller = new WantToReadBookController(userService, null);
+        bookService = createBookService();
+        controller = new WantToReadBookController(userService, bookService);
         user = new User("test.twu", "test");
     }
 
     @Test
     public void shouldSuccessfullyAddBookToWantToReadList() {
-        ModelAndView modelAndView = controller.markBookAsWantToRead(1, user);
+        controller.markBookAsWantToRead(1, user);
 
-        String actual = (String) modelAndView.getModel().get("notification");
-        assertThat(actual, is(NOTIFICATION_MESSAGE));
+        verify(userService).markBookAsWantToRead(1, user.getCasname());
     }
 
     @Test
@@ -41,10 +41,15 @@ public class WantToReadBookControllerTest {
         controller.markBookAsWantToRead(1, user);
 
         when(userService.isMarkedAsWantToRead(user.getCasname(), 1)).thenReturn(true);
-        ModelAndView modelAndView = controller.markBookAsWantToRead(1, user);
+        controller.markBookAsWantToRead(1, user);
 
         verify(userService, times(1)).markBookAsWantToRead(1, user.getCasname());
-        String actual = (String) modelAndView.getModel().get("notification");
-        assertThat(actual, is(ERROR_MESSAGE));
+    }
+
+    private BookService createBookService() {
+        BookService bookService = mock(BookService.class);
+        when(bookService.getBookByID(1)).thenReturn(new Book("author",
+                "title", "", "", "", ""));
+        return bookService;
     }
 }
