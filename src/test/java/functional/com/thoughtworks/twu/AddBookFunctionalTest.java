@@ -2,7 +2,6 @@ package functional.com.thoughtworks.twu;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -33,11 +32,9 @@ public class AddBookFunctionalTest {
     }
 
     @Test
-    @Ignore
     public void shouldRedirectToViewBookPageByClick() {
         webDriver.findElement(By.className("view-book-btn")).click();
-
-        assertTrue(webDriver.findElement(By.tagName("title")).getText().contains("ReaderFeeder"));
+        assertTrue(webDriver.getCurrentUrl().contains("viewbook"));
     }
 
     @Test
