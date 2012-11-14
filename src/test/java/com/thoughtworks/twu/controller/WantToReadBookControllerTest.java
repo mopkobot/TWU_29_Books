@@ -5,9 +5,6 @@ import com.thoughtworks.twu.service.UserService;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.servlet.ModelAndView;
-
-import java.util.Map;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -29,10 +26,9 @@ public class WantToReadBookControllerTest {
 
     @Test
     public void shouldSuccessfullyAddBookToWantToReadList() {
-        ModelAndView modelAndView = controller.markBookAsWantToRead(1, user);
-        Map<String, Object> model = modelAndView.getModelMap();
+        String response = controller.markBookAsWantToRead(1, user);
 
-        assertThat((String) model.get("notification"), is("Book was successfully added to want to read list"));
+        assertThat(response, is("saved"));
     }
 
     @Test
@@ -41,8 +37,9 @@ public class WantToReadBookControllerTest {
         controller.markBookAsWantToRead(1, user);
 
         when(userService.isMarkedAsWantToRead(user.getCasname(),1)).thenReturn(true);
-        controller.markBookAsWantToRead(1, user);
+        String response = controller.markBookAsWantToRead(1, user);
 
         verify(userService, times(1)).markBookAsWantToRead(1, user.getCasname());
+        assertThat(response, is("already saved"));
     }
 }

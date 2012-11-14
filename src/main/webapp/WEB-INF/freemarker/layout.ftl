@@ -17,7 +17,7 @@
     <div class="navbar-right">
         <span class="navbar-username">
             <#if Session.user??>
-                Hello, <a href="/twu"> ${Session.user.name?cap_first}</a>!
+                Hello, <a href="/twu">${Session.user.name?cap_first}</a>!
             </#if>
         </span>
 
