@@ -17,11 +17,11 @@
     <div class="navbar-right">
         <span class="navbar-username">
             <#if Session.user??>
-                Hello, <a href="/twu">${Session.user.name?cap_first}</a>!
+                <a href="/twu">Hello, <b>${Session.user.name?cap_first}!</b></a>
             </#if>
         </span>
 
-        <form action="search_book" class="navbar-search pull-left" method="post">
+        <form action="search_book" class="navbar-search" method="post">
             <#if searchValue??>
                 <input type="text" class="search-query" name="searchValue"
                        value="${searchValue?js_string?j_string?html}"/>

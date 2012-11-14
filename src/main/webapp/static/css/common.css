@@ -112,6 +112,10 @@ input[type="submit"] {
     text-decoration: none;
 }
 
+.navbar-username a:hover {
+    background-color: #7EB5D6;
+}
+
 .navbar-right{
     position: relative;
     float: right;

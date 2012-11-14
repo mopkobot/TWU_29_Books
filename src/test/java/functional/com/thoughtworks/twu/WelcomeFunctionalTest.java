@@ -28,7 +28,7 @@ public class WelcomeFunctionalTest {
 
     @Test
     public void shouldShowUserNameAfterLoginSuccessfully() {
-        assertEquals("Reader Feeder User", webDriver.findElement(By.className("username")).getText());
+        assertEquals("Hello, Reader Feeder User!", webDriver.findElement(By.className("navbar-username")).getText());
     }
 
     @Test

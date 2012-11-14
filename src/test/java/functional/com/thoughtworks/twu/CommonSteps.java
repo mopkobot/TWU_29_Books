@@ -1,6 +1,7 @@
 package functional.com.thoughtworks.twu;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 public final class CommonSteps {
     public static void login(WebDriver webDriver, String username, String password) {
@@ -19,5 +20,17 @@ public final class CommonSteps {
         webDriver.findElement(By.name("searchValue")).sendKeys(searchQuery);
         webDriver.findElement(By.id(searchFilter)).click();
         webDriver.findElement(By.id("search")).submit();
+    }
+
+    public static WebElement locateElementByCss(WebDriver webDriver, String selector){
+        return locateElement(By.cssSelector(selector), webDriver);
+    }
+
+    public static WebElement locateElement(By selector, WebDriver webDriver) {
+        return webDriver.findElement(selector);
+    }
+
+    public static void goToURL(WebDriver webDriver, String url) {
+        webDriver.get(url);
     }
 }

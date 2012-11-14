@@ -68,9 +68,8 @@ public class CreateProfileFunctionalTest {
 
     @Test
     public void shouldRedirectToWelcomePageWhenSubmitUsername(){
-        CommonSteps.saveProfileInformation(webDriver,"Reader Feeder User");
-        assertTrue(webDriver.findElement(By.className("username")).isDisplayed());
-        assertTrue(webDriver.findElement(By.className("welcome")).isDisplayed());
+        CommonSteps.saveProfileInformation(webDriver, "Reader Feeder User");
+        assertTrue(webDriver.findElement(By.className("bookshelf")).isDisplayed());
     }
 
    @Test
