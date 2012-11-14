@@ -21,10 +21,11 @@ public class BookViewController {
     }
 
     @RequestMapping(value = "/viewbook", method = RequestMethod.GET)
-    public ModelAndView viewBook(@RequestParam(value = "booktitle", defaultValue = "") String title,
-                                 @RequestParam(value = "notification", defaultValue = "") String notification) {
+
+    public ModelAndView viewBook(@RequestParam(value = "bookId", defaultValue = "") String bookId,
+                                @RequestParam(value = "notification", defaultValue = "") String notification) {
         ModelAndView modelAndView = new ModelAndView("viewbook");
-        Book book = bookService.getBookByTitle(title);
+        Book book = bookService.getBookByID(Integer.parseInt(bookId));
         if (book == null){
             return modelAndView.addObject("bookNotFound", COULD_NOT_FIND_BOOK);
         }
