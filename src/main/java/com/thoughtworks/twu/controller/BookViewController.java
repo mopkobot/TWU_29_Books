@@ -33,8 +33,8 @@ public class BookViewController {
     }
 
     @RequestMapping(value = "/recommend", method = RequestMethod.POST)
-    public RedirectView recommend(@RequestParam(value = "bookId", defaultValue = "") String bookId) {
-        Book book = bookService.getBookByID(Integer.parseInt(bookId));
+    public RedirectView recommend(@RequestParam(value = "bookId", defaultValue = "") int bookId) {
+        Book book = bookService.getBookByID(bookId);
         if (book == null) {
             return new RedirectView("/viewbook?booktitle=", true);
         }

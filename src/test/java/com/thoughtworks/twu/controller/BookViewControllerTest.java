@@ -69,7 +69,7 @@ public class BookViewControllerTest {
         Book book = getBook();
         when(bookService.getBookByID(0)).thenReturn(book);
         BookViewController bookViewController = new BookViewController(bookService);
-        RedirectView viewBook = bookViewController.recommend("0");
+        RedirectView viewBook = bookViewController.recommend(0);
         String actualNotification = viewBook.getUrl();
 
         assertThat(actualNotification, is("/viewbook?booktitle="+book.getTitle()+"&notification="+BookViewController.RECOMMENDED_SUCCESFULLY));
@@ -81,7 +81,7 @@ public class BookViewControllerTest {
         BookService bookService = mock(BookService.class);
         when(bookService.getBookByID(3)).thenReturn(book);
         BookViewController bookViewController = new BookViewController(bookService);
-        bookViewController.recommend("3");
+        bookViewController.recommend(3);
 
         verify(bookService).getBookByID(3);
     }
@@ -93,7 +93,7 @@ public class BookViewControllerTest {
         when(bookService.getBookByID(3)).thenReturn(book);
 
         BookViewController bookViewController = new BookViewController(bookService);
-        bookViewController.recommend("3");
+        bookViewController.recommend(3);
 
         verify(bookService).updateRecommendCount(book);
     }
