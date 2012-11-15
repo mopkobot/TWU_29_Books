@@ -72,7 +72,7 @@ public class ViewBookFunctionalTest {
     }
 
     @Test
-    public void shouldUnderstandViewBookPageWithNotificationWhenUserRecommendsABook() {
+    public void shouldDisplayNotificationWhenUserRecommendsABook() {
         goToURL("http://127.0.0.1:8080/twu/viewbook?bookId=1333");
         assertOnNotification();
     }
@@ -118,7 +118,8 @@ public class ViewBookFunctionalTest {
     }
 
     private void assertOnNotification() {
-        WebElement notificationElement = locateElementByCss("h3.notification");
+        webDriver.findElement(By.className("recommend-btn")).click();
+        WebElement notificationElement = locateElementByCss("h3.alert");
         assertThat(notificationElement.isDisplayed(), is(true));
     }
 

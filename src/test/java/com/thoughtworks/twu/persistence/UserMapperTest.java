@@ -75,7 +75,7 @@ public class UserMapperTest extends IntegrationTest{
         userMapper.markBookAsWantToRead(casname, bookId);
         userMapper.markBookAsWantToRead(casname, secondBookId);
 
-        List<Book> expectedBooks = new ArrayList<>();
+        List<Book> expectedBooks = new ArrayList<Book>();
         expectedBooks.add(bookFromDB);
         expectedBooks.add(secondBookFromDB);
 
