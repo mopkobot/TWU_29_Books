@@ -4,7 +4,9 @@
 
 <@layout.block title=title>
     <#if book??>
-    <h3 class="notification">${notification}</h3>
+    <#if notification?has_content>
+    <h3 class="alert alert-success">${notification}</h3>
+    </#if>
         <div class="book-head">
             <div class="book-cover">
                 <img class="book-img" src="${book.image}" alt="Picture not available"/>
@@ -18,14 +20,16 @@
                         <div class="recommend-text">${book.recommendCount} Recommendation/s</div>
                     </form>
                 </div>
+                <#if book.author?has_content>
                 <h2 class="author">by ${book.author}</h2>
+                </#if>
                 <h2 class="bookId" style="display: none;">${book.id}</h2>
                 <div class="isbn">
-                    <#if book.ISBN10??>
+                    <#if book.ISBN10?has_content>
                         ISBN-10:${book.ISBN10}
                     </#if>
                     <br>
-                    <#if book.ISBN13??>
+                    <#if book.ISBN13?has_content    >
                         ISBN-13:${book.ISBN13}
                     </#if>
                 </div>
