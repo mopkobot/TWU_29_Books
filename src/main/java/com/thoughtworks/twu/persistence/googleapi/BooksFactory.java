@@ -7,7 +7,7 @@ import com.google.api.services.books.Books;
 
 public class BooksFactory {
     //TODO: move ApiKey to configuration
-    public static final String googleApiKey = "AIzaSyBrJ965BVgZd67CqotpYfb6u88p1XKfU7c";
+    public static final String googleApiKey = "AIzaSyA6DYGeBhzOeFMVoz0YJohpScLX0Eafc04";
 
     public static Books newBooks() {
         return new Books.Builder(new NetHttpTransport(), new JacksonFactory(), null)
