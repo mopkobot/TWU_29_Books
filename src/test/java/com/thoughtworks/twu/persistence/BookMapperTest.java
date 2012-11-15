@@ -20,10 +20,10 @@ import static org.junit.Assert.assertThat;
 //Job: Ensure that BookMapper can interact with DB as expected
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@TransactionConfiguration(defaultRollback=true)
+@TransactionConfiguration(defaultRollback = true)
 @TestExecutionListeners({TransactionalTestExecutionListener.class})
 @Transactional
-public class BookMapperTest extends IntegrationTest{
+public class BookMapperTest extends IntegrationTest {
     @Autowired
     private BookMapper bookMapper;
     private Book book;
@@ -41,7 +41,7 @@ public class BookMapperTest extends IntegrationTest{
     }
 
     @Test
-    public void shouldReturnAListOfBooksWithSameTitle(){
+    public void shouldReturnAListOfBooksWithSameTitle() {
         bookMapper.insertBook(book);
         bookMapper.insertBook(book);
         List<Book> bookList = bookMapper.getBooksByTitle(book.getTitle());
@@ -65,5 +65,15 @@ public class BookMapperTest extends IntegrationTest{
         bookMapper.updateRecommendCount(result);
 
         assertThat(result.getRecommendCount(), is(2));
+    }
+
+    @Test
+    public void shouldInsertBookWhenTheTitleIsLong() {
+        String longTitle = "title  title  title  title  title  title  title  title  title  title  title  title  " +
+                "title  title  title  title  title  title  title  title  title  title  title  title  " +
+                "title  title  title  title  title  title  title  title  title  title  ";
+        Book longTitleBook = new Book("author", longTitle, "image_src", "description", "0156027321", "978-0156027328");
+        bookMapper.insertBook(longTitleBook);
+        assertThat(bookMapper.getBookByTitle(longTitle).getTitle(), is(longTitle));
     }
 }
