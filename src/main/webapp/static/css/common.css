@@ -69,6 +69,11 @@ input[type="submit"] {
     background-color: #274257;
 }
 
+.view-book-btn {
+    position: fixed;
+    padding-left: 790px;
+}
+
 .navbar {
     overflow: visible;
     margin-bottom: 18px;

@@ -13,6 +13,7 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
@@ -31,6 +32,28 @@ public class AddBookFunctionalTest {
         CommonSteps.searchBook(webDriver,"9780375724404","searchByISBN");
     }
 
+    @Test
+    public void shouldAddBookToDBWhenViewButtonIsClicked(){
+        webDriver.findElement(By.className("view-book-btn")).click();
+
+        String actualTitle = webDriver.findElement(By.className("title")).getText();
+        String actualAuthor = webDriver.findElement(By.className("author")).getText();
+
+        assertThat(actualTitle, is("When We Were Orphans"));
+        assertThat(actualAuthor, is("by Kazuo Ishiguro"));
+    }
+
+    @Test
+    public  void shouldNotAddTheSameBookTwice(){
+
+        webDriver.findElement(By.className("view-book-btn")).click();
+        String firstURL =  webDriver.getCurrentUrl();
+        CommonSteps.searchBook(webDriver,"9780375724404","searchByISBN");
+        webDriver.findElement(By.className("view-book-btn")).click();
+        String secondURL = webDriver.getCurrentUrl();
+        assertEquals(firstURL,secondURL);
+
+    }
     @Test
     public void shouldRedirectToViewBookPageByClick() {
         webDriver.findElement(By.className("view-book-btn")).click();
