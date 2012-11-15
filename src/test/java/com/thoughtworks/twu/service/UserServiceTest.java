@@ -81,7 +81,7 @@ public class UserServiceTest {
 
     @Test
     public void shouldReturnAListOfWantToReadBooks() {
-        List<Book> expectedBooks = new ArrayList<>();
+        List<Book> expectedBooks = new ArrayList<Book>();
         expectedBooks.add(getBook());
 
         when(userMapper.getBooksInWantToReadList(user.getCasname())).thenReturn(expectedBooks);

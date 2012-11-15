@@ -31,7 +31,7 @@ public class WelcomeControllerTest {
 
     @Test
     public void shouldAddListOfWantToReadBooksToModelForTheLoggedInUser() throws IOException {
-        List<Book> expectedBooks = new ArrayList<>();
+        List<Book> expectedBooks = new ArrayList<Book>();
         expectedBooks.add(getBook());
 
         when(userService.getBooksFromWantToReadList(user.getCasname())).thenReturn(expectedBooks);
@@ -46,7 +46,7 @@ public class WelcomeControllerTest {
 
     @Test
     public void shouldSendBookNotFoundMessageIfNoBooksInWantToReadList() {
-        List<Book> emptyBooksList = new ArrayList<>();
+        List<Book> emptyBooksList = new ArrayList<Book>();
 
         when(userService.getBooksFromWantToReadList(user.getCasname())).thenReturn(emptyBooksList);
 
