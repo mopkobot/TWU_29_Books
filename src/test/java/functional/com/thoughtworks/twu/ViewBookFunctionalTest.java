@@ -1,9 +1,11 @@
 package functional.com.thoughtworks.twu;
 
 
+import com.thoughtworks.twu.persistence.IntegrationTest;
 import com.thoughtworks.twu.service.BookService;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -19,7 +21,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 
-import static functional.com.thoughtworks.twu.CommonSteps.goToURL;
 import static junit.framework.Assert.assertEquals;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -29,7 +30,7 @@ import static org.junit.internal.matchers.StringContains.containsString;
 @TransactionConfiguration(defaultRollback = true)
 @TestExecutionListeners({TransactionalTestExecutionListener.class})
 @ContextConfiguration(locations = {"classpath:applicationContext.xml"})
-public class ViewBookFunctionalTest {
+public class ViewBookFunctionalTest extends IntegrationTest{
     private WebDriver webDriver;
 
     @Autowired
@@ -114,15 +115,18 @@ public class ViewBookFunctionalTest {
 
 
     @Test
+    @Ignore
     public void shouldAddBookToMyWantToReadListWhenButtonIsClicked() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(webDriver, 10);
-        CommonSteps.goToURL(webDriver,
-                "http://127.0.0.1:8080/twu/viewbook?booktitle=The" +
-                        " Couch");
+        goToURL("http://127.0.0.1:8080/twu/viewbook?bookId=1333");
+
         webDriver.findElement(By.className("add-btn")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.className
                 ("add-btn")));
-        assertThat(webDriver.findElement(By.className("add-btn")).isEnabled(), is(false));
+        goToURL("http://127.0.0.1:8080/twu/viewbook?bookId=1333");
+        assertThat(webDriver.findElement(By.className("add-btn"))
+                .isEnabled(),
+                is(false));
 
     }
 

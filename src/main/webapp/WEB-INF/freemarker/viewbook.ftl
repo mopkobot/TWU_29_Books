@@ -24,7 +24,7 @@
                 <#if book.author?has_content>
                 <h2 class="author">by ${book.author}</h2>
                 </#if>
-                <h2 class="bookId" style="display: none;">${book.id}</h2>
+                <h2 class="bookId" style="display: none;">${book.id?c}</h2>
                 <div class="isbn">
                     <#if book.ISBN10?has_content>
                         ISBN-10:${book.ISBN10}
@@ -37,7 +37,7 @@
             </div>
             <div class="book-actions">
                 <form action="add-book-to-want" method="POST">
-                    <input type="hidden" name="bookId" value="${book.id}"/>
+                    <input type="hidden" name="bookId" value="${book.id?c}"/>
                     <input type="submit" value="Want to read" class="add-btn"/>
                 </form>
             </div>
