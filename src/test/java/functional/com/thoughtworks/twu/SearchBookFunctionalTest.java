@@ -52,8 +52,8 @@ public class SearchBookFunctionalTest {
     shouldDisplayBookAuthorAndTitleWhenGoButtonIsClickedAndWeSearchByTitle() {
         CommonSteps.searchBook(webDriver,"mop","searchByTitle");
         assertThat(webDriver.findElement(By.className("book-picture")).isDisplayed(), is(true));
-        assertThat(webDriver.findElement(By.className("book-title")).getText(), is("Monster mop"));
-        assertThat(webDriver.findElement(By.className("book-author")).getText(),is("by Anthony Laurence"));
+        assertThat(webDriver.findElement(By.className("book-title")).getText(), is("Little Mop lost"));
+        assertThat(webDriver.findElement(By.className("book-author")).getText(),is("by Kayoko Kanome"));
     }
 
     @Test
