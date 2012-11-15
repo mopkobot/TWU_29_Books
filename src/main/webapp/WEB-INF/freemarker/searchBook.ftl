@@ -1,7 +1,7 @@
 <@layout.block title="Search Results"  >
 
     <#if books?has_content>
-    <p>Showing the top 20 results, sorted by relevance.</p>
+    <p>Showing the top search results (maximum 20), sorted by relevance.</p>
     <ul class="book-list">
         <#list books as book>
             <li class="book">

@@ -111,7 +111,7 @@ public class SearchBookFunctionalTest {
     @Test
     public void shouldDisplayTheSortOrderOfResults(){
         CommonSteps.searchBook(webDriver,"Agile Samurai","searchByTitle");
-        assertEquals("Showing the top 20 results, sorted by relevance.", webDriver.findElement(By.tagName("p")).getText());
+        assertEquals("Showing the top search results (maximum 20), sorted by relevance.", webDriver.findElement(By.tagName("p")).getText());
     }
 
     @Test
