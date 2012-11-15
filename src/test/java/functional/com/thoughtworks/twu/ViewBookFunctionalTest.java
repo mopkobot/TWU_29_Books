@@ -2,20 +2,16 @@ package functional.com.thoughtworks.twu;
 
 
 import com.thoughtworks.twu.persistence.IntegrationTest;
-import com.thoughtworks.twu.service.BookService;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
@@ -29,18 +25,14 @@ import static org.junit.internal.matchers.StringContains.containsString;
 @RunWith(SpringJUnit4ClassRunner.class)
 @TransactionConfiguration(defaultRollback = true)
 @TestExecutionListeners({TransactionalTestExecutionListener.class})
-@ContextConfiguration(locations = {"classpath:applicationContext.xml"})
-public class ViewBookFunctionalTest extends IntegrationTest{
+public class ViewBookFunctionalTest extends IntegrationTest {
     private WebDriver webDriver;
-
-    @Autowired
-    private BookService bookService;
 
     @Before
     public void setUp() {
-        webDriver = new HtmlUnitDriver();
-        CommonSteps.login(webDriver,"test.twu","Th0ughtW0rks@12");
-        CommonSteps.saveProfileInformation(webDriver,"Reader Feeder User");
+        webDriver = new FirefoxDriver();
+        CommonSteps.login(webDriver, "test.twu", "Th0ughtW0rks@12");
+        CommonSteps.saveProfileInformation(webDriver, "Reader Feeder User");
     }
 
 
@@ -115,18 +107,12 @@ public class ViewBookFunctionalTest extends IntegrationTest{
 
 
     @Test
-    @Ignore
     public void shouldAddBookToMyWantToReadListWhenButtonIsClicked() throws InterruptedException {
-        WebDriverWait wait = new WebDriverWait(webDriver, 10);
         goToURL("http://127.0.0.1:8080/twu/viewbook?bookId=1333");
 
         webDriver.findElement(By.className("add-btn")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className
-                ("add-btn")));
         goToURL("http://127.0.0.1:8080/twu/viewbook?bookId=1333");
-        assertThat(webDriver.findElement(By.className("add-btn"))
-                .isEnabled(),
-                is(false));
+        assertThat(webDriver.findElement(By.className("add-btn")).isEnabled(), is(false));
 
     }
 
@@ -182,7 +168,7 @@ public class ViewBookFunctionalTest extends IntegrationTest{
         return locateElement(By.cssSelector(selector));
     }
 
-    private void goToURL(String url){
+    private void goToURL(String url) {
         webDriver.get(url);
     }
 
