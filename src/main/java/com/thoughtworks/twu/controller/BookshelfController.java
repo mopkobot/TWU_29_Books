@@ -15,13 +15,13 @@ import java.util.List;
 
 @Controller
 @SessionAttributes("user")
-public class WelcomeController {
+public class BookshelfController {
 
     @Autowired
     private UserService userService;
 
     @Autowired
-    public WelcomeController(UserService userService) {
+    public BookshelfController(UserService userService) {
         this.userService = userService;
     }
 

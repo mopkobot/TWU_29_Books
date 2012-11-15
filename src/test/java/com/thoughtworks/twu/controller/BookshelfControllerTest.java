@@ -17,16 +17,16 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-public class WelcomeControllerTest {
+public class BookshelfControllerTest {
     private User user;
     private UserService userService;
-    private WelcomeController welcomeController;
+    private BookshelfController bookshelfController;
 
     @Before
     public void setUp() {
         user = new User("test.twu", "test");
         userService = mock(UserService.class);
-        welcomeController = new WelcomeController(userService);
+        bookshelfController = new BookshelfController(userService);
     }
 
     @Test
@@ -36,7 +36,7 @@ public class WelcomeControllerTest {
 
         when(userService.getBooksFromWantToReadList(user.getCasname())).thenReturn(expectedBooks);
 
-        ModelAndView actualModelAndView = welcomeController.welcome(user);
+        ModelAndView actualModelAndView = bookshelfController.welcome(user);
 
         List<Book> actualBooks = (List<Book>) actualModelAndView.getModel().get("books");
         assertThat(actualBooks, is(expectedBooks));
@@ -50,7 +50,7 @@ public class WelcomeControllerTest {
 
         when(userService.getBooksFromWantToReadList(user.getCasname())).thenReturn(emptyBooksList);
 
-        ModelAndView actualModelAndView = welcomeController.welcome(user);
+        ModelAndView actualModelAndView = bookshelfController.welcome(user);
 
         String bookNotFoundMessage = (String) actualModelAndView.getModel().get("bookNotFound");
 
