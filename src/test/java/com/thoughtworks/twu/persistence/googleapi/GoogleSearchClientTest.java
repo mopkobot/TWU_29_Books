@@ -61,13 +61,4 @@ public class GoogleSearchClientTest {
         Volumes result = googleSearchClient.performSearch("1234567890", "isbn");
         assertThat(result, is(expectedVolumes));
     }
-
-    //TODO: move to functional testing
-    @Test
-    public void shouldReturnOnlyTwentyResults() throws IOException {
-        GoogleSearchClient searchClient = new GoogleSearchClient();
-        int searchResult  = searchClient.performSearch("Happy", "title").getItems().size();
-
-        assertThat(searchResult, is(20));
-    }
 }

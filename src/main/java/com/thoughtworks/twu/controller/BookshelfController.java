@@ -27,17 +27,17 @@ public class BookshelfController {
 
     @RequestMapping(value = "/welcome", method = RequestMethod.GET)
     public ModelAndView welcome(@ModelAttribute("user") User user) {
-        ModelAndView welcome = new ModelAndView("welcome");
+        ModelAndView bookShelf = new ModelAndView("welcome");
 
         List<Book> booksFromWantToReadList = userService.getBooksFromWantToReadList(user.getCasname());
 
         if (!booksFromWantToReadList.isEmpty()){
-            welcome.addObject("books", booksFromWantToReadList);
+            bookShelf.addObject("books", booksFromWantToReadList);
         }
         else{
-             welcome.addObject("bookNotFound","Sorry! You haven't added any book to your reading list");
+             bookShelf.addObject("bookNotFound", "Sorry! You haven't added any book to your reading list");
         }
 
-        return welcome;
+        return bookShelf;
     }
 }

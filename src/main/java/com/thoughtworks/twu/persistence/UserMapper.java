@@ -27,5 +27,6 @@ public interface UserMapper {
     @Select("select count(*) from readings, books where user_casname=#{casname} AND books.id = #{bookId} AND book_id = books.id AND reading_status=" + WANT_TO_READ_STATUS)
     int isBookInWantToReadList(@Param("casname") String casname, @Param("bookId") int bookId);
 
+    @Select("select books.* from books, readings where readings.user_casname = #{casname} and books.id = readings.book_id and reading_status = "+ WANT_TO_READ_STATUS)
     List<Book> getBooksInWantToReadList(String casname);
 }

@@ -139,7 +139,7 @@ input[type="submit"] {
     overflow:hidden;
     margin:0 auto;
     margin-top: 70px;
-    padding: 10px;
+    padding: 30px;
     *zoom: 1;
 }
 
@@ -357,12 +357,18 @@ img.book-img {
     left: 250px;
 }
 
-.welcome {
-    float: right;
+.bookshelf {
     font-size: 21px;
-    position: relative;
-    right: 84px;
+    font-weight: bold;
+    text-align: center;
 }
+
+.bookshelf .welcome {
+    padding-top: 20px;
+    font-size: 16px;
+    font-weight: normal;
+}
+
 .notification {
     font-size: 20px;
 }

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -25,7 +26,7 @@ public class LoginController {
     @RequestMapping(value = "", method = RequestMethod.GET)
     public ModelAndView redirect(HttpServletRequest httpServletRequest) {
         String remoteUser = httpServletRequest.getRemoteUser();
-        ModelAndView modelAndView = new ModelAndView("welcome");
+        ModelAndView modelAndView = new ModelAndView(new RedirectView("welcome",true));
         User user = userService.getUserByCasname(remoteUser);
 
         if(userService.isUserExisted(remoteUser)) {
@@ -48,7 +49,7 @@ public class LoginController {
             userService.createUser(user);
         }
 
-        ModelAndView modelAndView = new ModelAndView("welcome");
+        ModelAndView modelAndView = new ModelAndView(new RedirectView("welcome",true));
         modelAndView.addObject("user", user);
         return modelAndView ;
     }
