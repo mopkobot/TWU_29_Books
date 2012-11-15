@@ -1,11 +1,9 @@
 package functional.com.thoughtworks.twu;
 
 
-import com.thoughtworks.twu.domain.Book;
 import com.thoughtworks.twu.service.BookService;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -44,11 +42,8 @@ public class ViewBookFunctionalTest {
 
 
     @Test
-    @Ignore
     public void shouldUnderstandViewBookPageWhenAllInformationIsPresent() {
-        Book book = bookService.getBookByTitle("Lavanya and sanchari QAs");
-        System.out.print("=======================" + Integer.toString(book.getId()));
-        goToURL("http://127.0.0.1:8080/twu/viewbook?bookId=" + Integer.toString(book.getId()));
+        goToURL("http://127.0.0.1:8080/twu/viewbook?bookId=1377");
 
         assertOnBookTitle("Lavanya and sanchari QAs");
         assertOnBookCover("http://ecx.images-amazon.com/images/I/51HVlrefdkL._SL500_AA300_.jpg");
@@ -60,11 +55,8 @@ public class ViewBookFunctionalTest {
     }
 
     @Test
-    @Ignore
     public void shouldUnderstandViewBookPageWhenNotAllInformationIsPresent() {
-        Book book = bookService.getBookByTitle("When devs are not coding");
-        System.out.print("=======================" + Integer.toString(book.getId()));
-        goToURL("http://127.0.0.1:8080/twu/viewbook?bookId=" + Integer.toString(book.getId()));
+        goToURL("http://127.0.0.1:8080/twu/viewbook?bookId=1333");
         assertOnBookTitle("When devs are not coding");
         assertOnBookCover("http://127.0.0.1:8080/twu/static/images/default_image.gif");
         assertOnAuthor("Benjamin Parzybok");
@@ -73,17 +65,15 @@ public class ViewBookFunctionalTest {
     }
 
     @Test
-    @Ignore
     public void shouldDisplayTheRecommendButton() {
-        goToURL("http://127.0.0.1:8080/twu/viewbook?booktitle=When devs are not coding");
+        goToURL("http://127.0.0.1:8080/twu/viewbook?bookId=1333");
         assertOnRecommendButton();
 
     }
 
     @Test
-    @Ignore
     public void shouldUnderstandViewBookPageWithNotificationWhenUserRecommendsABook() {
-        goToURL("http://127.0.0.1:8080/twu/viewbook?booktitle=When devs are not coding");
+        goToURL("http://127.0.0.1:8080/twu/viewbook?bookId=1333");
         assertOnNotification();
     }
 
@@ -94,16 +84,14 @@ public class ViewBookFunctionalTest {
     }
 
     @Test
-    @Ignore
-    public void shouldDisplayTheNumberOfRecommendations(){
-        goToURL("http://127.0.0.1:8080/twu/viewbook?booktitle=When devs are not coding");
+    public void shouldDisplayTheNumberOfRecommendations() {
+        goToURL("http://127.0.0.1:8080/twu/viewbook?bookId=1333");
         assertOnRecommendationsText();
     }
 
     @Test
-    @Ignore
-    public void shouldDisplayIncrementedRecommendCountWhenUserClicksRecommendButton(){
-        goToURL("http://127.0.0.1:8080/twu/viewbook?booktitle=When devs are not coding");
+    public void shouldDisplayIncrementedRecommendCountWhenUserClicksRecommendButton() {
+        goToURL("http://127.0.0.1:8080/twu/viewbook?bookId=1333");
         int recommendCountBeforeRecommend = getRecommendationCount();
 
         webDriver.findElement(By.className("recommend-btn")).click();
