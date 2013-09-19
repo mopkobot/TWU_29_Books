@@ -24,7 +24,7 @@
                 </div>
                 <form action="viewbook" method="GET">
                     <input type="submit" name="view-book-btn" value="View Book" class="view-book-btn"/>
-                    <input type = "hidden" name="bookId" value="${book.id}">
+                    <input type = "hidden" name="bookId" value="${book.id?c}">
                 </form>
             </li>
         </#list>
