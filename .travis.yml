@@ -3,7 +3,8 @@ before_install:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
 install:
-  - gradle createChangelogTable createDatabase
+  - gradle createDatabase
+  - gradle createChangelogTable
   - gradle updateDatabase
 jdk:
   - openjdk6
