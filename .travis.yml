@@ -6,5 +6,10 @@ install:
   - gradle createDatabase
   - gradle createChangelogTable
   - gradle updateDatabase
+script:
+  - gradle build
+  - gradle integrationTest
+  - gradle functionalTest
+  - gradle smokeTest
 jdk:
   - openjdk6
